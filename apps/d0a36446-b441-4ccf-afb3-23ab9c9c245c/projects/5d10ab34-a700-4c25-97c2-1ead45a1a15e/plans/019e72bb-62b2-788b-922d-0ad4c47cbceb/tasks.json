@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade-dotnet-to-net10",
+      "description": "Upgrade the application to the latest .NET LTS framework.",
+      "reason": "The modernization request explicitly requires moving to the latest framework before cloud-native migration work.",
+      "requirements": "Upgrade the solution from .NET Framework 4.8 to .NET 10 LTS and ensure project format/runtime compatibility required for subsequent Azure modernization tasks.",
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-cloud-native-services",
+      "description": "Modernize core app integrations to Azure cloud-native services.",
+      "reason": "The modernization goal requires cloud-native service adoption for configuration, identity, and data connectivity.",
+      "requirements": "Modernize the application to use Azure cloud-native services by adopting managed identity authentication, moving non-secret configuration to Azure App Configuration, using Azure SQL Database connectivity patterns, and aligning application authentication with Microsoft Entra ID.",
+      "dependencies": [
+        "001-upgrade-dotnet-to-net10"
+      ],
+      "skills": [
+        {
+          "name": "migration-managed-identity",
+          "location": "builtin"
+        },
+        {
+          "name": "migration-local-appsettings-azure-app-configuration-via-deployment",
+          "location": "builtin"
+        },
+        {
+          "name": "migration-azure-sql-database",
+          "location": "builtin"
+        },
+        {
+          "name": "migration-microsoft-entra-id",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "003-security-cve-remediation",
+      "description": "Scan dependencies for CVEs and remediate vulnerabilities before deployment.",
+      "reason": "Security remediation is required for every modernization plan to reduce known vulnerability risk.",
+      "requirements": "Scan all project dependencies for known CVEs and remediate vulnerabilities to minimum patched versions. When major upgrades are required, document dependency, current version, target major version, and breaking-change risk. Verify build and tests after remediation.",
+      "dependencies": [
+        "002-transform-cloud-native-services"
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "004-deployment-azure-container-apps",
+      "description": "Deploy the modernized application to Azure Container Apps.",
+      "reason": "The modernization request explicitly requires deployment of the modernized application to Azure.",
+      "requirements": "Containerize and deploy the modernized application to Azure Container Apps with Azure-native deployment configuration and runtime settings.",
+      "dependencies": [
+        "003-security-cve-remediation"
+      ],
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "Will create new service",
+      "deploymentTool": "bicep"
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "mnm-ZavaLoanPortal",
+    "language": "dotnet",
+    "createdAt": "2026-05-29T08:17:55.670Z",
+    "version": "1.0"
+  }
+}
