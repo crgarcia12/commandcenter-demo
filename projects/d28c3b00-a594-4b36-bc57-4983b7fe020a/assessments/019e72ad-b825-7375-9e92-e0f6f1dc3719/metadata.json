@@ -26,7 +26,10 @@
       "job_id": "27244028-1252788158-894730db-fda9-44f1-bb15-a457077ceb49"
     },
     "c0e33be9-a44e-4f2a-800c-f3ec7f7f2012": {
-      "status": "running"
+      "status": "running",
+      "pull_request": "https://github.com/crgarcia12/mnm-ZavaFraudDetector/pull/5",
+      "session_url": "https://github.com/crgarcia12/mnm-ZavaFraudDetector/pull/5/agent-sessions/bf6966bf-cac0-4316-a871-7812ebc197d0",
+      "job_id": "27244028-1252788186-66595ec7-5d0f-4533-a11e-b9d6a2a1d365"
     }
   }
 }
