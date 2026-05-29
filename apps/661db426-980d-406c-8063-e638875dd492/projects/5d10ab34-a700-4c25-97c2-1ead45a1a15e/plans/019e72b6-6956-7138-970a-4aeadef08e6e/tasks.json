@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade-dotnet",
+      "description": "Upgrade the application from .NET Framework 4.8 ASP.NET Web Forms to .NET 10 ASP.NET Core",
+      "reason": "The application targets .NET Framework 4.8 and uses ASP.NET Web Forms, which cannot run natively on Linux containers without Mono. The current Dockerfile uses Mono 6.12 (a legacy workaround). Upgrading to .NET 10 enables native Linux container support, modern Azure SDK compatibility, and removes the Mono dependency for proper Azure Container Apps deployment.",
+      "requirements": "Upgrade the project from .NET Framework 4.8 ASP.NET Web Forms to .NET 10 ASP.NET Core. Convert the legacy non-SDK-style .csproj to SDK-style format. Migrate the Web Forms pages (Default.aspx, Login.aspx, Logout.aspx, Site.Master) to ASP.NET Core Razor Pages or MVC equivalents, preserving all existing report functionality (loan portfolio summary, delinquency grid, daily transaction volume). Migrate configuration from web.config to appsettings.json. Ensure the project compiles and all existing functionality is preserved.",
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-sql-to-azure-sql",
+      "description": "Migrate SQL Server database access to Azure SQL Database with Managed Identity",
+      "reason": "The application currently uses SQL Server with a plaintext connection string containing hardcoded credentials (username 'sa' and password) in web.config. This is a security risk. Azure SQL Database with Managed Identity eliminates hardcoded credentials and follows Azure security best practices.",
+      "requirements": "Migrate the SQL Server data access layer to use Azure SQL Database with Managed Identity (passwordless) authentication. Replace the System.Data.SqlClient usage in Default.aspx.cs with the Managed Identity-compatible Azure SQL client. Remove the hardcoded SQL credentials from configuration. Ensure all three report queries (loan portfolio summary, delinquency, daily transaction volume) continue to work correctly against Azure SQL Database.",
+      "dependencies": ["001-upgrade-dotnet"],
+      "skills": [
+        {
+          "name": "migration-azure-sql-database",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "003-transform-auth-to-entra-id",
+      "description": "Migrate Forms Authentication and external AuthGateway to Microsoft Entra ID",
+      "reason": "The application uses legacy ASP.NET Forms Authentication with an external AuthGateway (ZavaAuthGateway) for authentication. This external dependency needs to be replaced with a modern, cloud-native identity solution. Microsoft Entra ID provides secure, standards-based authentication (OAuth 2.0 / OIDC) and eliminates the dependency on the external AuthGateway service.",
+      "requirements": "Migrate the application authentication from ASP.NET Forms Authentication and the external ZavaAuthGateway to Microsoft Entra ID using OAuth 2.0 / OpenID Connect. Replace the Login.aspx AuthGateway redirect flow with Microsoft Entra ID sign-in. Remove the hardcoded AuthGatewayLoginUrl and AuthGatewayLogoutUrl app settings. Ensure the Logout.aspx flow signs out from Entra ID properly. Protect the Default.aspx report page so it requires authenticated Entra ID users.",
+      "dependencies": ["001-upgrade-dotnet"],
+      "skills": [
+        {
+          "name": "migration-microsoft-entra-id",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "004-security-cve-remediation",
+      "description": "Scan all project dependencies for known CVEs and remediate identified vulnerabilities",
+      "reason": "Before deploying to Azure, the application must be free of known security vulnerabilities. A CVE scan ensures dependencies are patched to their minimum safe versions.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, the current version, the upgraded major version, and the breaking change risk. Verify that the project builds and all tests pass after remediation.",
+      "dependencies": ["001-upgrade-dotnet", "002-transform-sql-to-azure-sql", "003-transform-auth-to-entra-id"],
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "005-deployment-azure-container-apps",
+      "description": "Containerize and deploy ZavaReportDashboard to Azure Container Apps",
+      "reason": "The application needs to be containerized with a modern .NET 10 base image (replacing the legacy Mono-based Dockerfile) and deployed to Azure Container Apps for scalable, cloud-native hosting.",
+      "requirements": "Create a modern Dockerfile using a .NET 10 base image (replacing the existing Mono-based Dockerfile). Build and publish the container image. Deploy the application to Azure Container Apps with Managed Identity enabled. Configure environment variables and connection settings for Azure SQL Database and Microsoft Entra ID. Ensure the application is accessible and functional after deployment.",
+      "dependencies": ["004-security-cve-remediation"],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "Create new Azure Container Apps environment and application",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaReportDashboard",
+    "language": "dotnet",
+    "createdAt": "2026-05-29T09:50:32.097+02:00",
+    "version": "1.0"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "ZavaReportDashboard plan",
+  "execution_mode": "local",
+  "status": "completed",
+  "use_rulebook": false,
+  "base_commit": "8d0908bce3ac272db798b9964f63daa116074e30",
+  "source_commit": "e88477bcf1b98c6277efdb2eb7b953b9c632143f",
+  "created_at": "2026-05-29T07:50:17.8013985\u002B00:00",
+  "completed_at": "2026-05-29T07:52:52.6683422\u002B00:00",
+  "content_hash": {
+    "plan.md": "6dc505db991e53a1ecac7cfd932c0625e469468174c45b0c94e4b840c7611f5b",
+    "tasks.json": "7993f0296d271e8ff4d71ed636d45a8efca2ba4754ca1278e0448eeee81bf79c"
+  }
+}
