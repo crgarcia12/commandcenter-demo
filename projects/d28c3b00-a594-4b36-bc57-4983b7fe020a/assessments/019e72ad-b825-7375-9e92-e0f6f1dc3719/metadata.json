@@ -1,32 +1,33 @@
 {
   "name": "PaaS",
   "execution_mode": "cca",
-  "status": "running",
+  "status": "completed",
   "target": "openjdk25",
   "domain": "upgrade,cloud-readiness,security",
   "created_at": "2026-05-29T07:40:48.1575057\u002B00:00",
+  "completed_at": "2026-05-29T08:10:37.4523056\u002B00:00",
   "base_commit": "339511daacbd590edd01979ae5850c50b885ffb0",
   "apps": {
     "1667b9a4-0d72-47bd-ac20-0c3d5138ab3e": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaAccountManager/pull/5",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaAccountManager/pull/5/agent-sessions/d3e027a6-20ae-45f9-b643-8d385b933285",
       "job_id": "27244028-1252760694-2e21b3e2-79e1-4375-90b6-ca40851920ab"
     },
     "1ef45066-15e8-4619-b6e7-5db061f8c4a5": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaFileIngestion/pull/6",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaFileIngestion/pull/6/agent-sessions/826cbb40-e85a-47a3-a416-1266cca4308c",
       "job_id": "27244028-1252788179-02585f25-5584-4a20-82fa-6ee6a11cade2"
     },
     "8f0c68c8-0a98-4631-a8f7-0c210a4bb44b": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaBatchScheduler/pull/5",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaBatchScheduler/pull/5/agent-sessions/1a04d3e8-06d1-4012-b5e3-94ba6b78efcf",
       "job_id": "27244028-1252788158-894730db-fda9-44f1-bb15-a457077ceb49"
     },
     "c0e33be9-a44e-4f2a-800c-f3ec7f7f2012": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaFraudDetector/pull/5",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaFraudDetector/pull/5/agent-sessions/bf6966bf-cac0-4316-a871-7812ebc197d0",
       "job_id": "27244028-1252788186-66595ec7-5d0f-4533-a11e-b9d6a2a1d365"
