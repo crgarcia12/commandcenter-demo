@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "transform",
+      "id": "001-transform-plaintext-credentials-to-keyvault",
+      "description": "Migrate plaintext database credentials and sensitive configuration values from properties files and environment variables to Azure Key Vault for secure, centralized secret management.",
+      "reason": "The application reads DB_USER, DB_PASSWORD, and other sensitive values directly from frauddetector.properties or environment variables. Storing secrets in Azure Key Vault eliminates credential exposure, enables rotation, and is required for a secure Azure deployment.",
+      "requirements": "Migrate all sensitive credentials (database username, database password, SSO cookie name, auth gateway URL) currently read from frauddetector.properties or environment variables to Azure Key Vault. Update FraudConfig.java to retrieve secrets from Azure Key Vault using Managed Identity. Ensure the project builds and all existing tests pass after the change.",
+      "skills": [
+        {
+          "name": "migration-plaintext-credential-to-azure-keyvault",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-log-to-console",
+      "description": "Migrate application logging from any file-based output to console-only (stdout/stderr) for cloud-native compatibility with Azure Container Apps.",
+      "reason": "Cloud-native environments like Azure Container Apps collect logs from stdout/stderr. File-based logging is not accessible in ephemeral containers and is incompatible with Azure Monitor and Log Analytics.",
+      "requirements": "Remove any file appenders from logging configuration. Ensure all application log output is directed to console (stdout/stderr). Update any logging configuration files (e.g., logback.xml, log4j.xml) accordingly. Verify project builds and tests pass.",
+      "skills": [
+        {
+          "name": "migration-log-to-console",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "003-security-cve-remediation",
+      "description": "Scan all project dependencies for known CVEs and remediate identified vulnerabilities to ensure the application is secure before deployment.",
+      "reason": "Apache Struts 2.5.30 and other dependencies may have known CVEs. Remediating vulnerabilities before deployment is essential to prevent exploitation in production.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, current version, upgraded version, and breaking change risk. Verify that the project builds and all tests pass after remediation.",
+      "dependencies": [
+        "001-transform-plaintext-credentials-to-keyvault",
+        "002-transform-log-to-console"
+      ],
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "004-deployment-azure-container-apps",
+      "description": "Containerize and deploy the ZavaFraudDetector application to Azure Container Apps using the existing Dockerfile.",
+      "reason": "The application needs to be deployed to Azure Container Apps for scalable, managed cloud hosting. An existing Dockerfile is already present in the repository.",
+      "requirements": "Deploy the application to Azure Container Apps using the existing Dockerfile. Configure Managed Identity for the container app to enable passwordless access to Azure Key Vault and Azure SQL. Provision required Azure resources (Container Apps environment, container registry) using Bicep. Expose the application on port 8080.",
+      "dependencies": [
+        "003-security-cve-remediation"
+      ],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "Create new resources",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaFraudDetector",
+    "language": "java",
+    "createdAt": "2026-05-29T09:51:46.475+02:00",
+    "version": "1.0"
+  }
+}

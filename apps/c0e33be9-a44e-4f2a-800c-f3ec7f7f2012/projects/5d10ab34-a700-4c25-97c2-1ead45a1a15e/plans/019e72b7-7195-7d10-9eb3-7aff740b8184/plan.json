@@ -1,8 +1,14 @@
 {
   "name": "ZavaFraudDetector plan",
   "execution_mode": "local",
-  "status": "running",
+  "status": "completed",
   "use_rulebook": false,
   "base_commit": "2947bbfed35a9adafe353f2d4442d562623ed851",
-  "created_at": "2026-05-29T07:51:25.4800729\u002B00:00"
+  "source_commit": "3a73b5c78b9de932291a58d0b9ab78e928801dc5",
+  "created_at": "2026-05-29T07:51:25.4800729\u002B00:00",
+  "completed_at": "2026-05-29T07:54:35.5349370\u002B00:00",
+  "content_hash": {
+    "plan.md": "770c10f19d1e946e93d3d4f587032978736781b44aefd042b1719619448dbe98",
+    "tasks.json": "03a95dab5b0aed707f10476cc00ed36983a8a8f7195835125562e79ffd1bfcc6"
+  }
 }
