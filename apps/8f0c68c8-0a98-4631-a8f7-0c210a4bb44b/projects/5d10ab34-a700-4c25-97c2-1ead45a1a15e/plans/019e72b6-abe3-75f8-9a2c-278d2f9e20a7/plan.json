@@ -1,0 +1,8 @@
+{
+  "name": "ZavaBatchScheduler plan",
+  "execution_mode": "local",
+  "status": "running",
+  "use_rulebook": false,
+  "base_commit": "5eaf217594ef4961a5c0a7b7867bff6e1d5315f5",
+  "created_at": "2026-05-29T07:50:34.8356043\u002B00:00"
+}
