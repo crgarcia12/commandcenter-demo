@@ -1,0 +1,23 @@
+{
+  "name": "PaaS",
+  "execution_mode": "cca",
+  "status": "running",
+  "target": "openjdk25",
+  "domain": "upgrade,cloud-readiness,security",
+  "created_at": "2026-05-29T07:40:48.1575057\u002B00:00",
+  "base_commit": "339511daacbd590edd01979ae5850c50b885ffb0",
+  "apps": {
+    "1667b9a4-0d72-47bd-ac20-0c3d5138ab3e": {
+      "status": "pending"
+    },
+    "1ef45066-15e8-4619-b6e7-5db061f8c4a5": {
+      "status": "pending"
+    },
+    "8f0c68c8-0a98-4631-a8f7-0c210a4bb44b": {
+      "status": "pending"
+    },
+    "c0e33be9-a44e-4f2a-800c-f3ec7f7f2012": {
+      "status": "pending"
+    }
+  }
+}
