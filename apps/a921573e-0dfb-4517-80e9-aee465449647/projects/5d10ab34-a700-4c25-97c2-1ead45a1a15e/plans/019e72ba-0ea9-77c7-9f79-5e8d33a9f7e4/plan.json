@@ -1,14 +1,19 @@
 {
   "name": "Modernize Zava",
   "execution_mode": "cca",
-  "status": "running",
+  "status": "completed",
   "execution_goal": "Modernize the application to the latest frameowkr, and cloud native serivces",
   "assessment_id": "019e71d4-309f-7660-b33f-f7403e6dda4b",
   "use_rulebook": false,
   "base_commit": "96be3aec8ee0b1535ec7c11ff917d59636770656",
   "source_commit": "f2503baf0e30c8cc1814ec890c246e1686b98817",
   "created_at": "2026-05-29T07:54:16.7162067\u002B00:00",
+  "completed_at": "2026-05-29T08:04:44.1883228\u002B00:00",
   "pull_request": "https://github.com/crgarcia12/mnm-ZavaPayGateway/pull/5",
   "session_url": "https://github.com/crgarcia12/mnm-ZavaPayGateway/pull/5/agent-sessions/8c282c10-7be5-402e-aa70-895a7c1b7c09",
-  "job_id": "27244028-1252788258-dd77a769-3b6c-4f7d-84a2-b137ee48eb48"
+  "job_id": "27244028-1252788258-dd77a769-3b6c-4f7d-84a2-b137ee48eb48",
+  "content_hash": {
+    "plan.md": "b19b1c1ca4f5b9718e5cde4bb93fd4d47ce799312ce5c57eca3072c8f05a60be",
+    "tasks.json": "15c4f04212c3e71f0679f28084b38040b66954e24b3e20fc534ece24486a6e7c"
+  }
 }
