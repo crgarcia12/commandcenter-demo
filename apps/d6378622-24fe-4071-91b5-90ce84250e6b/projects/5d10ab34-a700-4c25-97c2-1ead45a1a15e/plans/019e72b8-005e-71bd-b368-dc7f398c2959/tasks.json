@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "transform",
+      "id": "001-transform-migrate-plaintext-credentials-to-azure-keyvault",
+      "description": "Migrate hardcoded database credentials from ledger.properties and LedgerConfig.java to Azure Key Vault for secure secret management",
+      "reason": "The application stores database username and password as plaintext in ledger.properties (db.user=sa, db.password=YourStrong!Passw0rd). These credentials must be moved to Azure Key Vault to eliminate security risks associated with storing secrets in source code and configuration files.",
+      "requirements": "Remove plaintext database credentials (db.user, db.password) from ledger.properties. Retrieve these secrets at runtime from Azure Key Vault using Managed Identity. Update LedgerConfig.java and LedgerConnectionFactory.java to fetch credentials from Azure Key Vault instead of properties file or environment variables. Ensure the build still compiles and existing functionality is preserved.",
+      "skills": [
+        {
+          "name": "migration-plaintext-credential-to-azure-keyvault",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "002-security-cve-remediation",
+      "description": "Scan all project dependencies for known CVEs and remediate identified vulnerabilities before deployment",
+      "reason": "The project uses mssql-jdbc 12.8.1 and javax.servlet-api 4.0.1. Known vulnerabilities may exist in these or transitive dependencies. Remediating CVEs ensures the modernized application is secure before being deployed to Azure.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, the current version, the upgraded major version, and the breaking change risk. Verify that the project builds and all tests pass after remediation.",
+      "dependencies": [
+        "001-transform-migrate-plaintext-credentials-to-azure-keyvault"
+      ],
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "003-deployment-azure-container-apps",
+      "description": "Containerize and deploy ZavaLedger to Azure Container Apps",
+      "reason": "The user explicitly requested deployment to Azure. Azure Container Apps provides a managed, serverless container platform suitable for this Tomcat-based WAR application. An existing Dockerfile is already present in the repository.",
+      "requirements": "Deploy the ZavaLedger application to Azure Container Apps. Use the existing Dockerfile which builds a WAR and runs on Tomcat 9.0 JDK 17. Provision required Azure resources (Container Apps environment, container registry, Azure SQL Database, Azure Key Vault) as new resources. Configure Managed Identity for the container app to access Azure Key Vault and Azure SQL Database.",
+      "dependencies": [
+        "001-transform-migrate-plaintext-credentials-to-azure-keyvault",
+        "002-security-cve-remediation"
+      ],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "Create new resources",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaLedger",
+    "language": "java",
+    "createdAt": "2026-05-29T09:52:20.509+02:00",
+    "version": "1.0"
+  }
+}
