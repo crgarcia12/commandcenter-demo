@@ -1,0 +1,8 @@
+{
+  "name": "ZavaAuditWorker plan",
+  "execution_mode": "local",
+  "status": "running",
+  "use_rulebook": false,
+  "base_commit": "9ff9fe790f93752d5813f5d03fa2ede112ed224d",
+  "created_at": "2026-05-29T07:52:06.6021836\u002B00:00"
+}
