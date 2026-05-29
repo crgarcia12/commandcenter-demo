@@ -80,7 +80,10 @@
       "job_id": "27244028-1252788199-016a8ec5-f211-46d8-beeb-eae64dccc1fe"
     },
     "c0e33be9-a44e-4f2a-800c-f3ec7f7f2012": {
-      "status": "running"
+      "status": "running",
+      "pull_request": "https://github.com/crgarcia12/mnm-ZavaFraudDetector/pull/4",
+      "session_url": "https://github.com/crgarcia12/mnm-ZavaFraudDetector/pull/4/agent-sessions/cc229193-90ce-43f6-b95b-9bf0eb3054e4",
+      "job_id": "27244028-1252788186-7e6cfea6-e346-44b0-ac76-5bb16e980c93"
     },
     "c96a8e07-f055-4436-9ac3-b3d37b3f030b": {
       "status": "running"
