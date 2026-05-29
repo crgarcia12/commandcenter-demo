@@ -1,5 +1,6 @@
 {
   "name": "ZavaNotifyWorker",
+  "language": "dotnet",
   "created_at": "2026-05-29T02:39:03.3283853\u002B00:00",
   "source": {
     "provider": "github",
