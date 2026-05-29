@@ -1,9 +1,11 @@
 {
   "name": "Modernization",
   "execution_mode": "cca",
-  "status": "running",
+  "status": "failed",
   "execution_goal": "Modernize to the latest frameworks",
   "use_rulebook": true,
   "base_commit": "a9de9a3b538d8f23c2967e01b91b86b30c108462",
-  "created_at": "2026-05-29T08:13:29.5213021\u002B00:00"
+  "created_at": "2026-05-29T08:13:29.5213021\u002B00:00",
+  "completed_at": "2026-05-29T08:13:36.1046340\u002B00:00",
+  "error": "Branch \u0027plan\u0027 already exists on remote. Please specify a different branch name."
 }
