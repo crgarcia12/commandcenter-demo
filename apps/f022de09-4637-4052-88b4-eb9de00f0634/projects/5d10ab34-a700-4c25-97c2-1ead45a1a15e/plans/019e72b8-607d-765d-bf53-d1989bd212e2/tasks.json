@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "transform",
+      "id": "001-transform-sql-server-to-azure-sql-managed-identity",
+      "description": "Migrate the database connection from password-based SQL Server authentication to Azure SQL Database with Managed Identity for passwordless connectivity.",
+      "reason": "The application connects to SQL Server using plaintext credentials (DB_USER/DB_PASSWORD) hardcoded in the Dockerfile and read via environment variables. Replacing these with Azure Managed Identity eliminates credential exposure and aligns with Azure security best practices.",
+      "requirements": "Migrate the JDBC connection in LoanConnectionFactory and LoanOriginationConfig from password-based SQL Server authentication to passwordless Azure Managed Identity authentication targeting Azure SQL Database. Remove the DB_USER and DB_PASSWORD environment variables and credential references. Ensure the connection URL and driver configuration are updated to support Managed Identity token-based auth. This is a plain Java EE servlet application (not Spring Boot) — adapt the migration accordingly.",
+      "dependencies": [],
+      "skills": [
+        {
+          "name": "migration-mi-azure-sql",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "002-security-cve-remediation",
+      "description": "Scan all project dependencies for known CVEs and remediate identified vulnerabilities before deployment.",
+      "reason": "The project uses org.json:20140107, a 2014 release with known CVEs, and other potentially outdated dependencies. Remediating these ensures the application is secure before being deployed to Azure.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. Pay particular attention to org.json:json:20140107 which is an extremely old release with known vulnerabilities — upgrade to the latest stable version. If a CVE fix requires a major version upgrade, document the affected dependency, the current version, the upgraded version, and any breaking change risk. Verify the project builds and all tests pass after remediation.",
+      "dependencies": [
+        "001-transform-sql-server-to-azure-sql-managed-identity"
+      ],
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "003-deployment-azure-container-apps",
+      "description": "Containerize and deploy the ZavaLoanOriginationAPI to Azure Container Apps using the existing Dockerfile.",
+      "reason": "The application needs to be deployed to Azure as part of the modernization goal. Azure Container Apps provides a managed serverless container platform with built-in Managed Identity support and scaling capabilities.",
+      "requirements": "Deploy ZavaLoanOriginationAPI to Azure Container Apps using the existing Dockerfile (Gradle build → Tomcat 9 WAR). Configure Managed Identity on the container app to allow access to Azure SQL Database. Set environment variables for KYC_SERVICE_BASE_URL, RISK_SERVICE_BASE_URL, and LEDGER_SERVICE_BASE_URL to point to their respective Azure-hosted service endpoints. Expose port 8080.",
+      "dependencies": [
+        "001-transform-sql-server-to-azure-sql-managed-identity",
+        "002-security-cve-remediation"
+      ],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "Create new",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaLoanOriginationAPI",
+    "language": "java",
+    "createdAt": "2026-05-29T09:53:04.834+02:00",
+    "version": "1.0"
+  }
+}

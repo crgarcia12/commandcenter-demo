@@ -1,8 +1,14 @@
 {
   "name": "ZavaLoanOriginationAPI plan",
   "execution_mode": "local",
-  "status": "running",
+  "status": "completed",
   "use_rulebook": false,
   "base_commit": "c7f01667fa45967da64d5ce89992751bb7eda64c",
-  "created_at": "2026-05-29T07:52:26.7931011\u002B00:00"
+  "source_commit": "cc268c34cc976b5b40043cd31f7fe958e8b0e741",
+  "created_at": "2026-05-29T07:52:26.7931011\u002B00:00",
+  "completed_at": "2026-05-29T07:56:23.8242357\u002B00:00",
+  "content_hash": {
+    "plan.md": "d372f296674d998bb9fafce828715010481b36097a902ee72a133a6e354b7512",
+    "tasks.json": "7991bb10260ddfbef08d16edd01ac6a172d4a15ee89dbfd28c1571ca0065fb9d"
+  }
 }
