@@ -1,0 +1,8 @@
+{
+  "name": "ZavaAuthGateway plan",
+  "execution_mode": "local",
+  "status": "running",
+  "use_rulebook": false,
+  "base_commit": "719ea769a0abd6dae25e16e63b8188bf7d9b9817",
+  "created_at": "2026-05-29T07:50:09.8283276\u002B00:00"
+}
