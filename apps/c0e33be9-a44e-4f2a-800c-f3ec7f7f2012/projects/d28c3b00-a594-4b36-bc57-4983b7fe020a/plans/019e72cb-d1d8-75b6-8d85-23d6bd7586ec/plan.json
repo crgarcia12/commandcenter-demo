@@ -1,0 +1,9 @@
+{
+  "name": "Modernization",
+  "execution_mode": "cca",
+  "status": "running",
+  "execution_goal": "Modernize to the latest frameworks",
+  "use_rulebook": true,
+  "base_commit": "df1debcee16ed7c9d19658124eaaf4cc1c1d989d",
+  "created_at": "2026-05-29T08:13:40.9496987\u002B00:00"
+}
