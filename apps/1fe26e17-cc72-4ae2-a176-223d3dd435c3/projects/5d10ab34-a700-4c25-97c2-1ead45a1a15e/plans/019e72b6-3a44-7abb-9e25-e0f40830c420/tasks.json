@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "transform",
+      "id": "001-transform-rabbitmq-to-servicebus",
+      "description": "Migrate RabbitMQ AMQP messaging to Azure Service Bus",
+      "reason": "The application uses the RabbitMQ AMQP client directly (com.rabbitmq:amqp-client) to publish wire transfer events. Replacing it with Azure Service Bus enables cloud-native, fully managed messaging on Azure with managed identity support, eliminating the need for self-hosted RabbitMQ infrastructure.",
+      "requirements": "Migrate RabbitMQ AMQP client usage to Azure Service Bus SDK. Replace the topic exchange and routing key pattern (wire.events / wire.[status]) with Azure Service Bus topics and subscriptions. Remove RabbitMQ connection configuration (host, port, user, password) and replace with managed identity-based Azure Service Bus connection. Update Gradle dependencies accordingly.",
+      "skills": [
+        {
+          "name": "migration-java-ee-amqp-rabbitmq-servicebus",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-plaintext-credentials-to-keyvault",
+      "description": "Migrate hardcoded plaintext credentials to Azure Key Vault",
+      "reason": "Critical security vulnerabilities exist due to hardcoded SQL Server SA credentials and RabbitMQ guest/guest credentials stored in wire-transfer.properties and baked into the Dockerfile. Moving all secrets to Azure Key Vault eliminates credential exposure and enables centralized secret management.",
+      "requirements": "Migrate all hardcoded credentials — DB_USER (sa), DB_PASSWORD (YourStrong!Passw0rd), RABBITMQ_USER (guest), RABBITMQ_PASSWORD (guest) — from wire-transfer.properties and Dockerfile to Azure Key Vault. Update the application (WireConfig.java, WireConnectionFactory.java) to retrieve secrets from Azure Key Vault at runtime using managed identity. Remove plaintext secrets from all files in the repository.",
+      "dependencies": [
+        "001-transform-rabbitmq-to-servicebus"
+      ],
+      "skills": [
+        {
+          "name": "migration-plaintext-credential-to-azure-keyvault",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "003-security-cve-remediation",
+      "description": "Scan and remediate CVEs in project dependencies",
+      "reason": "The project depends on critically outdated libraries, notably org.json:json:20140107 (released 2014, known CVE history) and other dependencies that may contain known security vulnerabilities. Remediating these before deployment ensures a secure production workload.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, the current version, the upgraded major version, and the breaking change risk. Verify that the project builds and all tests pass after remediation.",
+      "dependencies": [
+        "001-transform-rabbitmq-to-servicebus",
+        "002-transform-plaintext-credentials-to-keyvault"
+      ],
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "004-deployment-azure-container-apps",
+      "description": "Containerize and deploy ZavaWireTransferService to Azure Container Apps",
+      "reason": "The application needs to run as a managed, scalable container service on Azure. Azure Container Apps provides a serverless container platform with built-in managed identity, autoscaling, and ingress support — ideal for a WAR-based service modernized to cloud-native standards.",
+      "requirements": "Use the existing Dockerfile (Gradle build + Tomcat 9 runtime) to build and publish the container image. Deploy to Azure Container Apps using Azure CLI. Configure environment variables for Azure SQL Database endpoint, Azure Service Bus namespace, and Azure Key Vault URL. Enable system-assigned managed identity on the container app for passwordless access to all Azure services. Create new Azure resources.",
+      "dependencies": [
+        "003-security-cve-remediation"
+      ],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "Create new",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaWireTransferService",
+    "language": "java",
+    "createdAt": "2026-05-29T09:50:21.089+02:00",
+    "version": "1.0"
+  }
+}

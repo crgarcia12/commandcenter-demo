@@ -1,0 +1,14 @@
+{
+  "name": "ZavaWireTransferService plan",
+  "execution_mode": "local",
+  "status": "completed",
+  "use_rulebook": false,
+  "base_commit": "5313363460469381e609ec98cb13b0a640a727ad",
+  "source_commit": "b3e29c0fe4d9c70a9f5c7ce3ef9e6ebab515fdb0",
+  "created_at": "2026-05-29T07:50:05.7247676\u002B00:00",
+  "completed_at": "2026-05-29T07:54:04.4216543\u002B00:00",
+  "content_hash": {
+    "plan.md": "a3df71b4f534a07acb09815f2b4d08fc44a883b6cab155c6c4ffbfcea770ca85",
+    "tasks.json": "6c57cee3ffbd515b8daee4900907e3eb59ded22e0cd593f1c46eda5f7d107b5c"
+  }
+}
