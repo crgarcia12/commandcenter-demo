@@ -1,0 +1,7 @@
+{
+  "name": "ZavaFileIngestion plan execution",
+  "execution_mode": "cca",
+  "status": "pending",
+  "base_commit": "4cc72b961640a7cf644f6bc92a6ba31e636f7b47",
+  "started_at": "2026-05-29T08:40:07.5133947\u002B00:00"
+}
