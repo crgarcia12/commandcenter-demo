@@ -6,5 +6,9 @@
   "assessment_id": "019e71d4-309f-7660-b33f-f7403e6dda4b",
   "use_rulebook": false,
   "base_commit": "3ffba229901b7867ab5622ac337a7c4299200675",
-  "created_at": "2026-05-29T07:55:15.0648909\u002B00:00"
+  "source_commit": "3a73b5c78b9de932291a58d0b9ab78e928801dc5",
+  "created_at": "2026-05-29T07:55:15.0648909\u002B00:00",
+  "pull_request": "https://github.com/crgarcia12/mnm-ZavaFraudDetector/pull/6",
+  "session_url": "https://github.com/crgarcia12/mnm-ZavaFraudDetector/pull/6/agent-sessions/d1b7e623-e7a5-4477-8eb5-79ecd7b1aacb",
+  "job_id": "27244028-1252788186-16bc4bcc-8a76-4e87-8e51-808f909b9be1"
 }
