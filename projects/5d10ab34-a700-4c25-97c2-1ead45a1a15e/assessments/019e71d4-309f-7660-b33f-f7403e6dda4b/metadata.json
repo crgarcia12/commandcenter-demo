@@ -104,7 +104,10 @@
       "job_id": "27244028-1252788145-77a6a789-4029-4f73-9b90-a803d504d24d"
     },
     "d524fc47-df1b-45f3-af60-c14a555453d9": {
-      "status": "running"
+      "status": "running",
+      "pull_request": "https://github.com/crgarcia12/mnm-ZavaNotifyWorker/pull/4",
+      "session_url": "https://github.com/crgarcia12/mnm-ZavaNotifyWorker/pull/4/agent-sessions/c1597936-0894-4a89-8fa3-13cb365ead42",
+      "job_id": "27244028-1252788247-c92c5e4e-d204-4df5-8ba1-039a4a17a17e"
     },
     "d6378622-24fe-4071-91b5-90ce84250e6b": {
       "status": "running"
