@@ -1,0 +1,14 @@
+{
+  "name": "ZavaInterestCalculator plan",
+  "execution_mode": "local",
+  "status": "completed",
+  "use_rulebook": false,
+  "base_commit": "b7245c3773523652ca57b38f68ae7ea031dc2ef0",
+  "source_commit": "bdfaa78b7a5f9a0bb82b60b74a9236628721b0c0",
+  "created_at": "2026-05-29T07:51:05.6333088\u002B00:00",
+  "completed_at": "2026-05-29T07:54:12.5066111\u002B00:00",
+  "content_hash": {
+    "plan.md": "44bbe55e44eb4bbf8f7e68cdff432ddf80a764b955a1580c6c3a12202d63d0d3",
+    "tasks.json": "8e533d425b28fa0166e9c4b867cb9a3242e268620438116b7c15bc69ab96f2f2"
+  }
+}

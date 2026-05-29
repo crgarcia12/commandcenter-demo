@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "transform",
+      "id": "001-transform-migrate-sql-server-to-azure-sql-mi",
+      "description": "Migrate the SQL Server database connectivity from password-based authentication to Azure SQL Database with Managed Identity, removing hardcoded credentials from the Dockerfile and environment variables.",
+      "reason": "The application currently uses hardcoded SQL Server credentials (DB_USER, DB_PASSWORD) in the Dockerfile and reads them as environment variables. Moving to Azure SQL Database with Managed Identity eliminates secret management risk and aligns with Azure security best practices.",
+      "requirements": "Update the JDBC connection string in InterestConfig to use Azure Managed Identity (ActiveDirectoryMSI authentication) for Azure SQL Database. Remove password-based connection properties (DB_USER, DB_PASSWORD) from the Dockerfile. Update the mssql-jdbc driver configuration to support managed identity authentication. Ensure the application continues to function as a plain Java EE servlet (no Spring Boot) with the updated connectionless credential model. Use Azure SQL Database as the target database service.",
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "002-security-cve-remediation",
+      "description": "Scan all project dependencies for known CVEs and remediate identified vulnerabilities to ensure the application is secure before deployment.",
+      "reason": "The project contains notably outdated dependencies such as org.json:20140107 (from 2014) which have known security vulnerabilities. A security scan and remediation pass is required before deploying to Azure.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. Pay particular attention to org.json:20140107 which is from 2014 and likely has known CVEs. If a CVE fix requires a major version upgrade, document the affected dependency, the current version, the upgraded major version, and the breaking change risk. Verify that the project builds and all tests pass after remediation.",
+      "dependencies": [
+        "001-transform-migrate-sql-server-to-azure-sql-mi"
+      ],
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "003-deployment-azure-container-apps",
+      "description": "Build the container image and deploy the ZavaInterestCalculator application to Azure Container Apps.",
+      "reason": "The user requested deployment to Azure. Azure Container Apps provides a fully managed, serverless container hosting platform suitable for this Java servlet application.",
+      "requirements": "Update the existing Dockerfile as needed to reflect the managed identity authentication changes and produce a production-ready container image. Provision an Azure Container Apps environment and deploy the application. Configure the Container App with the appropriate environment variables for Azure SQL Database connection (endpoint and database name, without credentials). Enable system-assigned Managed Identity on the Container App and grant it access to the Azure SQL Database. Use Bicep for infrastructure provisioning.",
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "Create new service",
+      "deploymentTool": "bicep",
+      "dependencies": [
+        "002-security-cve-remediation"
+      ],
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaInterestCalculator",
+    "language": "java",
+    "createdAt": "2026-05-29T09:51:31.699+02:00",
+    "version": "1.0"
+  }
+}
