@@ -1,7 +1,11 @@
 {
   "name": "ZavaFileIngestion plan execution",
   "execution_mode": "cca",
-  "status": "pending",
+  "status": "running",
   "base_commit": "4cc72b961640a7cf644f6bc92a6ba31e636f7b47",
+  "source_commit": "f46f61ed8f2f3d2bf65e05a801bfdd5beac69a07",
+  "pull_request": "https://github.com/crgarcia12/mnm-ZavaFileIngestion/pull/8",
+  "session_url": "https://github.com/crgarcia12/mnm-ZavaFileIngestion/pull/8/agent-sessions/c61c3a3d-78ed-463b-89b6-906aa2320caa",
+  "job_id": "27244028-1252788179-0868253d-86fd-47c7-817a-857ac0dd6c12",
   "started_at": "2026-05-29T08:40:07.5133947\u002B00:00"
 }
