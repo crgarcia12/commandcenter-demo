@@ -38,7 +38,10 @@
       "job_id": "27244028-1252788155-3879ee69-091c-4874-8a91-9cd086190fbe"
     },
     "661db426-980d-406c-8063-e638875dd492": {
-      "status": "running"
+      "status": "running",
+      "pull_request": "https://github.com/crgarcia12/mnm-ZavaReportDashboard/pull/4",
+      "session_url": "https://github.com/crgarcia12/mnm-ZavaReportDashboard/pull/4/agent-sessions/4255eb03-6e0f-40ef-9359-f8c2ccb2a2be",
+      "job_id": "27244028-1252788279-2242705a-2123-4a87-9f65-92cef1dcadd8"
     },
     "7a005bcc-a091-4513-85d9-18de5a55e889": {
       "status": "running"
