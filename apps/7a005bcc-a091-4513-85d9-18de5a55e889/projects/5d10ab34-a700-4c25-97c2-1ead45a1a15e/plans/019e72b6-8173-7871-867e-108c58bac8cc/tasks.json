@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade-dotnet",
+      "description": "Upgrade ZavaStatementService from .NET Framework 4.8 to .NET 10 (net10.0).",
+      "reason": "The application currently targets .NET Framework 4.8 and runs inside a deprecated Mono-based Docker container. Mono is no longer actively maintained and cannot reliably run in Azure Container Apps Linux environments. Upgrading to .NET 10 enables native Linux containerization, modern Azure SDK support, and proper WCF service migration (to CoreWCF or REST).",
+      "requirements": "Upgrade the project from .NET Framework 4.8 to .NET 10. Convert the legacy non-SDK-style .csproj to SDK-style format. Migrate the WCF service (System.ServiceModel, .svc endpoint) to a modern equivalent suitable for .NET 10 (e.g., CoreWCF or ASP.NET Core REST API). Replace the Mono-based Dockerfile with a .NET 10 Linux base image. Ensure the project builds and all existing functionality is preserved.",
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-sql-managed-identity",
+      "description": "Migrate SQL Server database connectivity from username/password credentials to Azure SQL Database with Managed Identity authentication.",
+      "reason": "The application currently connects to SQL Server using hardcoded credentials in web.config and environment variables (DB_HOST, DB_USER, DB_PASSWORD, etc.). These credentials are a security risk. Managed Identity eliminates the need for secrets in configuration and aligns with Azure security best practices.",
+      "requirements": "Replace the username/password SQL Server connection (System.Data.SqlClient / Microsoft.Data.SqlClient) with Azure SQL Database using Managed Identity (DefaultAzureCredential). Remove credential-based environment variables and connection string entries. Update DbConfig.cs to use token-based authentication. Ensure the application can connect to Azure SQL Database without explicit credentials.",
+      "dependencies": ["001-upgrade-dotnet"],
+      "skills": [
+        {
+          "name": "migration-azure-sql-database",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "003-transform-console-logging",
+      "description": "Configure console logging so the application emits structured logs to stdout/stderr for Azure Container Apps log aggregation.",
+      "reason": "The application currently has no explicit logging configuration. Azure Container Apps captures stdout/stderr for log aggregation and Azure Monitor integration. Proper console logging is required for observability in the cloud.",
+      "requirements": "Configure the application to emit structured logs to stdout/stderr. Ensure log output is captured by the Azure Container Apps log aggregation pipeline and is visible in Azure Monitor. Apply cloud-native logging patterns appropriate for .NET 10.",
+      "dependencies": ["001-upgrade-dotnet"],
+      "skills": [
+        {
+          "name": "migration-console-logging",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "004-security-cve-remediation",
+      "description": "Scan all project dependencies for known CVEs and remediate identified vulnerabilities before deployment.",
+      "reason": "Before deploying to Azure, all known security vulnerabilities in dependencies must be identified and fixed to ensure the application meets security and compliance standards.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, the current version, the upgraded major version, and the breaking change risk. Verify that the project builds and all tests pass after remediation.",
+      "dependencies": ["001-upgrade-dotnet"],
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "005-deployment-azure-container-apps",
+      "description": "Containerize the upgraded application and deploy it to Azure Container Apps.",
+      "reason": "The user's goal is to modernize the application and deploy it to Azure. Azure Container Apps is the default cloud-native deployment target that provides serverless container hosting, auto-scaling, and seamless Managed Identity integration.",
+      "requirements": "Build a production-ready Dockerfile for the .NET 10 application. Provision Azure Container Apps infrastructure using Bicep. Build and push the container image to Azure Container Registry. Deploy the containerized application to Azure Container Apps with Managed Identity enabled and appropriate environment configuration. Ensure the health endpoint (/health) is exposed and configured as a liveness/readiness probe.",
+      "dependencies": [
+        "002-transform-sql-managed-identity",
+        "003-transform-console-logging",
+        "004-security-cve-remediation"
+      ],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "Create new",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaStatementService",
+    "language": "dotnet",
+    "createdAt": "2026-05-29T09:50:43.442+02:00",
+    "version": "1.0"
+  }
+}
