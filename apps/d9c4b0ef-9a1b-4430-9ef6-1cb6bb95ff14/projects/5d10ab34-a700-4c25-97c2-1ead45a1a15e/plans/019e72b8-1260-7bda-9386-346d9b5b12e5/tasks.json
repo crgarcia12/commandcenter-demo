@@ -1,0 +1,117 @@
+{
+  "$schema": "https://raw.githubusercontent.com/github/modernize/main/schema/tasks-schema.json",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade-dotnet",
+      "description": "Upgrade the project from .NET Framework 4.8 to .NET 10 (net10.0)",
+      "reason": "The project targets .NET Framework 4.8 using a legacy MSBuild csproj format and packages.config. Upgrading to .NET 10 enables modern Azure SDK usage, SDK-style project format, and cloud-native runtime support required for subsequent migration tasks.",
+      "requirements": "Upgrade the ZavaAuditWorker project from .NET Framework 4.8 to .NET 10 (net10.0). Convert the legacy csproj to SDK-style format. Migrate packages.config to PackageReference. Ensure the project builds and all existing functionality is preserved after the upgrade.",
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-rabbitmq-to-servicebus",
+      "description": "Migrate the RabbitMQ queue consumer to Azure Service Bus with Managed Identity",
+      "reason": "The application uses RabbitMQ.Client to poll a queue for audit events with username/password credentials. Azure Service Bus provides a managed, scalable cloud messaging service with Managed Identity support, eliminating credential management.",
+      "requirements": "Replace the RabbitMQ.Client-based queue polling (host, port, vhost, user/password config) with Azure Service Bus. Preserve the existing queue consumption semantics: receive individual messages, process audit events, acknowledge (complete) on success, and dead-letter on failure. Use Managed Identity (DefaultAzureCredential) for authentication. Remove all RabbitMQ configuration (host, port, vhost, user, password) and replace with an Azure Service Bus namespace endpoint configuration.",
+      "dependencies": ["001-upgrade-dotnet"],
+      "skills": [
+        {
+          "name": "migration-azure-servicebus",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "003-transform-sql-to-azure-sql",
+      "description": "Migrate SQL Server connection to Azure SQL Database with Managed Identity",
+      "reason": "The application uses System.Data.SqlClient with hardcoded username/password credentials stored in app.config to persist audit events. Azure SQL Database with Managed Identity eliminates credential exposure and aligns with Azure security best practices.",
+      "requirements": "Replace the SQL Server connection (username/password via DB_CONNECTION_STRING or individual DB_HOST/DB_USER/DB_PASSWORD environment variables) with Azure SQL Database using Managed Identity (DefaultAzureCredential). Preserve all audit event persistence logic including both legacy AuditLog schema (ActionID-based) and modern schema (EventType-based). Remove hardcoded credentials from app.config and connection string builder. Replace System.Data.SqlClient with Microsoft.Data.SqlClient.",
+      "dependencies": ["001-upgrade-dotnet"],
+      "skills": [
+        {
+          "name": "migration-azure-sql-database",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "004-transform-console-logging",
+      "description": "Modernize console logging for cloud-native container environments",
+      "reason": "The application uses Console.WriteLine for all log output, which is not structured and may not integrate well with Azure log aggregation in container environments. Cloud-native logging ensures proper log collection by Azure Monitor and container platform.",
+      "requirements": "Replace Console.WriteLine calls with structured console logging suitable for cloud and container environments. Ensure log output is emitted to stdout/stderr in a format compatible with Azure Container Apps log aggregation. Preserve all existing log messages and severity distinctions.",
+      "dependencies": ["001-upgrade-dotnet"],
+      "skills": [
+        {
+          "name": "migration-console-logging",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "005-security-cve-remediation",
+      "description": "Scan and remediate CVEs in project dependencies",
+      "reason": "Before deployment to Azure, all known security vulnerabilities in project dependencies must be identified and remediated to ensure the application is secure.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, the current version, the upgraded major version, and the breaking change risk. Verify that the project builds and all tests pass after remediation.",
+      "dependencies": [
+        "001-upgrade-dotnet",
+        "002-transform-rabbitmq-to-servicebus",
+        "003-transform-sql-to-azure-sql",
+        "004-transform-console-logging"
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "006-deployment-azure-container-apps",
+      "description": "Containerize and deploy ZavaAuditWorker to Azure Container Apps",
+      "reason": "The application needs to be deployed as a cloud-native container workload on Azure. Azure Container Apps provides a serverless container platform with built-in Managed Identity support, scaling, and observability.",
+      "requirements": "Containerize the .NET 10 application using a modern Dockerfile (replacing the legacy mono-based Dockerfile). Deploy to Azure Container Apps using the Azure CLI. Configure Managed Identity for the container app to allow authentication to Azure Service Bus and Azure SQL Database. Update the Dockerfile to use the official .NET 10 runtime image.",
+      "dependencies": ["005-security-cve-remediation"],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "Create new service",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaAuditWorker",
+    "language": "dotnet",
+    "createdAt": "2026-05-29T09:52:25.812+02:00",
+    "version": "1.0"
+  }
+}

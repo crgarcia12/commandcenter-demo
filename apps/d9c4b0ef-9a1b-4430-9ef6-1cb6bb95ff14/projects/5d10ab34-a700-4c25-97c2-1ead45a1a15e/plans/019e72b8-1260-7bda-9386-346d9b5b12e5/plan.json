@@ -1,8 +1,14 @@
 {
   "name": "ZavaAuditWorker plan",
   "execution_mode": "local",
-  "status": "running",
+  "status": "completed",
   "use_rulebook": false,
   "base_commit": "9ff9fe790f93752d5813f5d03fa2ede112ed224d",
-  "created_at": "2026-05-29T07:52:06.6021836\u002B00:00"
+  "source_commit": "503dd37d72f38e46e4439a5c7f1f4cb224ab7d19",
+  "created_at": "2026-05-29T07:52:06.6021836\u002B00:00",
+  "completed_at": "2026-05-29T07:54:55.5313361\u002B00:00",
+  "content_hash": {
+    "plan.md": "00b6f1cc9c3df3223eb87007de19710bd99456f66e2992d89cc64e524ff89a8b",
+    "tasks.json": "d904f7df6138200ee0a87dddfc893f39b1788af68bb5ee2849373cb810e04572"
+  }
 }
