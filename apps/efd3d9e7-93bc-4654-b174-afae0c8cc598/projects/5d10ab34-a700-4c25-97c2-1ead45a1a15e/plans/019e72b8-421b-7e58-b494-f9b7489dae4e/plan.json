@@ -1,0 +1,8 @@
+{
+  "name": "ZavaACHProcessor plan",
+  "execution_mode": "local",
+  "status": "running",
+  "use_rulebook": false,
+  "base_commit": "431add15f873723c069d2ea40ecb9ee4382e964e",
+  "created_at": "2026-05-29T07:52:18.8011578\u002B00:00"
+}
