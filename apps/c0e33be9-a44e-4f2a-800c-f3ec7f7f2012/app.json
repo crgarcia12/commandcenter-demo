@@ -1,5 +1,6 @@
 {
   "name": "ZavaFraudDetector",
+  "language": "java",
   "created_at": "2026-05-29T02:38:04.0424429\u002B00:00",
   "source": {
     "provider": "github",
