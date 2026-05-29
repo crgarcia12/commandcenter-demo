@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade-java-framework",
+      "description": "Modernize the application to the latest supported Java framework and runtime baseline.",
+      "reason": "The current Java 8 and legacy servlet baseline limits long-term support and cloud modernization readiness.",
+      "requirements": "Upgrade the application baseline to the latest supported Java runtime/framework for this project and align build configuration for the upgraded baseline while preserving existing business behavior.",
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-secrets-to-keyvault",
+      "description": "Migrate plaintext and environment-based application credentials to Azure Key Vault.",
+      "reason": "Centralized secret management reduces credential exposure risk and supports Azure-native operations.",
+      "requirements": "Migrate sensitive application credentials and connection secrets from local properties/environment patterns to Azure Key Vault backed retrieval.",
+      "dependencies": [
+        "001-upgrade-java-framework"
+      ],
+      "skills": [
+        {
+          "name": "migration-plaintext-credential-to-azure-keyvault",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "003-transform-azure-sql-managed-identity",
+      "description": "Modernize database connectivity to Azure SQL with managed identity authentication.",
+      "reason": "Passwordless identity-based access improves security posture and cloud-native alignment.",
+      "requirements": "Adopt managed identity-based authentication for Azure SQL connectivity and remove direct password dependency from runtime configuration.",
+      "dependencies": [
+        "001-upgrade-java-framework",
+        "002-transform-secrets-to-keyvault"
+      ],
+      "skills": [
+        {
+          "name": "migration-mi-azure-sql",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "004-security-cve-remediation",
+      "description": "Scan dependencies for known CVEs and remediate identified vulnerabilities.",
+      "reason": "Security remediation is required before production modernization deployment.",
+      "requirements": "Upgrade vulnerable dependencies to patched versions, document any major-version remediation risks, and verify build and tests succeed after remediation.",
+      "dependencies": [
+        "001-upgrade-java-framework",
+        "002-transform-secrets-to-keyvault",
+        "003-transform-azure-sql-managed-identity"
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "005-deployment-azure-container-apps",
+      "description": "Deploy the modernized application to Azure Container Apps.",
+      "reason": "Azure Container Apps provides a cloud-native managed platform for containerized Java workloads.",
+      "requirements": "Containerize and deploy the modernized application to Azure Container Apps with production-ready runtime settings and secure service integration.",
+      "dependencies": [
+        "004-security-cve-remediation"
+      ],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "create new service",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaDocVault",
+    "language": "java",
+    "createdAt": "2026-05-29T07:58:46.293+00:00",
+    "version": "1.0"
+  }
+}
