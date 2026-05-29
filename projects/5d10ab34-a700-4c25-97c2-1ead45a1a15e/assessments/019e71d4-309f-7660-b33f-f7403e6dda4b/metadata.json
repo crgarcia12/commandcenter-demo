@@ -128,7 +128,10 @@
       "job_id": "27244028-1252788174-42d6a357-1f52-48e8-a2c1-19303f3f9bea"
     },
     "efd3d9e7-93bc-4654-b174-afae0c8cc598": {
-      "status": "running"
+      "status": "running",
+      "pull_request": "https://github.com/crgarcia12/mnm-ZavaACHProcessor/pull/4",
+      "session_url": "https://github.com/crgarcia12/mnm-ZavaACHProcessor/pull/4/agent-sessions/864d7bc0-cd0d-43ee-a381-14291f2cc3ba",
+      "job_id": "27244028-1252788138-f56cbced-1cc3-4363-a921-cb9396ab229b"
     },
     "f022de09-4637-4052-88b4-eb9de00f0634": {
       "status": "running"
