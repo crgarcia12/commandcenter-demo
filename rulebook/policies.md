@@ -8,12 +8,12 @@ Enforceable standards and hard boundaries for modernization. Every policy here i
 
 | Technology | Reason | Approved Alternative |
 |-----------|--------|---------------------|
-| Service Bus | Not approved for use in this organization | Azure Cache for Redis |
+| Any database service not in the approved list | Only Azure SQL, Azure Database for PostgreSQL, and Azure Cosmos DB are supported | Azure SQL, Azure Database for PostgreSQL, Azure Cosmos DB |
 
 ### Required Elements
 
 Every modernized application must include:
 
-#### Cloud Resources
+#### Data Services
 
-- Caching must use Redis Cache (Azure Cache for Redis). No other caching technology is permitted.
+- Database tier must use one of the approved services: **Azure SQL**, **Azure Database for PostgreSQL**, or **Azure Cosmos DB**.

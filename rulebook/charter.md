@@ -1,3 +1,6 @@
 # Charter
 
-<!-- No charter content (scope, strategy, or principles) was found in the source. Sections omitted — flagged for architect review. -->
+## Principles
+
+- Prefer the latest stable version of all packages and dependencies.
+- Prefer cloud native services when possible.
