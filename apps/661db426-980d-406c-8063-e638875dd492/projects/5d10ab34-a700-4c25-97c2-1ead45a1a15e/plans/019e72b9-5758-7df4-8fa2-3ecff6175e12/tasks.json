@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade-dotnet-to-net10",
+      "description": "Upgrade the application to the latest .NET framework baseline.",
+      "reason": "The user explicitly requested modernization to the latest framework and Azure modernization readiness.",
+      "requirements": "Upgrade the current ASP.NET Web Forms application from .NET Framework 4.8 to the latest LTS .NET target and modern project format while preserving functional behavior.",
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-cloud-native-services",
+      "description": "Modernize the application configuration and authentication model for Azure cloud-native services.",
+      "reason": "The user requested modernization with cloud-native services as part of Azure adoption.",
+      "requirements": "Align application configuration and service connectivity with Azure cloud-native service patterns using managed identity and externally managed runtime configuration where applicable.",
+      "dependencies": [
+        "001-upgrade-dotnet-to-net10"
+      ],
+      "skills": [
+        {
+          "name": "migration-managed-identity",
+          "location": "builtin"
+        },
+        {
+          "name": "migration-local-appsettings-azure-app-configuration-via-deployment",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "003-security-cve-remediation",
+      "description": "Scan all project dependencies for known CVEs and remediate vulnerabilities before deployment.",
+      "reason": "Security/CVE remediation is required in every modernization plan unless explicitly removed.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If remediation requires a major version update, document impacted dependencies and breaking-change risk, then verify build and tests.",
+      "environmentConfiguration": "Runtime and build environment established by prior upgrade and transform tasks.",
+      "dependencies": [
+        "001-upgrade-dotnet-to-net10",
+        "002-transform-cloud-native-services"
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "004-deploy-azure-container-apps",
+      "description": "Deploy the modernized application to Azure Container Apps.",
+      "reason": "The user explicitly requested deploying the modernized application to Azure.",
+      "requirements": "Containerize (if needed by deployment flow), configure runtime settings, and deploy the application to Azure Container Apps using existing Azure resources.",
+      "dependencies": [
+        "003-security-cve-remediation"
+      ],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "existing",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaReportDashboard",
+    "language": "dotnet",
+    "createdAt": "2026-05-29T08:20:12Z",
+    "version": "1.0"
+  }
+}
