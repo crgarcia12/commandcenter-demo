@@ -1,0 +1,8 @@
+{
+  "name": "ZavaNotifyWorker plan",
+  "execution_mode": "local",
+  "status": "running",
+  "use_rulebook": false,
+  "base_commit": "f8acfcc141db4ce6b6a2c84bdbfd4761e4a9cd23",
+  "created_at": "2026-05-29T07:51:58.3904471\u002B00:00"
+}
