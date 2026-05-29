@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade-dotnet-lts",
+      "description": "Upgrade the ZavaCurrencyService application to the latest .NET LTS framework.",
+      "reason": "The user explicitly requested modernization to the latest framework and the current project is a legacy .NET Framework application.",
+      "requirements": "Upgrade the project runtime and project format to the latest .NET LTS (net10.0) while preserving existing service behavior and endpoints.",
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-cloud-native-services",
+      "description": "Modernize application integrations to Azure cloud-native services.",
+      "reason": "The user requested cloud-native service modernization as part of the plan execution goal.",
+      "requirements": "Migrate data access, configuration, secrets, and identity usage to Azure cloud-native services, including Azure SQL Database, Azure App Configuration, Azure Key Vault, and Managed Identity.",
+      "dependencies": [
+        "001-upgrade-dotnet-lts"
+      ],
+      "skills": [
+        {
+          "name": "migration-azure-sql-database",
+          "location": "builtin"
+        },
+        {
+          "name": "migration-local-appsettings-azure-app-configuration",
+          "location": "builtin"
+        },
+        {
+          "name": "migration-azure-keyvault-secret",
+          "location": "builtin"
+        },
+        {
+          "name": "migration-managed-identity",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "003-security-cve-remediation",
+      "description": "Scan all project dependencies for known CVEs and remediate identified vulnerabilities.",
+      "reason": "Security remediation is required in every modernization plan before deployment.",
+      "requirements": "Upgrade vulnerable dependencies to patched versions, document major-version upgrade risks when required, and verify the project build and tests after remediation.",
+      "dependencies": [
+        "002-transform-cloud-native-services"
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "004-deploy-azure-container-apps",
+      "description": "Deploy the modernized application to Azure.",
+      "reason": "The user explicitly requested deployment of the modernized application to Azure.",
+      "requirements": "Containerize as needed and deploy the modernized application to Azure Container Apps with production-ready configuration.",
+      "dependencies": [
+        "003-security-cve-remediation"
+      ],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "create new service",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaCurrencyService",
+    "language": "dotnet",
+    "createdAt": "2026-05-29T08:02:18.905Z",
+    "version": "1.0"
+  }
+}
