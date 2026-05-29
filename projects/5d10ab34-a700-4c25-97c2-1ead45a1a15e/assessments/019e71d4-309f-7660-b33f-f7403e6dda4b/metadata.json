@@ -74,7 +74,10 @@
       "job_id": "27244028-1252788258-b806035f-a156-486a-af19-c526f285b6ce"
     },
     "b30372ce-c2cd-40ba-883d-fc0f2f45b5c0": {
-      "status": "running"
+      "status": "running",
+      "pull_request": "https://github.com/crgarcia12/mnm-ZavaInterestCalculator/pull/4",
+      "session_url": "https://github.com/crgarcia12/mnm-ZavaInterestCalculator/pull/4/agent-sessions/6d799f35-7236-4e71-ad12-342af65673c7",
+      "job_id": "27244028-1252788199-016a8ec5-f211-46d8-beeb-eae64dccc1fe"
     },
     "c0e33be9-a44e-4f2a-800c-f3ec7f7f2012": {
       "status": "running"
