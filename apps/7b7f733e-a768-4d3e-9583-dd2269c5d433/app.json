@@ -1,5 +1,6 @@
 {
   "name": "ZavaComplianceReporter",
+  "language": "java",
   "created_at": "2026-05-29T02:37:28.0169032\u002B00:00",
   "source": {
     "provider": "github",
