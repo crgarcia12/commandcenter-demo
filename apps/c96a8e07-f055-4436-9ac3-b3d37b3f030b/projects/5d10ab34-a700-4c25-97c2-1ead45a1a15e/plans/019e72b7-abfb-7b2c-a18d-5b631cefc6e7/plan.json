@@ -1,0 +1,8 @@
+{
+  "name": "ZavaQueueBridge plan",
+  "execution_mode": "local",
+  "status": "running",
+  "use_rulebook": false,
+  "base_commit": "dea29ce802e2afb07981090bbf0acabf7db7a478",
+  "created_at": "2026-05-29T07:51:40.4339155\u002B00:00"
+}
