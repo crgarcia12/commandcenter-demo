@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "transform",
+      "id": "001-transform-plaintext-credentials-to-keyvault",
+      "description": "Migrate hardcoded plaintext credentials from the properties file to Azure Key Vault for secure, centralized secret management.",
+      "reason": "The application stores sensitive database credentials (db.user, db.password) as plaintext in paygateway.properties. This is a security risk and must be replaced with Azure Key Vault before deployment.",
+      "requirements": "Identify all hardcoded plaintext credentials in the project (database username, password, and any other secrets stored in paygateway.properties or source code). Migrate those secrets to Azure Key Vault and update the application to retrieve them from Key Vault at runtime using Managed Identity. Remove plaintext secrets from configuration files.",
+      "skills": [
+        {
+          "name": "migration-plaintext-credential-to-azure-keyvault",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      },
+      "dependencies": []
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-sql-server-managed-identity",
+      "description": "Migrate the SQL Server database connection from password-based authentication to Azure Managed Identity for passwordless, secure access to Azure SQL Database.",
+      "reason": "The application currently authenticates to SQL Server using a hardcoded username and password (PayGatewayConnectionFactory). Using Managed Identity eliminates credential management overhead and improves security posture.",
+      "requirements": "Replace the JDBC password-based authentication for SQL Server with Azure Managed Identity authentication. Update Spring Cloud Azure dependencies if needed, update datasource configuration, and ensure the application connects to Azure SQL Database using passwordless Managed Identity. No hardcoded passwords should remain for the database connection.",
+      "skills": [
+        {
+          "name": "migration-mi-azure-sql",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      },
+      "dependencies": [
+        "001-transform-plaintext-credentials-to-keyvault"
+      ]
+    },
+    {
+      "type": "security",
+      "id": "003-security-cve-remediation",
+      "description": "Scan all project dependencies for known CVEs and remediate any identified vulnerabilities to ensure the application is secure before deployment.",
+      "reason": "The project uses Apache Struts 1.3.10, a legacy library with known critical CVEs. Remediating vulnerabilities before deployment is essential to the security posture of the modernized application.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, the current version, the upgraded major version, and the breaking change risk. Verify that the project builds and all tests pass after remediation.",
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      },
+      "dependencies": [
+        "001-transform-plaintext-credentials-to-keyvault",
+        "002-transform-sql-server-managed-identity"
+      ]
+    },
+    {
+      "type": "deployment",
+      "id": "004-deployment-azure-container-apps",
+      "description": "Containerize and deploy the ZavaPayGateway application to Azure Container Apps using the existing Dockerfile and Azure CLI.",
+      "reason": "The user explicitly requested deployment to Azure. Azure Container Apps is the default deployment target. The project already has a Dockerfile for Tomcat 9 / JDK 8.",
+      "requirements": "Deploy the ZavaPayGateway application to Azure Container Apps. Reuse the existing Dockerfile. Provision a new Azure Container Apps environment. Configure the container app with the required environment variables (DB_HOST, DB_PORT, DB_NAME, AUTH_GATEWAY_WHOAMI_URL, LEDGER_URL, LEDGER_SETTLEMENT_ACCOUNT_ID, SSO_COOKIE_NAME) pointing to Azure resources. Assign a Managed Identity to the container app for Key Vault and Azure SQL access.",
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "Create new",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ],
+      "dependencies": [
+        "003-security-cve-remediation"
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaPayGateway",
+    "language": "java",
+    "createdAt": "2026-05-29T09:51:12.399+02:00",
+    "version": "1.0"
+  }
+}

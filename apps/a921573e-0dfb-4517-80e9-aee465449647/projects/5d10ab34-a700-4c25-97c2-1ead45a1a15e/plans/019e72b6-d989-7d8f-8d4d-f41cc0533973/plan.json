@@ -1,0 +1,14 @@
+{
+  "name": "ZavaPayGateway plan",
+  "execution_mode": "local",
+  "status": "completed",
+  "use_rulebook": false,
+  "base_commit": "fb25471be4a680a352e516fc835b5d169352c3b7",
+  "source_commit": "f2503baf0e30c8cc1814ec890c246e1686b98817",
+  "created_at": "2026-05-29T07:50:46.4887358\u002B00:00",
+  "completed_at": "2026-05-29T07:53:58.2266598\u002B00:00",
+  "content_hash": {
+    "plan.md": "0010e3215998deff42df999b46dd9867a86831906b3ddd768d6a72608f968afa",
+    "tasks.json": "71fbaa26d2cd07cd18781bb87c4dff31d864594b3f7f4bad715dfbba20a7e3bb"
+  }
+}
