@@ -62,7 +62,10 @@
       "job_id": "27244028-1252788158-6dcb24c8-cfea-49c8-8719-04589eed558e"
     },
     "9b3bb3e2-6193-4fd3-948a-225065c2c34a": {
-      "status": "running"
+      "status": "running",
+      "pull_request": "https://github.com/crgarcia12/mnm-ZavaKYCService/pull/4",
+      "session_url": "https://github.com/crgarcia12/mnm-ZavaKYCService/pull/4/agent-sessions/5852f5d3-027f-4b46-9d90-f8a6adcef2ec",
+      "job_id": "27244028-1252788208-2ce4a57c-7b3c-407c-bc01-8b164df13b43"
     },
     "a921573e-0dfb-4517-80e9-aee465449647": {
       "status": "running"
