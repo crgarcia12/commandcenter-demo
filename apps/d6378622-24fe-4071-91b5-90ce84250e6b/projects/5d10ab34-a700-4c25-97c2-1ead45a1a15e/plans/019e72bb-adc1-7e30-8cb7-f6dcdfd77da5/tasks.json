@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade-java-runtime-framework",
+      "description": "Upgrade the application to the latest supported Java runtime/framework baseline for modernization readiness.",
+      "reason": "The user explicitly requested modernization to the latest framework.",
+      "requirements": "Upgrade the application runtime/framework baseline to the latest supported Java platform while preserving existing ledger business behavior and API compatibility where required.",
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-cloud-native-services",
+      "description": "Modernize application integrations to cloud-native Azure services.",
+      "reason": "The user explicitly requested modernization toward cloud-native services.",
+      "requirements": "Adopt cloud-native Azure service integration for configuration and secret management using managed identity and remove reliance on plaintext or environment-only secret handling patterns.",
+      "dependencies": [
+        "001-upgrade-java-runtime-framework"
+      ],
+      "skills": [
+        {
+          "name": "migration-plaintext-credential-to-azure-keyvault",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "003-security-cve-remediation",
+      "description": "Scan dependencies for known CVEs and remediate vulnerabilities before deployment.",
+      "reason": "Security/CVE remediation is required in every modernization plan.",
+      "requirements": "Upgrade vulnerable dependencies to patched versions, document major-version breaking-change risk when applicable, and verify build/test validation after remediation.",
+      "dependencies": [
+        "001-upgrade-java-runtime-framework",
+        "002-transform-cloud-native-services"
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "004-deployment-azure-container-apps",
+      "description": "Deploy the modernized application to Azure Container Apps.",
+      "reason": "The user requested deployment of the modernized application to Azure.",
+      "requirements": "Containerize and deploy the modernized application to Azure Container Apps using managed Azure hosting and production-ready deployment configuration.",
+      "dependencies": [
+        "003-security-cve-remediation"
+      ],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "create new service",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaLedger",
+    "language": "java",
+    "createdAt": "2026-05-29T08:25:45Z",
+    "version": "1.0"
+  }
+}
