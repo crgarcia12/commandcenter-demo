@@ -14,7 +14,10 @@
       "job_id": "27244028-1252760694-2e21b3e2-79e1-4375-90b6-ca40851920ab"
     },
     "1ef45066-15e8-4619-b6e7-5db061f8c4a5": {
-      "status": "running"
+      "status": "running",
+      "pull_request": "https://github.com/crgarcia12/mnm-ZavaFileIngestion/pull/6",
+      "session_url": "https://github.com/crgarcia12/mnm-ZavaFileIngestion/pull/6/agent-sessions/826cbb40-e85a-47a3-a416-1266cca4308c",
+      "job_id": "27244028-1252788179-02585f25-5584-4a20-82fa-6ee6a11cade2"
     },
     "8f0c68c8-0a98-4631-a8f7-0c210a4bb44b": {
       "status": "running"
