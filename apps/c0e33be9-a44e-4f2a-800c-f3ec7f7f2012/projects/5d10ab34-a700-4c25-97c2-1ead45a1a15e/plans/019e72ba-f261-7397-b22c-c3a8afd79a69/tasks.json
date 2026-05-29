@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade-java-framework",
+      "description": "Upgrade the Java application foundation to the latest supported framework baseline.",
+      "reason": "Runtime and framework modernization is required before cloud-native migration tasks.",
+      "requirements": "Upgrade the application to the latest supported Java framework and runtime baseline while preserving core fraud detection functionality.",
+      "dependencies": [],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-secrets-to-keyvault",
+      "description": "Modernize application secret handling using Azure Key Vault.",
+      "reason": "Cloud-native modernization requires secure centralized secret management.",
+      "requirements": "Migrate plaintext and local credential usage to Azure Key Vault and align service authentication with managed identity where applicable.",
+      "dependencies": [
+        "001-upgrade-java-framework"
+      ],
+      "skills": [
+        {
+          "name": "migration-plaintext-credential-to-azure-keyvault",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "003-transform-sql-auth-to-mi",
+      "description": "Enable cloud-native database connectivity using managed identity.",
+      "reason": "Moving to Azure-native service authentication removes password dependencies.",
+      "requirements": "Modernize database connectivity to Azure SQL using managed identity authentication and preserve existing fraud data access flows.",
+      "dependencies": [
+        "001-upgrade-java-framework"
+      ],
+      "skills": [
+        {
+          "name": "migration-mi-azure-sql",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "004-security-cve-remediation",
+      "description": "Scan dependencies for known CVEs and remediate vulnerabilities.",
+      "reason": "Security remediation is required in every modernization plan before deployment.",
+      "requirements": "Upgrade vulnerable dependencies to patched versions, document major-version risk when required, and verify successful build and tests after remediation.",
+      "dependencies": [
+        "001-upgrade-java-framework",
+        "002-transform-secrets-to-keyvault",
+        "003-transform-sql-auth-to-mi"
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "005-deployment-azure-container-apps",
+      "description": "Deploy the modernized application to Azure Container Apps.",
+      "reason": "The requested end state includes Azure deployment with cloud-native operations.",
+      "requirements": "Containerize and deploy the application to Azure Container Apps with production-ready configuration and managed identity-based access to dependent Azure services.",
+      "dependencies": [
+        "004-security-cve-remediation"
+      ],
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "create new",
+      "deploymentTool": "bicep"
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "mnm-ZavaFraudDetector",
+    "language": "java",
+    "createdAt": "2026-05-29T08:22:01.560+00:00",
+    "version": "1.0"
+  }
+}
