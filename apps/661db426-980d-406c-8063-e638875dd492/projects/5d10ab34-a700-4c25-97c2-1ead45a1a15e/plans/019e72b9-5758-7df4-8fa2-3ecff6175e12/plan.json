@@ -1,0 +1,10 @@
+{
+  "name": "Modernize Zava",
+  "execution_mode": "cca",
+  "status": "running",
+  "execution_goal": "Modernize the application to the latest frameowkr, and cloud native serivces",
+  "assessment_id": "019e71d4-309f-7660-b33f-f7403e6dda4b",
+  "use_rulebook": false,
+  "base_commit": "8312f37e075d2e87913fb8b28dc300ac53ec4589",
+  "created_at": "2026-05-29T07:53:29.8278506\u002B00:00"
+}
