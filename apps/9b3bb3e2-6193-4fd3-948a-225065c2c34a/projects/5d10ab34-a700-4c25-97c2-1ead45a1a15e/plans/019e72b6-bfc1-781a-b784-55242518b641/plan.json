@@ -1,0 +1,8 @@
+{
+  "name": "ZavaKYCService plan",
+  "execution_mode": "local",
+  "status": "running",
+  "use_rulebook": false,
+  "base_commit": "4627f0b180fdf4471f161fca5564f21dd8b3ccfd",
+  "created_at": "2026-05-29T07:50:39.9780212\u002B00:00"
+}
