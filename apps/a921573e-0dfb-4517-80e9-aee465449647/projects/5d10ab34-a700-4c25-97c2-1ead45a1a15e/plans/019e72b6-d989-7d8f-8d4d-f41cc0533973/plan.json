@@ -1,8 +1,0 @@
-{
-  "name": "ZavaPayGateway plan",
-  "execution_mode": "local",
-  "status": "running",
-  "use_rulebook": false,
-  "base_commit": "fb25471be4a680a352e516fc835b5d169352c3b7",
-  "created_at": "2026-05-29T07:50:46.4887358\u002B00:00"
-}
