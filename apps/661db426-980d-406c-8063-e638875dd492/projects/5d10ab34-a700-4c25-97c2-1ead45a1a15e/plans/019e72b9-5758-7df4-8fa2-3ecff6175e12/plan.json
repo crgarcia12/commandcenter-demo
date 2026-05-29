@@ -6,5 +6,7 @@
   "assessment_id": "019e71d4-309f-7660-b33f-f7403e6dda4b",
   "use_rulebook": false,
   "base_commit": "8312f37e075d2e87913fb8b28dc300ac53ec4589",
-  "created_at": "2026-05-29T07:53:29.8278506\u002B00:00"
+  "source_commit": "e88477bcf1b98c6277efdb2eb7b953b9c632143f",
+  "created_at": "2026-05-29T07:53:29.8278506\u002B00:00",
+  "job_id": "27244028-1252788279-34dff7e3-2dd3-4dbe-94b3-debe19a01fa8"
 }
