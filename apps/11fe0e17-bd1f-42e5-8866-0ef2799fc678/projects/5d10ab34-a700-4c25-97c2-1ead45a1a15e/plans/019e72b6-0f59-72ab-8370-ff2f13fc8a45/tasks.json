@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade-dotnet",
+      "description": "Upgrade ZavaRiskEngine from .NET Framework 4.8 to .NET 10 (latest LTS)",
+      "reason": "The project targets .NET Framework 4.8 using a legacy non-SDK MSBuild project format and runs on Mono. This must be upgraded to .NET 10 to enable modern Azure SDK usage, convert to SDK-style project format, and replace the Mono/XSP4-based container with an official .NET runtime image.",
+      "requirements": "Upgrade the project from .NET Framework 4.8 to .NET 10. Convert the legacy MSBuild project format to SDK-style. Migrate the WCF SOAP service to CoreWCF so the existing SOAP contract (IRiskEngineService) is preserved. Replace the Mono-based Dockerfile with an official .NET 10 container image. Ensure the project compiles successfully and all existing service operations (ScoreLoanApplication, GetRiskFactors, UpdateRiskModel) continue to function.",
+      "dependencies": [],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-sql-to-azure-sql",
+      "description": "Migrate SQL Server connection to Azure SQL Database with Managed Identity authentication",
+      "reason": "The application currently uses SQL Server with hardcoded username/password credentials in both DbConfig.cs (environment variables) and web.config. Migrating to Azure SQL Database with Managed Identity eliminates credential exposure and aligns with Azure security best practices.",
+      "requirements": "Replace the existing SQL Server username/password connection logic in DbConfig.cs and the connection string in web.config with Azure SQL Database using Managed Identity (passwordless) authentication. Ensure all database operations in ZavaRiskEngineService.cs (ScoreLoanApplication, GetRiskFactors, UpdateRiskModel) continue to function correctly against Azure SQL Database. Use DefaultAzureCredential for authentication.",
+      "dependencies": ["001-upgrade-dotnet"],
+      "skills": [
+        {
+          "name": "migration-azure-sql-database",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "003-transform-console-logging",
+      "description": "Configure console logging for cloud-native container environments",
+      "reason": "The application does not have structured console logging configured. Azure Container Apps relies on console output for log aggregation and observability. Proper logging configuration ensures operational visibility in the cloud.",
+      "requirements": "Configure the application to emit structured logs to the console suitable for Azure Container Apps log aggregation. Ensure log output is compatible with cloud platform log collection.",
+      "dependencies": ["001-upgrade-dotnet"],
+      "skills": [
+        {
+          "name": "migration-console-logging",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "004-security-cve-remediation",
+      "description": "Scan and remediate CVEs in project dependencies",
+      "reason": "Before deploying to Azure, all known security vulnerabilities in project dependencies must be identified and remediated to ensure the application is secure.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, the current version, the upgraded major version, and the breaking change risk. Verify that the project builds and all tests pass after remediation.",
+      "dependencies": ["001-upgrade-dotnet", "002-transform-sql-to-azure-sql", "003-transform-console-logging"],
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "005-deployment-azure-container-apps",
+      "description": "Containerize and deploy ZavaRiskEngine to Azure Container Apps",
+      "reason": "The modernized application needs to be packaged as a container and deployed to Azure Container Apps to complete the cloud migration. This includes provisioning the required Azure infrastructure and deploying the application image.",
+      "requirements": "Containerize the .NET 10 application using an official .NET runtime image. Provision Azure Container Apps infrastructure using Bicep. Deploy the application container image to Azure Container Apps with Managed Identity enabled. Ensure the SOAP service endpoint and health endpoint remain accessible after deployment.",
+      "dependencies": ["004-security-cve-remediation"],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "Create new resource",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaRiskEngine",
+    "language": "dotnet",
+    "createdAt": "2026-05-29T09:50:15.685+02:00",
+    "version": "1.0"
+  }
+}
