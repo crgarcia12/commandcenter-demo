@@ -1,0 +1,118 @@
+{
+  "$schema": "https://raw.githubusercontent.com/github/modernize/main/schemas/tasks-schema.json",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade-dotnet",
+      "description": "Upgrade the project from .NET Framework 4.8 (legacy non-SDK-style, WCF/Mono) to .NET 10 with an SDK-style project format and ASP.NET Core Web API.",
+      "reason": "The project targets .NET Framework 4.8 with a legacy non-SDK-style project file and runs on Mono via XSP4. WCF server hosting is not supported on .NET Core/5+. Upgrading to .NET 10 is required for Azure SDK compatibility, modern container deployment, and Linux-native execution without Mono.",
+      "requirements": "Convert the legacy non-SDK-style .csproj to SDK-style format targeting net10.0. Replace the WCF service host (IAlertService/AlertService.svc) with an ASP.NET Core Web API exposing equivalent endpoints. Remove Mono/XSP4 runtime dependency. Ensure all existing business logic, alert rule evaluation, and SQL data access code is preserved and compilable under .NET 10. Update or replace any .NET Framework-only APIs (e.g., System.Web, System.Data.SqlClient) with .NET 10 compatible equivalents.",
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-sql-to-azure-sql",
+      "description": "Migrate the SQL Server data access layer to Azure SQL Database using Managed Identity authentication.",
+      "reason": "The application currently connects to SQL Server using a hard-coded username and password in web.config and environment variables. Migrating to Azure SQL Database with Managed Identity eliminates credential management and improves security posture.",
+      "requirements": "Replace the username/password SQL Server connection string with an Azure SQL Database connection using Managed Identity (DefaultAzureCredential). Update DbConfig.cs and all SqlConnection usages in AlertService.cs to use the Azure SQL Database endpoint. Remove hard-coded credentials from web.config and environment variable fallbacks for DB_USER/DB_PASSWORD.",
+      "dependencies": ["001-upgrade-dotnet"],
+      "skills": [
+        {
+          "name": "migration-azure-sql-database",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "003-transform-rabbitmq-to-servicebus",
+      "description": "Replace the RabbitMQ alert event publisher with Azure Service Bus using Managed Identity authentication.",
+      "reason": "The application publishes alert events to RabbitMQ via the HTTP Management API using username/password credentials. Migrating to Azure Service Bus provides cloud-native reliable messaging with Managed Identity, removing the dependency on a self-hosted broker and hard-coded credentials.",
+      "requirements": "Replace RabbitMqPublisher.cs with an Azure Service Bus publisher that sends AlertEvent messages to a Service Bus queue or topic. Use Managed Identity (DefaultAzureCredential) for authentication. Remove all RabbitMQ environment variable references (RABBITMQ_HOST, RABBITMQ_MANAGEMENT_PORT, RABBITMQ_USER, RABBITMQ_PASSWORD, RABBITMQ_VHOST).",
+      "dependencies": ["001-upgrade-dotnet"],
+      "skills": [
+        {
+          "name": "migration-azure-servicebus",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "004-transform-console-logging",
+      "description": "Configure console logging for cloud-native log aggregation in Azure Container Apps.",
+      "reason": "The application currently has no structured logging configuration. Azure Container Apps collects logs from stdout/stderr. Proper console logging ensures all application events, errors, and diagnostics are captured by Azure Monitor.",
+      "requirements": "Configure the ASP.NET Core logging pipeline to output structured logs to the console (stdout) in a format suitable for Azure Container Apps log aggregation. Ensure log levels, correlation IDs, and error details are properly emitted.",
+      "dependencies": ["001-upgrade-dotnet"],
+      "skills": [
+        {
+          "name": "migration-console-logging",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "005-security-cve-remediation",
+      "description": "Scan all project dependencies for known CVEs and remediate identified vulnerabilities.",
+      "reason": "Before deploying to Azure, all known security vulnerabilities in project dependencies must be identified and resolved to ensure a secure production deployment.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, the current version, the upgraded major version, and the breaking change risk. Verify that the project builds and all tests pass after remediation.",
+      "dependencies": ["002-transform-sql-to-azure-sql", "003-transform-rabbitmq-to-servicebus", "004-transform-console-logging"],
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "006-deployment-azure-container-apps",
+      "description": "Containerize and deploy ZavaAlertService to Azure Container Apps.",
+      "reason": "The user requested deployment to Azure. Azure Container Apps is the default target, providing serverless container hosting with built-in Managed Identity support, scaling, and integration with Azure Monitor.",
+      "requirements": "Generate a .NET 10-based Dockerfile replacing the existing Mono/XSP4 Dockerfile. Build and push the container image to Azure Container Registry. Deploy the containerized service to Azure Container Apps with Managed Identity enabled for Azure SQL Database and Azure Service Bus access. Configure environment variables for Azure resource endpoints (Service Bus namespace, SQL Database server).",
+      "dependencies": ["005-security-cve-remediation"],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "Create new service",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaAlertService",
+    "language": "dotnet",
+    "createdAt": "2026-05-29T09:52:05.185+02:00",
+    "version": "1.0"
+  }
+}

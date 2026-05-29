@@ -1,8 +1,14 @@
 {
   "name": "ZavaAlertService plan",
   "execution_mode": "local",
-  "status": "running",
+  "status": "completed",
   "use_rulebook": false,
   "base_commit": "4d64c1094a7397b0b238e8d69ed0e5e539451424",
-  "created_at": "2026-05-29T07:51:54.9365048\u002B00:00"
+  "source_commit": "c33128f9ce7c50e208f30f903dfdded268a47d22",
+  "created_at": "2026-05-29T07:51:54.9365048\u002B00:00",
+  "completed_at": "2026-05-29T07:54:29.5581784\u002B00:00",
+  "content_hash": {
+    "plan.md": "ee0009e87561e2bc8c7f9a0aa392efb55e6346adab0b576eae693ec6280fb33c",
+    "tasks.json": "c63bc962e6fa3b550fc0dea35a1ee455a77b62f4e3b65fc650ea102e8e4a5f32"
+  }
 }
