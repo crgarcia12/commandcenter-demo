@@ -1,8 +1,14 @@
 {
   "name": "ZavaQueueBridge plan",
   "execution_mode": "local",
-  "status": "running",
+  "status": "completed",
   "use_rulebook": false,
   "base_commit": "dea29ce802e2afb07981090bbf0acabf7db7a478",
-  "created_at": "2026-05-29T07:51:40.4339155\u002B00:00"
+  "source_commit": "bca3f23b70bce27d22a9c1b52594d2fe0596942c",
+  "created_at": "2026-05-29T07:51:40.4339155\u002B00:00",
+  "completed_at": "2026-05-29T07:55:03.9199573\u002B00:00",
+  "content_hash": {
+    "plan.md": "d96cb2c2be36ab482be44aea0c9c2c78dba6f0261e0a927a380d17c1f46c4a93",
+    "tasks.json": "6af57e4e117edb57519630ca4fd3178d34a4c6ebf6c67f2fb4e040fa85063928"
+  }
 }

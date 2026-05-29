@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaQueueBridge",
+    "language": "dotnet",
+    "createdAt": "2026-05-29T09:51:57.661+02:00",
+    "version": "1.0"
+  },
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade-dotnet",
+      "description": "Upgrade the project from .NET Framework 4.8 to .NET 10 (net10.0).",
+      "reason": "The project targets .NET Framework 4.8 with a legacy non-SDK-style csproj and packages.config. Azure Container Apps requires native Linux containers; .NET Framework 4.8 only runs on Windows via Mono, which prevents proper Azure deployment. Upgrading to .NET 10 enables SDK-style PackageReference, modern Azure SDK packages, and a native Linux Docker base image. APIs unavailable in .NET 5+ (e.g., System.Web.Script.Serialization.JavaScriptSerializer) must be replaced.",
+      "requirements": "Upgrade from .NET Framework 4.8 to .NET 10 (net10.0). Convert the non-SDK-style csproj to SDK-style and migrate from packages.config to PackageReference. Replace System.Web.Script.Serialization.JavaScriptSerializer with a .NET 5+-compatible JSON serializer. Update the Dockerfile base image from Mono to the official .NET 10 runtime image. The application must build and run after upgrade.",
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-rabbitmq-to-servicebus",
+      "description": "Migrate the RabbitMQ messaging integration to Azure Service Bus.",
+      "reason": "The application currently uses a self-hosted RabbitMQ instance with hardcoded credentials. Migrating to Azure Service Bus removes the dependency on self-hosted infrastructure, eliminates credential-based authentication in favour of Managed Identity, and provides Azure-native messaging with built-in dead-letter support.",
+      "requirements": "Replace the RabbitMQ.Client dependency with the Azure Service Bus SDK. Migrate the exchange publish logic (filedrop.events topic exchange and zava.dlx dead-letter exchange) to Azure Service Bus topics/queues with equivalent routing behaviour. Replace username/password authentication with Managed Identity (DefaultAzureCredential). Preserve message payload structure, persistent delivery semantics, and dead-letter handling. Remove all RabbitMQ configuration settings (host, port, vhost, user, password).",
+      "dependencies": ["001-upgrade-dotnet"],
+      "skills": [
+        {
+          "name": "migration-azure-servicebus",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "003-transform-file-storage-mount",
+      "description": "Migrate the local file drop folder to Azure Files-mounted storage.",
+      "reason": "The application uses hardcoded local filesystem paths (/shared/filedrop) for its file drop, processed, and error directories. In a stateless Azure Container Apps environment the local filesystem is ephemeral. Migrating to an Azure Files-mounted path provides durable, shared storage accessible across container restarts.",
+      "requirements": "Migrate the file drop path from the hardcoded local path /shared/filedrop to an Azure Files-mounted storage path. Preserve the FileSystemWatcher pattern for file detection and the processed/error subdirectory logic. Update configuration to reference the mounted Azure Files path. Authentication for Azure Files must use Managed Identity.",
+      "dependencies": ["001-upgrade-dotnet"],
+      "skills": [
+        {
+          "name": "migration-azure-storage-mount",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "004-transform-console-logging",
+      "description": "Configure structured console logging for Azure container log aggregation.",
+      "reason": "The application uses raw Console.WriteLine statements. Azure Container Apps aggregates container stdout/stderr logs in Azure Monitor. Proper structured console logging ensures logs are captured, queryable, and include contextual metadata.",
+      "requirements": "Replace Console.WriteLine calls with a structured logging framework configured to write to stdout. Ensure log output format is compatible with Azure Container Apps and Azure Monitor log aggregation. Preserve existing log messages and severity levels.",
+      "dependencies": ["001-upgrade-dotnet"],
+      "skills": [
+        {
+          "name": "migration-console-logging",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "005-security-cve-remediation",
+      "description": "Scan all project dependencies for known CVEs and remediate identified vulnerabilities.",
+      "reason": "After upgrading the runtime and migrating to new Azure SDK packages, a full CVE scan ensures the modernized application is free of known security vulnerabilities before deployment.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, current version, upgraded major version, and breaking change risk. Verify the project builds and all tests pass after remediation.",
+      "environmentConfiguration": "Runtime environment established by the .NET 10 upgrade task. Build tool: dotnet CLI.",
+      "dependencies": [
+        "001-upgrade-dotnet",
+        "002-transform-rabbitmq-to-servicebus",
+        "003-transform-file-storage-mount",
+        "004-transform-console-logging"
+      ],
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "006-deployment-azure-container-apps",
+      "description": "Containerize the modernized application and deploy to Azure Container Apps.",
+      "reason": "The application needs to be packaged as a Linux container and deployed to Azure Container Apps to meet the modernization goal of running on Azure infrastructure.",
+      "requirements": "Generate a Dockerfile using the official .NET 10 runtime base image. Provision an Azure Container Apps environment and deploy the worker container. Configure Managed Identity on the container app for Azure Service Bus and Azure Files authentication. Set required environment variables for Azure Service Bus namespace and Azure Files mount path.",
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "Create new",
+      "deploymentTool": "bicep",
+      "dependencies": ["005-security-cve-remediation"],
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ]
+}
