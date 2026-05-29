@@ -1,8 +1,14 @@
 {
   "name": "ZavaNotifyWorker plan",
   "execution_mode": "local",
-  "status": "running",
+  "status": "completed",
   "use_rulebook": false,
   "base_commit": "f8acfcc141db4ce6b6a2c84bdbfd4761e4a9cd23",
-  "created_at": "2026-05-29T07:51:58.3904471\u002B00:00"
+  "source_commit": "2a10145f693619c02cedcaa0faeaaeb54741034a",
+  "created_at": "2026-05-29T07:51:58.3904471\u002B00:00",
+  "completed_at": "2026-05-29T07:55:27.1599618\u002B00:00",
+  "content_hash": {
+    "plan.md": "8bf0c73630f20f4a3cbff6ab39748c9b466c187937fa437c58076770e18c7236",
+    "tasks.json": "7dfa47defd3b9fb169e6e5389b66765dcef4d1b3b3b9939beddf5dec1bbccb37"
+  }
 }

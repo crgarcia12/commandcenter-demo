@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "transform",
+      "id": "001-transform-dependency-management",
+      "description": "Convert project from legacy packages.config format to SDK-style project format",
+      "reason": "The project uses the legacy MSBuild .csproj format with packages.config. Converting to SDK-style project format is required for modern .NET tooling, simplified dependency management, and compatibility with the Azure SDK packages used in subsequent migration tasks.",
+      "requirements": "Migrate the ZavaNotifyWorker.csproj from legacy MSBuild format to SDK-style .csproj format. Convert the packages.config RabbitMQ.Client 5.2.0 reference to a PackageReference element. Remove legacy ItemGroup compile includes and framework assembly references that are implicit in SDK-style projects. Ensure the project builds successfully after conversion.",
+      "skills": [
+        {
+          "name": "migration-dependency-management",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-rabbitmq-to-servicebus",
+      "description": "Migrate message consumption from RabbitMQ to Azure Service Bus",
+      "reason": "The application polls a self-hosted RabbitMQ queue for bank notification messages. Azure Service Bus provides a fully managed, scalable messaging service with dead-letter queue support, eliminating the need for self-managed broker infrastructure.",
+      "requirements": "Replace RabbitMQ.Client usage with Azure Service Bus SDK. Migrate the polling queue consumer (PollQueue/BasicGet pattern) to Azure Service Bus message processing. Use Managed Identity (DefaultAzureCredential) for authentication. Preserve message acknowledgement (BasicAck/BasicNack) logic by mapping to Service Bus Complete/DeadLetter operations. Preserve dead-letter exchange handling. The notification queue name is currently 'q.notify.email'.",
+      "dependencies": [
+        "001-transform-dependency-management"
+      ],
+      "skills": [
+        {
+          "name": "migration-azure-servicebus",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "003-transform-smtp-to-communication-email",
+      "description": "Migrate email delivery from local SMTP to Azure Communication Services Email",
+      "reason": "The application sends bank alert emails using System.Net.Mail against a local SMTP server (mailhog). Azure Communication Services Email provides a managed, scalable email delivery service with enterprise-grade reliability and no SMTP server to manage.",
+      "requirements": "Replace System.Net.Mail SmtpClient usage with Azure Communication Services Email SDK. Use Managed Identity (DefaultAzureCredential) for authentication. Preserve existing email composition logic including subject format ('Zava Bank {AlertType}: Transaction {TransactionId}') and multi-field body formatting. Preserve the sender address configuration (SMTP_FROM / Smtp.From).",
+      "dependencies": [
+        "001-transform-dependency-management"
+      ],
+      "skills": [
+        {
+          "name": "migration-azure-communication-email",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "004-transform-console-logging",
+      "description": "Configure structured console logging for cloud deployment",
+      "reason": "The application uses Console.WriteLine for all diagnostic output. Structured console logging is required for Azure Container Apps log aggregation and cloud-native observability.",
+      "requirements": "Configure structured console logging appropriate for Azure Container Apps and cloud platform log aggregation. Ensure log output is properly formatted so platform tooling (Azure Monitor, Log Analytics) can ingest and query it.",
+      "dependencies": [
+        "001-transform-dependency-management"
+      ],
+      "skills": [
+        {
+          "name": "migration-console-logging",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "005-transform-appsettings-to-app-configuration",
+      "description": "Migrate application settings from app.config to Azure App Configuration",
+      "reason": "The application uses app.config and environment variable overrides for runtime configuration. Centralizing settings in Azure App Configuration enables dynamic updates, environment-specific configuration, and a cloud-native configuration management approach.",
+      "requirements": "Externalize non-secret application settings (RabbitMQ/Service Bus endpoint, queue name, poll interval, SMTP/email sender) from app.config to Azure App Configuration. Ensure environment-variable configuration source is registered so values injected by the deployment agent are visible at runtime. Emit the .azure/configuration-migration.json seed file for the deployment agent. Do not move secrets or connection strings — those will be handled by Managed Identity.",
+      "dependencies": [
+        "001-transform-dependency-management"
+      ],
+      "skills": [
+        {
+          "name": "migration-local-appsettings-azure-app-configuration-via-deployment",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "006-security-cve-remediation",
+      "description": "Scan and remediate CVEs in project dependencies",
+      "reason": "Ensuring the application is free of known security vulnerabilities before deployment to Azure.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, the current version, the upgraded major version, and the breaking change risk. Verify that the project builds and all tests pass after remediation.",
+      "dependencies": [
+        "001-transform-dependency-management",
+        "002-transform-rabbitmq-to-servicebus",
+        "003-transform-smtp-to-communication-email",
+        "004-transform-console-logging",
+        "005-transform-appsettings-to-app-configuration"
+      ],
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "007-deployment-azure-container-apps",
+      "description": "Containerize and deploy the application to Azure Container Apps",
+      "reason": "Deploy the modernized ZavaNotifyWorker to Azure Container Apps for scalable, managed container hosting with full Managed Identity support for all Azure services.",
+      "requirements": "Containerize the application using a modern .NET runtime Linux image (replacing the Mono-based Dockerfile). Deploy to Azure Container Apps using Azure CLI. Configure Managed Identity for authentication with Azure Service Bus, Azure Communication Services Email, and Azure App Configuration. Provision required Azure resources including Container Apps environment and assign required RBAC roles.",
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "Create new",
+      "deploymentTool": "bicep",
+      "dependencies": [
+        "006-security-cve-remediation"
+      ],
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaNotifyWorker",
+    "language": "dotnet",
+    "createdAt": "2026-05-29T09:52:13.350+02:00",
+    "version": "1.0"
+  }
+}
