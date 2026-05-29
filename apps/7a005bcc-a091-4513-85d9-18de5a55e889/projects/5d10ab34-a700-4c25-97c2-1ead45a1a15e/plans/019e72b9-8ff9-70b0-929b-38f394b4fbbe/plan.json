@@ -6,5 +6,9 @@
   "assessment_id": "019e71d4-309f-7660-b33f-f7403e6dda4b",
   "use_rulebook": false,
   "base_commit": "aa90ced3813a1a33df3dcbe4ee88c42628fb269a",
-  "created_at": "2026-05-29T07:53:44.3383244\u002B00:00"
+  "source_commit": "6f3052bed9c498940e83a7fb2384bd7556f00abe",
+  "created_at": "2026-05-29T07:53:44.3383244\u002B00:00",
+  "pull_request": "https://github.com/crgarcia12/mnm-ZavaStatementService/pull/5",
+  "session_url": "https://github.com/crgarcia12/mnm-ZavaStatementService/pull/5/agent-sessions/fd0a99ca-6443-4a9a-9f83-b4337c04c05a",
+  "job_id": "27244028-1252788288-b28f7aca-6449-4c7d-a94d-13d029e1a324"
 }
