@@ -1,0 +1,134 @@
+{
+  "metadata": {
+    "id": "20260528232339",
+    "generated_at": "2026-05-28T23:23:39.0000000Z",
+    "note": "Security-only report (AppCAT assessment was not run \u2014 MCP tools not available in this environment)"
+  },
+  "security": [
+    {
+      "id": "CVE-2023-5072",
+      "title": "Java: DoS Vulnerability in JSON-JAVA",
+      "category": "CVE",
+      "severity": "mandatory",
+      "description": "A denial of service vulnerability in JSON-Java. A bug in the parser means that an input string of modest size can lead to indefinite amounts of memory being used.",
+      "evidence": {
+        "files": [
+          "build.gradle:17"
+        ],
+        "explanation": "[CVE-2023-5072](https://github.com/advisories/GHSA-4jq9-2xhw-jpx7): Java: DoS Vulnerability in JSON-JAVA\n\nSeverity: HIGH\n\nAffected: org.json:json:20140107 (build.gradle:17)\n\nRecommended fix: Upgrade to 20231013 or later"
+      },
+      "storyPoint": 1
+    },
+    {
+      "id": "CVE-2022-45688",
+      "title": "json stack overflow vulnerability",
+      "category": "CVE",
+      "severity": "mandatory",
+      "description": "A stack overflow in the XML.toJSONObject component of org.json:json before version 20230227 allows attackers to cause a Denial of Service (DoS) via crafted JSON or XML data.",
+      "evidence": {
+        "files": [
+          "build.gradle:17"
+        ],
+        "explanation": "[CVE-2022-45688](https://github.com/advisories/GHSA-3vqj-43w4-2q58): json stack overflow vulnerability\n\nSeverity: HIGH\n\nAffected: org.json:json:20140107 (build.gradle:17)\n\nRecommended fix: Upgrade to 20230227 or later"
+      },
+      "storyPoint": 1
+    },
+    {
+      "id": "CWE-477",
+      "title": "Use of Obsolete Function",
+      "category": "Code Quality",
+      "severity": "optional",
+      "description": "The code uses deprecated or obsolete functions, which suggests that the code has not been actively reviewed or maintained.",
+      "evidence": {
+        "files": [
+          "src/main/java/com/zavabank/interestcalculator/InterestConnectionFactory.java"
+        ],
+        "explanation": "Class.forName() used for JDBC driver loading at InterestConnectionFactory.java:10 \u2014 obsolete since JDBC 4.0"
+      },
+      "storyPoint": 1
+    },
+    {
+      "id": "CWE-1057",
+      "title": "Data Access Operations Outside of Expected Data Manager Component",
+      "category": "Code Quality",
+      "severity": "potential",
+      "description": "The product uses a dedicated, central data manager component as required by design, but it contains code that performs data-access operations that do not use this data manager.",
+      "evidence": {
+        "files": [
+          "src/main/java/com/zavabank/interestcalculator/InterestCalculateServlet.java",
+          "src/main/java/com/zavabank/interestcalculator/InterestAccrueAllServlet.java",
+          "src/main/java/com/zavabank/interestcalculator/InterestBootstrapServlet.java"
+        ],
+        "explanation": "Direct SQL operations embedded in servlet classes without a dedicated DAO/repository layer"
+      },
+      "storyPoint": 5
+    },
+    {
+      "id": "CWE-259",
+      "title": "Use of Hard-coded Password",
+      "category": "Credentials & Secrets",
+      "severity": "optional",
+      "description": "The product contains a hard-coded password, which it uses for its own inbound authentication or for outbound communication to external components.",
+      "evidence": {
+        "files": [
+          "src/main/resources/interest.properties"
+        ],
+        "explanation": "Hard-coded database password in interest.properties:5, used by InterestConnectionFactory for SQL Server authentication"
+      },
+      "storyPoint": 5
+    },
+    {
+      "id": "CWE-778",
+      "title": "Insufficient Logging",
+      "category": "Credentials & Secrets",
+      "severity": "potential",
+      "description": "When a security-critical event occurs, the product either does not record the event or omits important details about the event when logging it.",
+      "evidence": {
+        "files": [
+          "src/main/java/com/zavabank/interestcalculator/InterestCalculateServlet.java",
+          "src/main/java/com/zavabank/interestcalculator/InterestAccrueAllServlet.java"
+        ],
+        "explanation": "No logging framework used; financial operations and errors are not logged"
+      },
+      "storyPoint": 3
+    },
+    {
+      "id": "CWE-798",
+      "title": "Use of Hard-coded Credentials",
+      "category": "Credentials & Secrets",
+      "severity": "optional",
+      "description": "The product contains hard-coded credentials, such as a password or cryptographic key.",
+      "evidence": {
+        "files": [
+          "src/main/resources/interest.properties"
+        ],
+        "explanation": "Hard-coded SA username and password in interest.properties (lines 4-5), used for SQL Server database access with administrator privileges"
+      },
+      "storyPoint": 5
+    }
+  ],
+  "rules": {},
+  "projects": [
+    {
+      "properties": {
+        "appName": "ZavaInterestCalculator",
+        "repo": "ZavaInterestCalculator",
+        "languages": [
+          "Java"
+        ],
+        "frameworks": [
+          "Java EE / Jakarta EE",
+          "JDBC"
+        ],
+        "tools": [
+          "Gradle"
+        ],
+        "jdkVersion": "1.8",
+        "applicationType": "Web Application",
+        "description": "Interest calculation service for ZavaBank using Java Servlets and SQL Server"
+      },
+      "incidents": []
+    }
+  ],
+  "rearchitect": []
+}

@@ -1,0 +1,175 @@
+{
+  "metadata": {
+    "id": "20260528230916",
+    "analysisStartTime": "2026-05-28T23:09:16Z",
+    "generated_at": "2026-05-28T23:09:16.0000000Z",
+    "note": "Security-only report (AppCAT was not run \u2014 appmod MCP tools not available in this environment)"
+  },
+  "rules": {},
+  "projects": [
+    {
+      "properties": {
+        "repo": "ZavaDocVault",
+        "appName": "ZavaDocVault",
+        "languages": [
+          "Java"
+        ],
+        "frameworks": [
+          "Java Servlet (javax.servlet 3.1)",
+          "JDBC (mssql-jdbc 12.6.3)"
+        ],
+        "tools": [
+          "Gradle"
+        ],
+        "jdkVersion": "8",
+        "applicationType": "Web Application (WAR)"
+      },
+      "incidents": []
+    }
+  ],
+  "security": [
+    {
+      "id": "CVE-2025-59250",
+      "title": "JDBC Driver for SQL Server has improper input validation issue",
+      "category": "CVE",
+      "severity": "mandatory",
+      "description": "[CVE-2025-59250](https://github.com/advisories/GHSA-m494-w24q-6f7w): JDBC Driver for SQL Server has improper input validation issue\n\nSeverity: HIGH\n\nAffected dependencies:\n  - com.microsoft.sqlserver:mssql-jdbc:12.6.3.jre8 (declared at build.gradle:16)\n\nVulnerable version range: >= 12.6.0.jre11, < 12.6.5.jre11\n\nRecommended fix:\n  - Upgrade com.microsoft.sqlserver:mssql-jdbc to 12.6.5.jre8 or later",
+      "evidence": {
+        "files": [
+          "build.gradle:16"
+        ],
+        "explanation": "[CVE-2025-59250](https://github.com/advisories/GHSA-m494-w24q-6f7w): JDBC Driver for SQL Server has improper input validation issue\n\nSeverity: HIGH\n\nAffected dependencies:\n  - com.microsoft.sqlserver:mssql-jdbc:12.6.3.jre8 (declared at build.gradle:16)\n\nVulnerable version range: >= 12.6.0.jre11, < 12.6.5.jre11\n\nRecommended fix:\n  - Upgrade com.microsoft.sqlserver:mssql-jdbc to 12.6.5.jre8 or later"
+      },
+      "storyPoint": 1
+    },
+    {
+      "id": "CVE-2023-5072",
+      "title": "Java: DoS Vulnerability in JSON-JAVA",
+      "category": "CVE",
+      "severity": "mandatory",
+      "description": "[CVE-2023-5072](https://github.com/advisories/GHSA-4jq9-2xhw-jpx7): Denial of Service vulnerability in JSON-Java (org.json)\n\nSeverity: HIGH\n\nAffected dependencies:\n  - org.json:json:20140107 (declared at build.gradle:17)\n\nVulnerable version range: <= 20230618\n\nRecommended fix:\n  - Upgrade org.json:json to 20231013 or later",
+      "evidence": {
+        "files": [
+          "build.gradle:17"
+        ],
+        "explanation": "[CVE-2023-5072](https://github.com/advisories/GHSA-4jq9-2xhw-jpx7): Denial of Service vulnerability in JSON-Java (org.json)\n\nSeverity: HIGH\n\nAffected dependencies:\n  - org.json:json:20140107 (declared at build.gradle:17)\n\nVulnerable version range: <= 20230618\n\nRecommended fix:\n  - Upgrade org.json:json to 20231013 or later"
+      },
+      "storyPoint": 1
+    },
+    {
+      "id": "CVE-2022-45688",
+      "title": "json stack overflow vulnerability",
+      "category": "CVE",
+      "severity": "mandatory",
+      "description": "[CVE-2022-45688](https://github.com/advisories/GHSA-3vqj-43w4-2q58): Stack overflow vulnerability in org.json\n\nSeverity: HIGH\n\nAffected dependencies:\n  - org.json:json:20140107 (declared at build.gradle:17)\n\nVulnerable version range: < 20230227\n\nRecommended fix:\n  - Upgrade org.json:json to 20230227 or later (20231013 recommended to also address CVE-2023-5072)",
+      "evidence": {
+        "files": [
+          "build.gradle:17"
+        ],
+        "explanation": "[CVE-2022-45688](https://github.com/advisories/GHSA-3vqj-43w4-2q58): Stack overflow vulnerability in org.json\n\nSeverity: HIGH\n\nAffected dependencies:\n  - org.json:json:20140107 (declared at build.gradle:17)\n\nVulnerable version range: < 20230227\n\nRecommended fix:\n  - Upgrade org.json:json to 20230227 or later (20231013 recommended to also address CVE-2023-5072)"
+      },
+      "storyPoint": 1
+    },
+    {
+      "id": "CWE-434",
+      "title": "Unrestricted Upload of File with Dangerous Type",
+      "category": "File & Path Security",
+      "severity": "mandatory",
+      "description": "The product allows the upload or transfer of dangerous file types that are automatically processed within its environment.",
+      "evidence": {
+        "files": [
+          "src/main/java/com/zavabank/docvault/DocumentUploadServlet.java"
+        ],
+        "explanation": "In DocumentUploadServlet.doPost(), the servlet accepts any file type with no content-type or file-extension allowlist validation. The file's content type is taken directly from the request part (filePart.getContentType()) without sanitization, and there is no check that restricts which file types may be uploaded. Dangerous files such as HTML, JavaScript, or executable payloads can be stored and later served back to users with their original content type, enabling drive-by download attacks or stored XSS."
+      },
+      "storyPoint": 8
+    },
+    {
+      "id": "CWE-477",
+      "title": "Use of Obsolete Function",
+      "category": "Code Quality",
+      "severity": "optional",
+      "description": "The code uses deprecated or obsolete functions, which suggests that the code has not been actively reviewed or maintained.",
+      "evidence": {
+        "files": [
+          "src/main/java/com/zavabank/docvault/DocVaultConnectionFactory.java"
+        ],
+        "explanation": "In DocVaultConnectionFactory's static initializer, Class.forName(\"com.microsoft.sqlserver.jdbc.SQLServerDriver\") is used to manually register the JDBC driver. This pattern has been obsolete since JDBC 4.0 (Java SE 6): drivers are automatically discovered and registered via the Java SPI mechanism (META-INF/services). Since the project targets Java 8 (sourceCompatibility = JavaVersion.VERSION_1_8), this manual registration is unnecessary and constitutes use of an obsolete pattern."
+      },
+      "storyPoint": 1
+    },
+    {
+      "id": "CWE-772",
+      "title": "Missing Release of Resource after Effective Lifetime",
+      "category": "Code Quality",
+      "severity": "potential",
+      "description": "The product does not release a resource after its effective lifetime has ended, i.e., after the resource is no longer needed.",
+      "evidence": {
+        "files": [
+          "src/main/java/com/zavabank/docvault/DocVaultConfig.java"
+        ],
+        "explanation": "In DocVaultConfig's static initializer, the InputStream obtained from getResourceAsStream(\"doc-vault.properties\") is closed only in the happy path (after PROPERTIES.load() succeeds). If PROPERTIES.load(inputStream) throws an IOException, the catch block ignores the exception and the InputStream is never closed, causing a resource leak. The close() call should be in a finally block or the code should use a try-with-resources statement."
+      },
+      "storyPoint": 3
+    },
+    {
+      "id": "CWE-775",
+      "title": "Missing Release of File Descriptor or Handle after Effective Lifetime",
+      "category": "Code Quality",
+      "severity": "potential",
+      "description": "The product does not release a file descriptor or handle after its effective lifetime has ended, i.e., after the file descriptor/handle is no longer needed.",
+      "evidence": {
+        "files": [
+          "src/main/java/com/zavabank/docvault/DocVaultConfig.java"
+        ],
+        "explanation": "Same issue as CWE-772: In DocVaultConfig's static initializer, the InputStream (backed by a file descriptor for the classpath resource doc-vault.properties) is not closed in the exception path. If PROPERTIES.load(inputStream) throws an IOException, the underlying file handle is leaked because inputStream.close() is skipped and the catch block silently ignores the error."
+      },
+      "storyPoint": 3
+    },
+    {
+      "id": "CWE-259",
+      "title": "Use of Hard-coded Password",
+      "category": "Credentials & Secrets",
+      "severity": "optional",
+      "description": "The product contains a hard-coded password, which it uses for its own inbound authentication or for outbound communication to external components.",
+      "evidence": {
+        "files": [
+          "src/main/resources/doc-vault.properties"
+        ],
+        "explanation": "The classpath resource doc-vault.properties (bundled inside the WAR artifact) contains the literal database password on the line: db.****** DocVaultConfig.read() prefers environment variables but falls back to these property values, meaning the hard-coded password is the default credential used whenever the DB_PASSWORD environment variable is not set. Shipping a production password in the source repository and the deployable artifact is a critical exposure."
+      },
+      "storyPoint": 5
+    },
+    {
+      "id": "CWE-778",
+      "title": "Insufficient Logging",
+      "category": "Credentials & Secrets",
+      "severity": "potential",
+      "description": "When a security-critical event occurs, the product either does not record the event or omits important details about the event when logging it.",
+      "evidence": {
+        "files": [
+          "src/main/java/com/zavabank/docvault/CustomerDocumentsServlet.java",
+          "src/main/java/com/zavabank/docvault/DocumentUploadServlet.java",
+          "src/main/java/com/zavabank/docvault/DocumentDownloadServlet.java",
+          "src/main/java/com/zavabank/docvault/DocVaultConfig.java"
+        ],
+        "explanation": "No logging framework is used anywhere in the application. Security-critical events are silently discarded: (1) CustomerDocumentsServlet.doGet() catches SQLException and returns a 500 response with no logging. (2) DocumentUploadServlet.doPost() catches SQLException on document storage failure with no logging. (3) DocumentDownloadServlet.doGet() catches SQLException on document retrieval with no logging. (4) DocVaultConfig's static initializer catches IOException and ignores it entirely (catch (IOException ignored)), meaning a properties-loading failure leaves the app running with null credentials and no audit trail."
+      },
+      "storyPoint": 3
+    },
+    {
+      "id": "CWE-798",
+      "title": "Use of Hard-coded Credentials",
+      "category": "Credentials & Secrets",
+      "severity": "optional",
+      "description": "The product contains hard-coded credentials, such as a password or cryptographic key.",
+      "evidence": {
+        "files": [
+          "src/main/resources/doc-vault.properties"
+        ],
+        "explanation": "doc-vault.properties contains both a hard-coded database username (db.user=sa) and password (db.****** These credentials are packaged into the deployable WAR file and are committed to the source repository. DocVaultConfig uses them as fallback values when the DB_USER / DB_PASSWORD environment variables are absent, making them the effective credentials in any environment where those variables are not explicitly overridden."
+      },
+      "storyPoint": 5
+    }
+  ]
+}

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GitHub Modernize and Command Center</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --text: #f0f6fc;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --success: #3fb950;
+      --panel: #161b22;
+      --border: #30363d;
+      --font: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 15%, rgba(88, 166, 255, 0.22), transparent 32rem),
+        radial-gradient(circle at 80% 80%, rgba(63, 185, 80, 0.18), transparent 30rem),
+        var(--bg);
+    }
+
+    main {
+      width: min(1120px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 5rem 0;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 3rem;
+      align-items: center;
+      min-height: 72vh;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0.6rem 0 1rem;
+      font-size: clamp(3rem, 8vw, 6.8rem);
+      line-height: 0.94;
+      letter-spacing: -0.07em;
+    }
+
+    .abstract {
+      color: #c9d1d9;
+      font-size: clamp(1.2rem, 2vw, 1.55rem);
+      line-height: 1.5;
+      max-width: 760px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 3.2rem;
+      padding: 0.8rem 1.3rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .button.primary {
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--accent), var(--success));
+      color: #061018;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: rgba(22, 27, 34, 0.84);
+      padding: 1.5rem;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.32);
+    }
+
+    .panel h2 {
+      margin-top: 0;
+    }
+
+    .meta {
+      display: grid;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .meta-item {
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+    }
+
+    .meta-item strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--accent);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      border: 1px solid rgba(88, 166, 255, 0.45);
+      border-radius: 999px;
+      padding: 0.4rem 0.7rem;
+      color: #c9d1d9;
+      background: rgba(88, 166, 255, 0.09);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 850px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">GitHub Pages presentation</p>
+        <h1>GitHub Modernize and Command Center</h1>
+        <p class="abstract">
+          A source-grounded Build demo walkthrough of GitHub Copilot Modernization, the Modernize CLI, and Command Center: how teams assess portfolios, create governed plans, choose execution modes, and monitor modernization across Java and .NET applications.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="./slides.html">Open slide deck</a>
+          <a class="button" href="../../presentations.json">View registry</a>
+        </div>
+      </div>
+
+      <aside class="panel" aria-label="Presentation details">
+        <h2>Talk shape</h2>
+        <p class="note">
+          Grounded in the two local TXT source documents in <code>presentation/src/</code>. Availability, pricing, timeline, and public announcement details are intentionally left open unless stated by those files.
+        </p>
+        <div class="meta">
+          <div class="meta-item">
+            <strong>Audience</strong>
+            App owners, architects, platform teams, and developers modernizing legacy portfolios.
+          </div>
+          <div class="meta-item">
+            <strong>Event context</strong>
+            BUILD 2026 demo scenario from the source narrative; not a source of public product commitments.
+          </div>
+          <div class="meta-item">
+            <strong>Key arc</strong>
+            Assess → Plan → Execute → Monitor, with a Zava Bank demo storyline.
+          </div>
+        </div>
+        <div class="tags" aria-label="Tags">
+          <span class="tag">GitHub</span>
+          <span class="tag">Modernization</span>
+          <span class="tag">Command Center</span>
+          <span class="tag">Java</span>
+          <span class="tag">.NET</span>
+        </div>
+      </aside>
+    </section>
+  </main>
+</body>
+</html>

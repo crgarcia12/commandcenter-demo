@@ -1,0 +1,142 @@
+{
+  "metadata": {
+    "id": "20260528232412",
+    "generatedAt": "2026-05-28T23:24:43.0000000Z",
+    "note": "Security-only report (AppCAT assessment was not run \u2014 MCP tools not available in this environment)"
+  },
+  "security": [
+    {
+      "id": "CVE-2023-5072",
+      "title": "Java: DoS Vulnerability in JSON-JAVA",
+      "category": "CVE",
+      "severity": "mandatory",
+      "description": "[CVE-2023-5072](https://github.com/advisories/GHSA-4jq9-2xhw-jpx7): Java: DoS Vulnerability in JSON-JAVA\n\nSeverity: HIGH\n\nAffected dependencies:\n  - org.json:json:20140107 (declared at build.gradle:17)\n\nThe parser bug can be used to circumvent a check that prevents a key in a JSON object from being another JSON object.\n\nRecommended fix:\n  - Upgrade org.json:json to 20231013 or later",
+      "evidence": {
+        "files": [
+          "build.gradle:17"
+        ],
+        "explanation": "[CVE-2023-5072](https://github.com/advisories/GHSA-4jq9-2xhw-jpx7): Java: DoS Vulnerability in JSON-JAVA\n\nSeverity: HIGH\n\nAffected dependencies:\n  - org.json:json:20140107 (declared at build.gradle:17)\n\nThe parser bug can be used to circumvent a check that prevents a key in a JSON object from being another JSON object."
+      },
+      "storyPoint": 1
+    },
+    {
+      "id": "CVE-2022-45688",
+      "title": "json stack overflow vulnerability",
+      "category": "CVE",
+      "severity": "mandatory",
+      "description": "[CVE-2022-45688](https://github.com/advisories/GHSA-3vqj-43w4-2q58): json stack overflow vulnerability\n\nSeverity: HIGH\n\nAffected dependencies:\n  - org.json:json:20140107 (declared at build.gradle:17)\n\nA stack overflow in the XML.toJSONObject component allows attackers to cause a Denial of Service (DoS) via crafted JSON or XML data.",
+      "evidence": {
+        "files": [
+          "build.gradle:17"
+        ],
+        "explanation": "[CVE-2022-45688](https://github.com/advisories/GHSA-3vqj-43w4-2q58): json stack overflow vulnerability\n\nSeverity: HIGH\n\nAffected dependencies:\n  - org.json:json:20140107 (declared at build.gradle:17)"
+      },
+      "storyPoint": 1
+    },
+    {
+      "id": "CWE-477",
+      "title": "Use of Obsolete Function",
+      "category": "Code Quality",
+      "severity": "optional",
+      "description": "The code uses deprecated or obsolete functions, which suggests that the code has not been actively reviewed or maintained.",
+      "evidence": {
+        "files": [
+          "src/main/java/com/zavabank/kycservice/KycConnectionFactory.java"
+        ],
+        "explanation": "In KycConnectionFactory (line 10), Class.forName(\"com.microsoft.sqlserver.jdbc.SQLServerDriver\") is used to manually register the JDBC driver. Since JDBC 4.0 (Java SE 6), drivers are auto-registered via the ServiceLoader mechanism, making this manual registration obsolete."
+      },
+      "storyPoint": 1
+    },
+    {
+      "id": "CWE-772",
+      "title": "Missing Release of Resource after Effective Lifetime",
+      "category": "Code Quality",
+      "severity": "potential",
+      "description": "The product does not release a resource after its effective lifetime has ended, i.e., after the resource is no longer needed.",
+      "evidence": {
+        "files": [
+          "src/main/java/com/zavabank/kycservice/KycConfig.java"
+        ],
+        "explanation": "In the KycConfig static initializer (lines 12-15), the InputStream is closed on line 15 but not inside a finally block. If PROPERTIES.load() throws an IOException, the stream will never be closed, resulting in a resource leak."
+      },
+      "storyPoint": 3
+    },
+    {
+      "id": "CWE-775",
+      "title": "Missing Release of File Descriptor or Handle after Effective Lifetime",
+      "category": "Code Quality",
+      "severity": "potential",
+      "description": "The product does not release a file descriptor or handle after its effective lifetime has ended, i.e., after the file descriptor/handle is no longer needed.",
+      "evidence": {
+        "files": [
+          "src/main/java/com/zavabank/kycservice/KycConfig.java"
+        ],
+        "explanation": "In the KycConfig static initializer (lines 12-15), the InputStream file handle is closed only if no exception occurs during PROPERTIES.load(). Because close() is not in a finally block, the file descriptor can be leaked if an exception is thrown."
+      },
+      "storyPoint": 3
+    },
+    {
+      "id": "CWE-259",
+      "title": "Use of Hard-coded Password",
+      "category": "Credentials & Secrets",
+      "severity": "optional",
+      "description": "The product contains a hard-coded password, which it uses for its own inbound authentication or for outbound communication to external components.",
+      "evidence": {
+        "files": [
+          "src/main/resources/kyc.properties"
+        ],
+        "explanation": "src/main/resources/kyc.properties (line 5) contains a hard-coded database password. This default password is shipped in the packaged artifact and exposes SQL Server credentials if DB_PASSWORD is not set."
+      },
+      "storyPoint": 5
+    },
+    {
+      "id": "CWE-778",
+      "title": "Insufficient Logging",
+      "category": "Credentials & Secrets",
+      "severity": "potential",
+      "description": "When a security-critical event occurs, the product either does not record the event or omits important details about the event when logging it.",
+      "evidence": {
+        "files": [
+          "src/main/java/com/zavabank/kycservice/KycVerifyServlet.java",
+          "src/main/java/com/zavabank/kycservice/KycStatusServlet.java"
+        ],
+        "explanation": "No logging framework is used anywhere in the codebase. KYC verification outcomes and SQL errors are never recorded in any audit log, making security incidents and compliance-relevant decisions unmonitorable."
+      },
+      "storyPoint": 3
+    },
+    {
+      "id": "CWE-798",
+      "title": "Use of Hard-coded Credentials",
+      "category": "Credentials & Secrets",
+      "severity": "optional",
+      "description": "The product contains hard-coded credentials, such as a password or cryptographic key.",
+      "evidence": {
+        "files": [
+          "src/main/resources/kyc.properties"
+        ],
+        "explanation": "src/main/resources/kyc.properties (lines 4-5) contains hard-coded database credentials: db.user=sa and a hard-coded password. These are bundled into the WAR artifact and used as fallback when DB_USER/DB_PASSWORD env vars are not set."
+      },
+      "storyPoint": 5
+    }
+  ],
+  "rules": {},
+  "projects": [
+    {
+      "properties": {
+        "repo": "mnm-ZavaKYCService",
+        "appName": "ZavaKYCService",
+        "languages": [
+          "Java"
+        ],
+        "frameworks": [
+          "Java Servlet"
+        ],
+        "tools": [
+          "Gradle"
+        ]
+      },
+      "incidents": [],
+      "ruleInstances": []
+    }
+  ]
+}

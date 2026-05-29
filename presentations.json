@@ -1,0 +1,16 @@
+[
+  {
+    "slug": "github-modernize-command-center",
+    "title": "GitHub Modernize and Command Center",
+    "abstract": "A practical, grounded walkthrough of GitHub Copilot Modernization, the Modernize CLI, and Command Center for assessing, planning, executing, and monitoring modernization across Java and .NET portfolios.",
+    "date": "2026-05",
+    "tags": ["github", "modernization", "copilot", "command-center", "java", "dotnet"],
+    "events": [
+      {
+        "name": "BUILD 2026 demo context",
+        "date": "2026",
+        "location": "Conference scenario"
+      }
+    ]
+  }
+]

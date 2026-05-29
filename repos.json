@@ -1,0 +1,94 @@
+[
+  {
+    "name": "ZavaAccountManager",
+    "url": "https://github.com/crgarcia12/mnm-ZavaAccountManager"
+  },
+  {
+    "name": "ZavaACHProcessor",
+    "url": "https://github.com/crgarcia12/mnm-ZavaACHProcessor"
+  },
+  {
+    "name": "ZavaAlertService",
+    "url": "https://github.com/crgarcia12/mnm-ZavaAlertService"
+  },
+  {
+    "name": "ZavaAuditWorker",
+    "url": "https://github.com/crgarcia12/mnm-ZavaAuditWorker"
+  },
+  {
+    "name": "ZavaAuthGateway",
+    "url": "https://github.com/crgarcia12/mnm-ZavaAuthGateway"
+  },
+  {
+    "name": "ZavaBatchScheduler",
+    "url": "https://github.com/crgarcia12/mnm-ZavaBatchScheduler"
+  },
+  {
+    "name": "ZavaComplianceReporter",
+    "url": "https://github.com/crgarcia12/mnm-ZavaComplianceReporter"
+  },
+  {
+    "name": "ZavaCurrencyService",
+    "url": "https://github.com/crgarcia12/mnm-ZavaCurrencyService"
+  },
+  {
+    "name": "ZavaDocVault",
+    "url": "https://github.com/crgarcia12/mnm-ZavaDocVault"
+  },
+  {
+    "name": "ZavaFileIngestion",
+    "url": "https://github.com/crgarcia12/mnm-ZavaFileIngestion"
+  },
+  {
+    "name": "ZavaFraudDetector",
+    "url": "https://github.com/crgarcia12/mnm-ZavaFraudDetector"
+  },
+  {
+    "name": "ZavaInterestCalculator",
+    "url": "https://github.com/crgarcia12/mnm-ZavaInterestCalculator"
+  },
+  {
+    "name": "ZavaKYCService",
+    "url": "https://github.com/crgarcia12/mnm-ZavaKYCService"
+  },
+  {
+    "name": "ZavaLedger",
+    "url": "https://github.com/crgarcia12/mnm-ZavaLedger"
+  },
+  {
+    "name": "ZavaLoanOriginationAPI",
+    "url": "https://github.com/crgarcia12/mnm-ZavaLoanOriginationAPI"
+  },
+  {
+    "name": "ZavaLoanPortal",
+    "url": "https://github.com/crgarcia12/mnm-ZavaLoanPortal"
+  },
+  {
+    "name": "ZavaNotifyWorker",
+    "url": "https://github.com/crgarcia12/mnm-ZavaNotifyWorker"
+  },
+  {
+    "name": "ZavaPayGateway",
+    "url": "https://github.com/crgarcia12/mnm-ZavaPayGateway"
+  },
+  {
+    "name": "ZavaQueueBridge",
+    "url": "https://github.com/crgarcia12/mnm-ZavaQueueBridge"
+  },
+  {
+    "name": "ZavaReportDashboard",
+    "url": "https://github.com/crgarcia12/mnm-ZavaReportDashboard"
+  },
+  {
+    "name": "ZavaRiskEngine",
+    "url": "https://github.com/crgarcia12/mnm-ZavaRiskEngine"
+  },
+  {
+    "name": "ZavaStatementService",
+    "url": "https://github.com/crgarcia12/mnm-ZavaStatementService"
+  },
+  {
+    "name": "ZavaWireTransferService",
+    "url": "https://github.com/crgarcia12/mnm-ZavaWireTransferService"
+  }
+]

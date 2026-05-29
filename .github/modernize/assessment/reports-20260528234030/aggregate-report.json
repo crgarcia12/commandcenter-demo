@@ -1,0 +1,4041 @@
+﻿{
+  "version": null,
+  "producer": "GitHub Copilot Modernization CLI",
+  "metadata": {
+    "id": "20260528232412",
+    "generatedAt": "2026-05-28T23:24:43.0000000Z",
+    "note": "Security-only report (AppCAT assessment was not run \u2014 MCP tools not available in this environment)",
+    "analysisStartTime": "2026-05-28T23:40:26.5674683Z",
+    "analysisEndTime": "2026-05-28T23:40:29.6014272Z",
+    "capabilities": [],
+    "os": [
+      "windows",
+      "linux"
+    ],
+    "domains": [],
+    "targetIds": [
+      "AppService.Windows",
+      "AppService.Linux",
+      "AKS.Linux",
+      "AKS.Windows",
+      "ACA",
+      "AppServiceContainer.Linux",
+      "AppServiceContainer.Windows",
+      "AppServiceManagedInstance.Windows",
+      "azure-appservice",
+      "azure-aks",
+      "azure-container-apps"
+    ],
+    "targetDisplayNames": [
+      "Azure App Service",
+      "Azure Kubernetes Service",
+      "Azure Container Apps",
+      "Azure App Service Container",
+      "Azure App Service Managed Instance"
+    ],
+    "mode": "issue-only",
+    "repos": [
+      {
+        "identity": "ZavaKYCService",
+        "name": "ZavaKYCService",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaKYCService",
+        "sourceRepo": "ZavaKYCService",
+        "appIdentifiers": [
+          "ZavaKYCService"
+        ]
+      },
+      {
+        "identity": "ZavaInterestCalculator",
+        "name": "ZavaInterestCalculator",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaInterestCalculator",
+        "sourceRepo": "ZavaInterestCalculator",
+        "appIdentifiers": [
+          "ZavaInterestCalculator"
+        ]
+      },
+      {
+        "identity": "ZavaRiskEngine",
+        "name": "ZavaRiskEngine",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaRiskEngine",
+        "sourceRepo": "ZavaRiskEngine",
+        "appIdentifiers": [
+          "ZavaRiskEngine"
+        ]
+      },
+      {
+        "identity": "ZavaFraudDetector",
+        "name": "ZavaFraudDetector",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaFraudDetector",
+        "sourceRepo": "ZavaFraudDetector",
+        "appIdentifiers": [
+          "ZavaFraudDetector"
+        ]
+      },
+      {
+        "identity": "ZavaNotifyWorker",
+        "name": "ZavaNotifyWorker",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaNotifyWorker",
+        "sourceRepo": "ZavaNotifyWorker",
+        "appIdentifiers": [
+          "ZavaNotifyWorker"
+        ]
+      },
+      {
+        "identity": "ZavaCurrencyService",
+        "name": "ZavaCurrencyService",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaCurrencyService",
+        "sourceRepo": "ZavaCurrencyService",
+        "appIdentifiers": [
+          "ZavaCurrencyService"
+        ]
+      },
+      {
+        "identity": "ZavaPayGateway",
+        "name": "ZavaPayGateway",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaPayGateway",
+        "sourceRepo": "ZavaPayGateway",
+        "appIdentifiers": [
+          "ZavaPayGateway"
+        ]
+      },
+      {
+        "identity": "ZavaLedger",
+        "name": "ZavaLedger",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaLedger",
+        "sourceRepo": "ZavaLedger",
+        "appIdentifiers": [
+          "ZavaLedger"
+        ]
+      },
+      {
+        "identity": "ZavaDocVault",
+        "name": "ZavaDocVault",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaDocVault",
+        "sourceRepo": "ZavaDocVault",
+        "appIdentifiers": [
+          "ZavaDocVault"
+        ]
+      },
+      {
+        "identity": "ZavaReportDashboard",
+        "name": "ZavaReportDashboard",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaReportDashboard",
+        "sourceRepo": "ZavaReportDashboard",
+        "appIdentifiers": [
+          "ZavaReportDashboard"
+        ]
+      },
+      {
+        "identity": "ZavaBatchScheduler",
+        "name": "ZavaBatchScheduler",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaBatchScheduler",
+        "sourceRepo": "ZavaBatchScheduler",
+        "appIdentifiers": [
+          "ZavaBatchScheduler"
+        ]
+      },
+      {
+        "identity": "ZavaQueueBridge",
+        "name": "ZavaQueueBridge",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaQueueBridge",
+        "sourceRepo": "ZavaQueueBridge",
+        "appIdentifiers": [
+          "ZavaQueueBridge"
+        ]
+      },
+      {
+        "identity": "ZavaACHProcessor",
+        "name": "ZavaACHProcessor",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaACHProcessor",
+        "sourceRepo": "ZavaACHProcessor",
+        "appIdentifiers": [
+          "ZavaACHProcessor"
+        ]
+      },
+      {
+        "identity": "ZavaStatementService",
+        "name": "ZavaStatementService",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaStatementService",
+        "sourceRepo": "ZavaStatementService",
+        "appIdentifiers": [
+          "ZavaStatementService"
+        ]
+      },
+      {
+        "identity": "ZavaLoanPortal",
+        "name": "ZavaLoanPortal",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaLoanPortal",
+        "sourceRepo": "ZavaLoanPortal",
+        "appIdentifiers": [
+          "ZavaLoanPortal"
+        ]
+      },
+      {
+        "identity": "ZavaLoanOriginationAPI",
+        "name": "ZavaLoanOriginationAPI",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaLoanOriginationAPI",
+        "sourceRepo": "ZavaLoanOriginationAPI",
+        "appIdentifiers": [
+          "ZavaLoanOriginationAPI"
+        ]
+      },
+      {
+        "identity": "ZavaAlertService",
+        "name": "ZavaAlertService",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaAlertService",
+        "sourceRepo": "ZavaAlertService",
+        "appIdentifiers": [
+          "ZavaAlertService"
+        ]
+      },
+      {
+        "identity": "ZavaComplianceReporter",
+        "name": "ZavaComplianceReporter",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaComplianceReporter",
+        "sourceRepo": "ZavaComplianceReporter",
+        "appIdentifiers": [
+          "ZavaComplianceReporter"
+        ]
+      },
+      {
+        "identity": "ZavaAuditWorker",
+        "name": "ZavaAuditWorker",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaAuditWorker",
+        "sourceRepo": "ZavaAuditWorker",
+        "appIdentifiers": [
+          "ZavaAuditWorker"
+        ]
+      },
+      {
+        "identity": "ZavaFileIngestion",
+        "name": "ZavaFileIngestion",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaFileIngestion",
+        "sourceRepo": "ZavaFileIngestion",
+        "appIdentifiers": [
+          "ZavaFileIngestion"
+        ]
+      },
+      {
+        "identity": "ZavaAccountManager",
+        "name": "ZavaAccountManager",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaAccountManager",
+        "sourceRepo": "ZavaAccountManager",
+        "appIdentifiers": [
+          "ZavaAccountManager"
+        ]
+      },
+      {
+        "identity": "ZavaWireTransferService",
+        "name": "ZavaWireTransferService",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaWireTransferService",
+        "sourceRepo": "ZavaWireTransferService",
+        "appIdentifiers": [
+          "ZavaWireTransferService"
+        ]
+      },
+      {
+        "identity": "ZavaAuthGateway",
+        "name": "ZavaAuthGateway",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaAuthGateway",
+        "sourceRepo": "ZavaAuthGateway",
+        "appIdentifiers": [
+          "ZavaAuthGateway"
+        ]
+      }
+    ]
+  },
+  "summary": {
+    "totalProjects": 11,
+    "totalIssues": 39,
+    "totalIncidents": 72,
+    "totalEffort": 198,
+    "charts": {
+      "severity": {
+        "mandatory": 0,
+        "optional": 55,
+        "potential": 17,
+        "information": 0
+      },
+      "category": {
+        "Database": 16,
+        "Security": 47,
+        "Local": 9
+      }
+    }
+  },
+  "projects": [
+    {
+      "properties": {
+        "repo": "ZavaKYCService",
+        "appName": "ZavaKYCService",
+        "languages": [
+          "Java"
+        ],
+        "frameworks": [
+          "Java Servlet"
+        ],
+        "tools": [
+          "Gradle"
+        ],
+        "securityMandatory": 2,
+        "securityPotential": 3,
+        "securityOptional": 3,
+        "rearchitectCount": 0
+      },
+      "incidents": [],
+      "ruleInstances": []
+    },
+    {
+      "properties": {
+        "appName": "ZavaInterestCalculator",
+        "repo": "ZavaInterestCalculator",
+        "languages": [
+          "Java"
+        ],
+        "frameworks": [
+          "Java EE / Jakarta EE",
+          "JDBC"
+        ],
+        "tools": [
+          "Gradle"
+        ],
+        "jdkVersion": "1.8",
+        "applicationType": "Web Application",
+        "description": "Interest calculation service for ZavaBank using Java Servlets and SQL Server",
+        "securityMandatory": 2,
+        "securityPotential": 2,
+        "securityOptional": 3,
+        "rearchitectCount": 0
+      },
+      "incidents": []
+    },
+    {
+      "path": "workspace/crgarcia12/mnm-ZavaRiskEngine/ZavaRiskEngine.csproj",
+      "issues": 4,
+      "storyPoints": 18,
+      "properties": {
+        "appName": "ZavaRiskEngine",
+        "frameworks": [
+          ".NETFramework,Version=v4.8"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "repo": "ZavaRiskEngine",
+        "securityMandatory": 0,
+        "securityPotential": 0,
+        "securityOptional": 0,
+        "rearchitectCount": 0
+      },
+      "incidents": [
+        {
+          "ruleId": "Database.0002",
+          "incidentId": "205516c4-9ab3-43a3-bb9d-230d53384ac4",
+          "location": "workspace/crgarcia12/mnm-ZavaRiskEngine/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "potential",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Database.0003",
+          "incidentId": "7a2c89a5-8b6f-44a0-bd8a-336068e8b289",
+          "location": "workspace/crgarcia12/mnm-ZavaRiskEngine/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "optional",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0002",
+          "incidentId": "92477c8e-f2c2-469a-96ea-98924551a93b",
+          "location": "workspace/crgarcia12/mnm-ZavaRiskEngine/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "optional",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "f5ad2e0d-62b1-418c-b795-9664293febcf",
+          "location": "workspace/crgarcia12/mnm-ZavaRiskEngine/DbConfig.cs",
+          "locationKind": "File",
+          "line": 22,
+          "column": 20,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "c09a7120-0947-4902-927c-d1c8ead0f2eb",
+          "location": "workspace/crgarcia12/mnm-ZavaRiskEngine/DbConfig.cs",
+          "locationKind": "File",
+          "line": 13,
+          "column": 47,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "9014eed7-8319-4e6b-bedf-e3e451724ebc",
+          "location": "workspace/crgarcia12/mnm-ZavaRiskEngine/DbConfig.cs",
+          "locationKind": "File",
+          "line": 13,
+          "column": 62,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        }
+      ]
+    },
+    {
+      "properties": {
+        "repo": "ZavaFraudDetector",
+        "appName": "ZavaFraudDetector",
+        "languages": [
+          "Java"
+        ],
+        "frameworks": [
+          "Apache Struts 2"
+        ],
+        "tools": [
+          "Gradle"
+        ],
+        "securityMandatory": 7,
+        "securityPotential": 6,
+        "securityOptional": 2,
+        "rearchitectCount": 0
+      },
+      "incidents": []
+    },
+    {
+      "path": "workspace/crgarcia12/mnm-ZavaNotifyWorker/ZavaNotifyWorker.csproj",
+      "issues": 2,
+      "storyPoints": 15,
+      "properties": {
+        "appName": "ZavaNotifyWorker",
+        "frameworks": [
+          ".NETFramework,Version=v4.8"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "repo": "ZavaNotifyWorker",
+        "securityMandatory": 0,
+        "securityPotential": 0,
+        "securityOptional": 0,
+        "rearchitectCount": 0
+      },
+      "incidents": [
+        {
+          "ruleId": "Security.0002",
+          "incidentId": "7950a60c-f83e-439f-bc99-17cd23df1c0d",
+          "location": "workspace/crgarcia12/mnm-ZavaNotifyWorker/app.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "optional",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "891d3948-4401-49ec-a526-0f061d68d23d",
+          "location": "workspace/crgarcia12/mnm-ZavaNotifyWorker/app.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "21c288b3-dd5d-4239-9728-b7ec6ca4044b",
+          "location": "workspace/crgarcia12/mnm-ZavaNotifyWorker/app.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "d97cc450-2f7f-4ddb-899a-7ddeb7f5edd9",
+          "location": "workspace/crgarcia12/mnm-ZavaNotifyWorker/Program.cs",
+          "locationKind": "File",
+          "line": 82,
+          "column": 34,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "396117c6-ced3-4ca7-8ed9-3648aa8ee584",
+          "location": "workspace/crgarcia12/mnm-ZavaNotifyWorker/Program.cs",
+          "locationKind": "File",
+          "line": 82,
+          "column": 55,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        }
+      ]
+    },
+    {
+      "path": "workspace/crgarcia12/mnm-ZavaCurrencyService/ZavaCurrencyService.csproj",
+      "issues": 4,
+      "storyPoints": 15,
+      "properties": {
+        "appName": "ZavaCurrencyService",
+        "frameworks": [
+          ".NETFramework,Version=v4.8"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "repo": "ZavaCurrencyService",
+        "securityMandatory": 0,
+        "securityPotential": 0,
+        "securityOptional": 0,
+        "rearchitectCount": 0
+      },
+      "incidents": [
+        {
+          "ruleId": "Database.0002",
+          "incidentId": "66354a4e-46e3-4664-9466-7b84b23771bf",
+          "location": "workspace/crgarcia12/mnm-ZavaCurrencyService/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "potential",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Database.0003",
+          "incidentId": "00f1cc1e-d673-42b4-a3f3-757c1fa4b57a",
+          "location": "workspace/crgarcia12/mnm-ZavaCurrencyService/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "optional",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0002",
+          "incidentId": "b0df54a4-d33f-43c6-b3b1-51e78b13f1d6",
+          "location": "workspace/crgarcia12/mnm-ZavaCurrencyService/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "optional",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "d8b59bca-1566-4397-9007-b60b93a42254",
+          "location": "workspace/crgarcia12/mnm-ZavaCurrencyService/DbConfig.cs",
+          "locationKind": "File",
+          "line": 22,
+          "column": 20,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "9c9212c5-35c8-4035-9f9e-a21b2a2d7876",
+          "location": "workspace/crgarcia12/mnm-ZavaCurrencyService/DbConfig.cs",
+          "locationKind": "File",
+          "line": 13,
+          "column": 62,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        }
+      ]
+    },
+    {
+      "properties": {
+        "repo": "ZavaPayGateway",
+        "appName": "mnm-ZavaPayGateway",
+        "languages": [
+          "Java"
+        ],
+        "frameworks": [
+          "Apache Struts 1.x"
+        ],
+        "tools": [
+          "Gradle"
+        ],
+        "securityMandatory": 4,
+        "securityPotential": 2,
+        "securityOptional": 3,
+        "rearchitectCount": 0
+      },
+      "incidents": []
+    },
+    {
+      "properties": {
+        "repo": "ZavaLedger",
+        "appName": "ZavaLedger",
+        "languages": [
+          "Java"
+        ],
+        "frameworks": [
+          "javax.servlet"
+        ],
+        "tools": [
+          "Gradle"
+        ],
+        "jdkVersion": "17",
+        "securityMandatory": 0,
+        "securityPotential": 3,
+        "securityOptional": 3,
+        "rearchitectCount": 0
+      },
+      "incidents": []
+    },
+    {
+      "properties": {
+        "repo": "ZavaDocVault",
+        "appName": "ZavaDocVault",
+        "languages": [
+          "Java"
+        ],
+        "frameworks": [
+          "Java Servlet (javax.servlet 3.1)",
+          "JDBC (mssql-jdbc 12.6.3)"
+        ],
+        "tools": [
+          "Gradle"
+        ],
+        "jdkVersion": "8",
+        "applicationType": "Web Application (WAR)",
+        "securityMandatory": 4,
+        "securityPotential": 3,
+        "securityOptional": 3,
+        "rearchitectCount": 0
+      },
+      "incidents": []
+    },
+    {
+      "path": "workspace/crgarcia12/mnm-ZavaReportDashboard/ZavaReportDashboard.csproj",
+      "issues": 4,
+      "storyPoints": 14,
+      "properties": {
+        "appName": "ZavaReportDashboard",
+        "frameworks": [
+          ".NETFramework,Version=v4.8"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "repo": "ZavaReportDashboard",
+        "securityMandatory": 0,
+        "securityPotential": 0,
+        "securityOptional": 0,
+        "rearchitectCount": 0
+      },
+      "incidents": [
+        {
+          "ruleId": "Database.0002",
+          "incidentId": "e0803cf8-2eb3-4d84-98a0-ae4e3d2d2377",
+          "location": "workspace/crgarcia12/mnm-ZavaReportDashboard/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "potential",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Database.0003",
+          "incidentId": "82b3a82e-c3ac-4c6d-8764-d08c265fd211",
+          "location": "workspace/crgarcia12/mnm-ZavaReportDashboard/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "optional",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0002",
+          "incidentId": "daf3000e-74cd-4328-8623-17837a099ffa",
+          "location": "workspace/crgarcia12/mnm-ZavaReportDashboard/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "optional",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0002",
+          "incidentId": "c8b7d99c-a26b-4886-b57a-7b0c5e57e100",
+          "location": "workspace/crgarcia12/mnm-ZavaReportDashboard/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "optional",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Local.0006",
+          "incidentId": "131b80a8-7e55-4efb-958c-c2f5406cbb6c",
+          "location": "workspace/crgarcia12/mnm-ZavaReportDashboard/Logout.aspx.cs",
+          "locationKind": "File",
+          "line": 0,
+          "column": 307,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppService.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AKS.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AKS.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "ACA": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "potential",
+              "effort": 1
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Local.0006",
+          "incidentId": "0fcfa98f-b545-4d8f-bc83-6d0c6874f485",
+          "location": "workspace/crgarcia12/mnm-ZavaReportDashboard/Login.aspx.cs",
+          "locationKind": "File",
+          "line": 0,
+          "column": 473,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppService.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AKS.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AKS.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "ACA": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "potential",
+              "effort": 1
+            }
+          },
+          "labels": []
+        }
+      ]
+    },
+    {
+      "properties": {
+        "repo": "ZavaBatchScheduler",
+        "languages": [
+          "Java"
+        ],
+        "frameworks": [],
+        "tools": [
+          "Gradle"
+        ],
+        "securityMandatory": 0,
+        "securityPotential": 0,
+        "securityOptional": 0,
+        "rearchitectCount": 0
+      },
+      "incidents": []
+    },
+    {
+      "path": "workspace/crgarcia12/mnm-ZavaQueueBridge/ZavaQueueBridge.csproj",
+      "issues": 2,
+      "storyPoints": 15,
+      "properties": {
+        "appName": "ZavaQueueBridge",
+        "frameworks": [
+          ".NETFramework,Version=v4.8"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "repo": "ZavaQueueBridge",
+        "securityMandatory": 0,
+        "securityPotential": 0,
+        "securityOptional": 0,
+        "rearchitectCount": 0
+      },
+      "incidents": [
+        {
+          "ruleId": "Security.0002",
+          "incidentId": "44c208b7-d0d2-4c8e-bdf3-d33f08d97966",
+          "location": "workspace/crgarcia12/mnm-ZavaQueueBridge/app.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "optional",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "e8998fa1-bb90-4ca8-964c-42bb9db6da43",
+          "location": "workspace/crgarcia12/mnm-ZavaQueueBridge/app.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "bbe4033b-7053-4571-bc90-ef912483401e",
+          "location": "workspace/crgarcia12/mnm-ZavaQueueBridge/app.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "17d073a5-0644-4755-8f4f-74e2874a30ec",
+          "location": "workspace/crgarcia12/mnm-ZavaQueueBridge/Program.cs",
+          "locationKind": "File",
+          "line": 81,
+          "column": 34,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "98d8bdcf-5544-41e0-909e-a53dff79efc9",
+          "location": "workspace/crgarcia12/mnm-ZavaQueueBridge/Program.cs",
+          "locationKind": "File",
+          "line": 81,
+          "column": 55,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        }
+      ]
+    },
+    {
+      "properties": {
+        "repo": "ZavaACHProcessor",
+        "appName": "mnm-ZavaACHProcessor",
+        "languages": [
+          "Java"
+        ],
+        "frameworks": [],
+        "tools": [
+          "Gradle"
+        ],
+        "securityMandatory": 1,
+        "securityPotential": 0,
+        "securityOptional": 2,
+        "rearchitectCount": 0
+      },
+      "incidents": []
+    },
+    {
+      "path": "workspace/crgarcia12/mnm-ZavaStatementService/ZavaStatementService.csproj",
+      "issues": 4,
+      "storyPoints": 18,
+      "properties": {
+        "appName": "ZavaStatementService",
+        "frameworks": [
+          ".NETFramework,Version=v4.8"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "repo": "ZavaStatementService",
+        "securityMandatory": 0,
+        "securityPotential": 0,
+        "securityOptional": 0,
+        "rearchitectCount": 0
+      },
+      "incidents": [
+        {
+          "ruleId": "Database.0002",
+          "incidentId": "94e7a3d3-265a-4993-9a6a-fb3e1efa686a",
+          "location": "workspace/crgarcia12/mnm-ZavaStatementService/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "potential",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Database.0003",
+          "incidentId": "5d2f74de-f5dc-45d5-b19f-cf340334c05d",
+          "location": "workspace/crgarcia12/mnm-ZavaStatementService/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "optional",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0002",
+          "incidentId": "5a39b1d1-56eb-483b-a9fa-d43b9aeb127a",
+          "location": "workspace/crgarcia12/mnm-ZavaStatementService/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "optional",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "1a6ef5ef-23fb-4ff6-a104-3f02ea4adeb6",
+          "location": "workspace/crgarcia12/mnm-ZavaStatementService/DbConfig.cs",
+          "locationKind": "File",
+          "line": 22,
+          "column": 20,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "7d03ef16-3819-4ca5-98b4-e42ec8f447ba",
+          "location": "workspace/crgarcia12/mnm-ZavaStatementService/DbConfig.cs",
+          "locationKind": "File",
+          "line": 13,
+          "column": 47,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "f94fb6d5-5897-4e3e-90f4-ff5b9f1266e8",
+          "location": "workspace/crgarcia12/mnm-ZavaStatementService/DbConfig.cs",
+          "locationKind": "File",
+          "line": 13,
+          "column": 62,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        }
+      ]
+    },
+    {
+      "path": "workspace/crgarcia12/mnm-ZavaLoanPortal/ZavaLoanPortal.csproj",
+      "issues": 4,
+      "storyPoints": 14,
+      "properties": {
+        "appName": "ZavaLoanPortal",
+        "frameworks": [
+          ".NETFramework,Version=v4.8"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "repo": "ZavaLoanPortal",
+        "securityMandatory": 0,
+        "securityPotential": 0,
+        "securityOptional": 0,
+        "rearchitectCount": 0
+      },
+      "incidents": [
+        {
+          "ruleId": "Database.0002",
+          "incidentId": "0b581c10-9e5c-4622-ab79-d5a3e9a34bb2",
+          "location": "workspace/crgarcia12/mnm-ZavaLoanPortal/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "potential",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Database.0003",
+          "incidentId": "14b417f3-6f2c-4257-bbf9-4fccc2b4604b",
+          "location": "workspace/crgarcia12/mnm-ZavaLoanPortal/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "optional",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0002",
+          "incidentId": "85153e75-459d-4500-a367-24d8a21a17dc",
+          "location": "workspace/crgarcia12/mnm-ZavaLoanPortal/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "optional",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0002",
+          "incidentId": "4340f768-2ce0-4570-aaa3-568cbebe81bd",
+          "location": "workspace/crgarcia12/mnm-ZavaLoanPortal/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "optional",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Local.0006",
+          "incidentId": "0f3bca2a-36ee-4ffb-a0b8-ac28401280d6",
+          "location": "workspace/crgarcia12/mnm-ZavaLoanPortal/Logout.aspx.cs",
+          "locationKind": "File",
+          "line": 0,
+          "column": 302,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppService.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AKS.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AKS.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "ACA": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "potential",
+              "effort": 1
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Local.0006",
+          "incidentId": "e2e7a9be-0f90-499a-9b5a-b10ea3832a1b",
+          "location": "workspace/crgarcia12/mnm-ZavaLoanPortal/Login.aspx.cs",
+          "locationKind": "File",
+          "line": 0,
+          "column": 461,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppService.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AKS.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AKS.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "ACA": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "potential",
+              "effort": 1
+            }
+          },
+          "labels": []
+        }
+      ]
+    },
+    {
+      "properties": {
+        "repo": "ZavaLoanOriginationAPI",
+        "appName": "ZavaLoanOriginationAPI",
+        "languages": [
+          "Java"
+        ],
+        "frameworks": [
+          "Java EE / Jakarta EE",
+          "JDBC"
+        ],
+        "tools": [
+          "Gradle"
+        ],
+        "jdkVersion": "11",
+        "applicationType": "Web Application",
+        "securityMandatory": 2,
+        "securityPotential": 3,
+        "securityOptional": 3,
+        "rearchitectCount": 0
+      },
+      "incidents": []
+    },
+    {
+      "path": "workspace/crgarcia12/mnm-ZavaAlertService/ZavaAlertService.csproj",
+      "issues": 5,
+      "storyPoints": 22,
+      "properties": {
+        "appName": "ZavaAlertService",
+        "frameworks": [
+          ".NETFramework,Version=v4.8"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "repo": "ZavaAlertService",
+        "securityMandatory": 0,
+        "securityPotential": 0,
+        "securityOptional": 0,
+        "rearchitectCount": 0
+      },
+      "incidents": [
+        {
+          "ruleId": "Local.0006",
+          "incidentId": "e74bc5ce-3850-4688-baa1-4f308b24dd53",
+          "location": "workspace/crgarcia12/mnm-ZavaAlertService/RabbitMqPublisher.cs",
+          "locationKind": "File",
+          "line": 20,
+          "column": 40,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppService.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AKS.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AKS.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "ACA": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "potential",
+              "effort": 1
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "414dca1a-78c8-456a-9122-d3709489f854",
+          "location": "workspace/crgarcia12/mnm-ZavaAlertService/RabbitMqPublisher.cs",
+          "locationKind": "File",
+          "line": 17,
+          "column": 62,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Database.0002",
+          "incidentId": "335156b4-2436-4086-8d77-19da66cb22c4",
+          "location": "workspace/crgarcia12/mnm-ZavaAlertService/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "potential",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Database.0003",
+          "incidentId": "43c4ddda-0c28-4195-bf91-1a7eff04f8e3",
+          "location": "workspace/crgarcia12/mnm-ZavaAlertService/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "optional",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0002",
+          "incidentId": "02f073c8-c33c-461a-a4c4-ea1399eb9a2a",
+          "location": "workspace/crgarcia12/mnm-ZavaAlertService/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "optional",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "25831175-7bd0-4c65-aba8-05b62d7525e8",
+          "location": "workspace/crgarcia12/mnm-ZavaAlertService/DbConfig.cs",
+          "locationKind": "File",
+          "line": 22,
+          "column": 20,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "8243422a-ef1a-4734-a45d-56e23e2983b5",
+          "location": "workspace/crgarcia12/mnm-ZavaAlertService/DbConfig.cs",
+          "locationKind": "File",
+          "line": 13,
+          "column": 47,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "25be63ab-7047-4b88-b0de-ea26a32cd959",
+          "location": "workspace/crgarcia12/mnm-ZavaAlertService/DbConfig.cs",
+          "locationKind": "File",
+          "line": 13,
+          "column": 62,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        }
+      ]
+    },
+    {
+      "properties": {
+        "repo": "ZavaComplianceReporter",
+        "appName": "ZavaComplianceReporter",
+        "languages": [
+          "Java"
+        ],
+        "frameworks": [
+          "Java Servlet",
+          "JSP",
+          "JSTL"
+        ],
+        "tools": [
+          "Gradle"
+        ],
+        "securityMandatory": 1,
+        "securityPotential": 6,
+        "securityOptional": 4,
+        "rearchitectCount": 0
+      },
+      "incidents": [],
+      "ruleInstances": []
+    },
+    {
+      "path": "workspace/crgarcia12/mnm-ZavaAuditWorker/ZavaAuditWorker.csproj",
+      "issues": 2,
+      "storyPoints": 24,
+      "properties": {
+        "appName": "ZavaAuditWorker",
+        "frameworks": [
+          ".NETFramework,Version=v4.8"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "repo": "ZavaAuditWorker",
+        "securityMandatory": 0,
+        "securityPotential": 0,
+        "securityOptional": 0,
+        "rearchitectCount": 0
+      },
+      "incidents": [
+        {
+          "ruleId": "Security.0002",
+          "incidentId": "f0922644-a16c-48dc-a1a5-f441bbd133db",
+          "location": "workspace/crgarcia12/mnm-ZavaAuditWorker/app.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "optional",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "d379cf4b-06be-410e-b21e-fab7631ff05d",
+          "location": "workspace/crgarcia12/mnm-ZavaAuditWorker/app.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "393adde9-1931-43a8-b60c-c704de56cecc",
+          "location": "workspace/crgarcia12/mnm-ZavaAuditWorker/app.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "8d367c7f-008e-4872-b14e-cf6fb6bf4d29",
+          "location": "workspace/crgarcia12/mnm-ZavaAuditWorker/Program.cs",
+          "locationKind": "File",
+          "line": 78,
+          "column": 34,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "f226cc63-1728-4f54-bc9c-2c4045f57917",
+          "location": "workspace/crgarcia12/mnm-ZavaAuditWorker/Program.cs",
+          "locationKind": "File",
+          "line": 78,
+          "column": 55,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "7a25c82d-d40d-45a5-ba94-294b8f4ae72e",
+          "location": "workspace/crgarcia12/mnm-ZavaAuditWorker/Program.cs",
+          "locationKind": "File",
+          "line": 98,
+          "column": 33,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "0b4c9345-5046-4673-889e-79fb6699a81e",
+          "location": "workspace/crgarcia12/mnm-ZavaAuditWorker/Program.cs",
+          "locationKind": "File",
+          "line": 97,
+          "column": 127,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "0213de2b-32af-4109-953f-e3b3a0a89da8",
+          "location": "workspace/crgarcia12/mnm-ZavaAuditWorker/Program.cs",
+          "locationKind": "File",
+          "line": 97,
+          "column": 76,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        }
+      ]
+    },
+    {
+      "properties": {
+        "repo": "ZavaFileIngestion",
+        "appName": "ZavaFileIngestion",
+        "languages": [
+          "Java"
+        ],
+        "frameworks": [
+          "Java SE"
+        ],
+        "tools": [
+          "Gradle"
+        ],
+        "securityMandatory": 1,
+        "securityPotential": 1,
+        "securityOptional": 2,
+        "rearchitectCount": 0
+      },
+      "incidents": []
+    },
+    {
+      "path": "workspace/crgarcia12/mnm-ZavaAccountManager/ZavaAccountManager.csproj",
+      "issues": 4,
+      "storyPoints": 16,
+      "properties": {
+        "appName": "ZavaAccountManager",
+        "frameworks": [
+          ".NETFramework,Version=v4.8"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "repo": "ZavaAccountManager",
+        "securityMandatory": 0,
+        "securityPotential": 0,
+        "securityOptional": 0,
+        "rearchitectCount": 0
+      },
+      "incidents": [
+        {
+          "ruleId": "Local.0006",
+          "incidentId": "00e5f8eb-83c1-4cfa-a0ea-e4c19db1c248",
+          "location": "workspace/crgarcia12/mnm-ZavaAccountManager/Default.aspx.cs",
+          "locationKind": "File",
+          "line": 0,
+          "column": 4386,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppService.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AKS.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AKS.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "ACA": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "potential",
+              "effort": 1
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Local.0006",
+          "incidentId": "cec04a70-480f-440e-a3f1-11be01d55e77",
+          "location": "workspace/crgarcia12/mnm-ZavaAccountManager/Default.aspx.cs",
+          "locationKind": "File",
+          "line": 0,
+          "column": 5116,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppService.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AKS.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AKS.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "ACA": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "potential",
+              "effort": 1
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Database.0002",
+          "incidentId": "2f7091fd-6d40-4cdb-a092-179dce78a9bc",
+          "location": "workspace/crgarcia12/mnm-ZavaAccountManager/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "potential",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Database.0003",
+          "incidentId": "7ef3f0ce-45c2-4abb-8974-9570697c4c65",
+          "location": "workspace/crgarcia12/mnm-ZavaAccountManager/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "optional",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0002",
+          "incidentId": "4a34cae3-265f-43f0-b109-025bb5321731",
+          "location": "workspace/crgarcia12/mnm-ZavaAccountManager/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "optional",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0002",
+          "incidentId": "a9e09a01-1263-461a-8962-c07188d3de37",
+          "location": "workspace/crgarcia12/mnm-ZavaAccountManager/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "optional",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Local.0006",
+          "incidentId": "d5621fba-abc1-44cf-930b-fb85b9ce1834",
+          "location": "workspace/crgarcia12/mnm-ZavaAccountManager/Logout.aspx.cs",
+          "locationKind": "File",
+          "line": 0,
+          "column": 306,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppService.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AKS.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AKS.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "ACA": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "potential",
+              "effort": 1
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Local.0006",
+          "incidentId": "b316abb4-4040-427e-b313-58b0368e48f2",
+          "location": "workspace/crgarcia12/mnm-ZavaAccountManager/Login.aspx.cs",
+          "locationKind": "File",
+          "line": 0,
+          "column": 472,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppService.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AKS.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AKS.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "ACA": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "potential",
+              "effort": 1
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "potential",
+              "effort": 1
+            }
+          },
+          "labels": []
+        }
+      ]
+    },
+    {
+      "properties": {
+        "repo": "ZavaWireTransferService",
+        "languages": [
+          "Java"
+        ],
+        "frameworks": [
+          "Servlet"
+        ],
+        "tools": [
+          "Gradle"
+        ],
+        "applicationType": "Web App",
+        "securityMandatory": 2,
+        "securityPotential": 0,
+        "securityOptional": 2,
+        "rearchitectCount": 0
+      },
+      "incidents": []
+    },
+    {
+      "path": "workspace/crgarcia12/mnm-ZavaAuthGateway/ZavaAuthGateway.csproj",
+      "issues": 4,
+      "storyPoints": 27,
+      "properties": {
+        "appName": "ZavaAuthGateway",
+        "frameworks": [
+          ".NETFramework,Version=v4.8"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "repo": "ZavaAuthGateway",
+        "securityMandatory": 0,
+        "securityPotential": 0,
+        "securityOptional": 0,
+        "rearchitectCount": 0
+      },
+      "incidents": [
+        {
+          "ruleId": "Database.0002",
+          "incidentId": "1f0473e2-6e5c-4b61-b18e-de5ce19ea62e",
+          "location": "workspace/crgarcia12/mnm-ZavaAuthGateway/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "potential",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "potential",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Database.0003",
+          "incidentId": "70f40088-3b9a-40e2-a90a-bcc943c67403",
+          "location": "workspace/crgarcia12/mnm-ZavaAuthGateway/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "optional",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0002",
+          "incidentId": "6d736828-0f33-4ce6-8a72-248a1257136f",
+          "location": "workspace/crgarcia12/mnm-ZavaAuthGateway/web.config",
+          "locationKind": "File",
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "optional",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "723407d7-1b52-46b8-92fa-0ca0d9dae426",
+          "location": "workspace/crgarcia12/mnm-ZavaAuthGateway/AuthRepository.cs",
+          "locationKind": "File",
+          "line": 11,
+          "column": 48,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "af5f3528-79de-4fff-9c62-206440d6c00b",
+          "location": "workspace/crgarcia12/mnm-ZavaAuthGateway/DbConfig.cs",
+          "locationKind": "File",
+          "line": 22,
+          "column": 20,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "a69a5e1c-2548-4354-bc2f-57acf87e5259",
+          "location": "workspace/crgarcia12/mnm-ZavaAuthGateway/DbConfig.cs",
+          "locationKind": "File",
+          "line": 13,
+          "column": 62,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "12958478-e860-42e0-a469-367c4e1dd859",
+          "location": "workspace/crgarcia12/mnm-ZavaAuthGateway/Login.aspx.cs",
+          "locationKind": "File",
+          "line": 26,
+          "column": 32,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "124e5ce3-6a70-4f96-9c5f-fead2e6a8ddc",
+          "location": "workspace/crgarcia12/mnm-ZavaAuthGateway/Login.aspx.cs",
+          "locationKind": "File",
+          "line": 33,
+          "column": 32,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        },
+        {
+          "ruleId": "Security.0003",
+          "incidentId": "70e42d2e-46c0-44fc-bb7c-3aa16fb6c898",
+          "location": "workspace/crgarcia12/mnm-ZavaAuthGateway/Login.aspx.cs",
+          "locationKind": "File",
+          "line": 18,
+          "column": 32,
+          "targets": {
+            "AppService.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppService.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AKS.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "ACA": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Linux": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceContainer.Windows": {
+              "severity": "optional",
+              "effort": 3
+            },
+            "AppServiceManagedInstance.Windows": {
+              "severity": "mandatory",
+              "effort": 3
+            }
+          },
+          "labels": []
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "Database.0002": {
+      "id": "Database.0002",
+      "description": "SQL database connection detected.\n\nEnsure the database is available/reachable on Azure.\n\nIf it is not, there are multiple ways you can move your data to Azure:\n    1. Migrate to Azure SQL Database.\n    2. Consider Azure SQL Managed Instance if you need features that are not available in Azure SQL Database and you don\u2019t want to use a VM.\n    3. Migrate your database servers directly to SQL Server on Azure VMs.\n\nTo assess database migration effort, you can use Azure Migrate tool, see the link below.",
+      "title": "SQL database connection detected",
+      "severity": "potential",
+      "effort": 3,
+      "links": [
+        {
+          "title": "Migrate SQL Server database to Azure",
+          "url": "https://go.microsoft.com/fwlink/?LinkID=2251731"
+        },
+        {
+          "title": "Azure SQL Managed Instance",
+          "url": "https://go.microsoft.com/fwlink/?LinkID=2251613"
+        },
+        {
+          "title": "Azure Migrate",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2252410"
+        }
+      ],
+      "labels": []
+    },
+    "Database.0003": {
+      "id": "Database.0003",
+      "description": "System.Data.SqlClient dependency is detected.\n\nWhile System.Data.SqlClient will work in Azure, the newer Microsoft.Data.SqlClient package is the primary .NET SQL client moving forward and receiving the latest features. For example, Microsoft.Data.SqlClient easily allows use of Azure Managed Identity from a connection string.",
+      "title": "System.Data.SqlClient dependency detected",
+      "severity": "optional",
+      "effort": 3,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?LinkID=2242668"
+        }
+      ],
+      "labels": []
+    },
+    "Security.0002": {
+      "id": "Security.0002",
+      "description": "Connection strings without configuration builders detected.  \n\n Keeping connection strings directly in the app is not the best practice and might introduce security risks, increased maintenance, scalability challenges or compliance standards (such as PCI DSS, GDPR, etc.). \n\n Instead, it is recommended to use configuration builders to get secrets from secure sources in Azure environment.",
+      "title": "Connection strings without configuration builders detected",
+      "severity": "optional",
+      "effort": 3,
+      "links": [
+        {
+          "title": "Configuration builders",
+          "url": "https://go.microsoft.com/fwlink/?LinkID=2250915"
+        },
+        {
+          "title": "Storing application secrets",
+          "url": "https://go.microsoft.com/fwlink/?LinkID=2250916"
+        },
+        {
+          "title": "Centralized app configuration and security",
+          "url": "https://go.microsoft.com/fwlink/?LinkID=2250733"
+        }
+      ],
+      "labels": []
+    },
+    "Security.0003": {
+      "id": "Security.0003",
+      "description": "Hardcoded sensitive data detected.\n\nIf you are targeting Managed Instance on Azure App Service, externalize secrets to Key Vault/App Configuration; use managed identity instead of passwords or embedded connection strings.\n\nWhile if targeting other Azure compute services:\n\nAvoid placing sensitive data such as passwords, ids, tokens etc., directly in config files and code since it compromises the security of your application.\n\nUse Azure App Configuration or Azure KeyVault to store secrets.",
+      "title": "Hardcoded sensitive data detected",
+      "severity": "optional",
+      "effort": 3,
+      "links": [
+        {
+          "title": "Centralized app configuration and security",
+          "url": "https://go.microsoft.com/fwlink/?LinkID=2250733"
+        }
+      ],
+      "labels": []
+    },
+    "Local.0006": {
+      "id": "Local.0006",
+      "description": "Your application has hardcoded URLs that might correspond to services that are not accessible on Azure.\n\nReview and ensure that the application is attempting to access URLs that would be available from Azure. You might need to migrate those services to Azure too, this way you will get the benefit of lower latency in the cloud.\n\nIf your application needs to depend on services that run on-premises, you can connect your Azure and local networks with ExpressRoute, Hybrid Connections, or VPN solutions.",
+      "title": "Hardcoded URLs detected",
+      "severity": "potential",
+      "effort": 1,
+      "links": [
+        {
+          "title": "ExpressRoute",
+          "url": "https://go.microsoft.com/fwlink/?LinkID=2250577"
+        },
+        {
+          "title": "Hybrid Connections",
+          "url": "https://go.microsoft.com/fwlink/?LinkID=2242588"
+        },
+        {
+          "title": "Connect an on-prem network",
+          "url": "https://go.microsoft.com/fwlink/?LinkID=2242591"
+        }
+      ],
+      "labels": []
+    }
+  },
+  "apps": [
+    {
+      "identifier": "ZavaAccountManager",
+      "repos": [
+        "ZavaAccountManager"
+      ]
+    },
+    {
+      "identifier": "ZavaACHProcessor",
+      "repos": [
+        "ZavaACHProcessor"
+      ]
+    },
+    {
+      "identifier": "ZavaAlertService",
+      "repos": [
+        "ZavaAlertService"
+      ]
+    },
+    {
+      "identifier": "ZavaAuditWorker",
+      "repos": [
+        "ZavaAuditWorker"
+      ]
+    },
+    {
+      "identifier": "ZavaAuthGateway",
+      "repos": [
+        "ZavaAuthGateway"
+      ]
+    },
+    {
+      "identifier": "ZavaBatchScheduler",
+      "repos": [
+        "ZavaBatchScheduler"
+      ]
+    },
+    {
+      "identifier": "ZavaComplianceReporter",
+      "repos": [
+        "ZavaComplianceReporter"
+      ]
+    },
+    {
+      "identifier": "ZavaCurrencyService",
+      "repos": [
+        "ZavaCurrencyService"
+      ]
+    },
+    {
+      "identifier": "ZavaDocVault",
+      "repos": [
+        "ZavaDocVault"
+      ]
+    },
+    {
+      "identifier": "ZavaFileIngestion",
+      "repos": [
+        "ZavaFileIngestion"
+      ]
+    },
+    {
+      "identifier": "ZavaFraudDetector",
+      "repos": [
+        "ZavaFraudDetector"
+      ]
+    },
+    {
+      "identifier": "ZavaInterestCalculator",
+      "repos": [
+        "ZavaInterestCalculator"
+      ]
+    },
+    {
+      "identifier": "ZavaKYCService",
+      "repos": [
+        "ZavaKYCService"
+      ]
+    },
+    {
+      "identifier": "ZavaLedger",
+      "repos": [
+        "ZavaLedger"
+      ]
+    },
+    {
+      "identifier": "ZavaLoanOriginationAPI",
+      "repos": [
+        "ZavaLoanOriginationAPI"
+      ]
+    },
+    {
+      "identifier": "ZavaLoanPortal",
+      "repos": [
+        "ZavaLoanPortal"
+      ]
+    },
+    {
+      "identifier": "ZavaNotifyWorker",
+      "repos": [
+        "ZavaNotifyWorker"
+      ]
+    },
+    {
+      "identifier": "ZavaPayGateway",
+      "repos": [
+        "ZavaPayGateway"
+      ]
+    },
+    {
+      "identifier": "ZavaQueueBridge",
+      "repos": [
+        "ZavaQueueBridge"
+      ]
+    },
+    {
+      "identifier": "ZavaReportDashboard",
+      "repos": [
+        "ZavaReportDashboard"
+      ]
+    },
+    {
+      "identifier": "ZavaRiskEngine",
+      "repos": [
+        "ZavaRiskEngine"
+      ]
+    },
+    {
+      "identifier": "ZavaStatementService",
+      "repos": [
+        "ZavaStatementService"
+      ]
+    },
+    {
+      "identifier": "ZavaWireTransferService",
+      "repos": [
+        "ZavaWireTransferService"
+      ]
+    }
+  ]
+}

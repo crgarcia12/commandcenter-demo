@@ -1,0 +1,296 @@
+Table of Contents
+GitHub Copilot Modernization CLI	1
+1. Overview	1
+2. Prerequisites	1
+3. Getting Started & Environment Configuration	1
+4. Step-by-Step Modernization Framework	1
+5. Custom Migration Skills Configuration	1
+6. Enterprise Multi-Repo Execution Modes	1
+7. Core Command Reference Syntax	1
+Command Center	1
+1. Prerequisites	1
+2. Single-User Deployment	1
+3. Multi-User Deployment (Operators)	1
+Quickstart: Assess, plan, execute and monitor modernization projects	1
+Assess at Scale with Modernize CLI	1
+Command Center web portal	1
+Assess at Scale with Command Center	1
+Create a new rule book (optional)	1
+Create a plan	1
+Execute the Plan	1
+Monitor the modernization progress	1
+
+
+
+GitHub Copilot Modernization CLI
+Technical Documentation and Quickstart Guide
+1. Overview
+GitHub Copilot Modernization offers AI-driven utility frameworks designed to easily transition Java and .NET legacy codebases into modern cloud structures. Utilizing an autonomous, agentic pipeline, the command-line interface handles end-to-end tasks from software profiling and gap analysis to active code execution.
+Supported Target Platforms
+•	Windows (x64, ARM64)
+•	Linux (x64, ARM64)
+•	macOS (Apple Silicon, Intel)
+2. Prerequisites
+Ensure the target environment complies with the following baseline requirements before initiating execution:
+1. Copilot CLI: Must be running the latest version globally.
+npm install -g @github/copilot
+2. Git Version Control System: Installed and globally available via environment configuration.
+3. GitHub Copilot Plan Eligibility: Requires an active license mapping to Free, Pro, Pro+, Business, or Enterprise tiers.
+[LINUX ENV NOTE] Linux environments require glibc 2.27+ (satisfied natively by Ubuntu 18.04+, Debian 10+, Fedora 29+, or Azure Linux 2.0+).
+3. Getting Started & Environment Configuration
+Binary Extraction Reference
+•	Windows x64: Extract modernize_X.Y.Z_windows_x64.zip
+•	Windows ARM64: Extract modernize_X.Y.Z_windows_arm64.zip
+•	Linux x64/ARM64: Extract modernize_X.Y.Z_linux_*.tar.gz
+•	macOS (Intel/Apple Silicon): Extract modernize_X.Y.Z_darwin_*.tar.gz
+System Path Alignment
+Add the extracted binary paths to your active shell profile session:
+Windows (CMD & PowerShell):
+# Temporary CMD registration
+set PATH=%PATH%;C:\path\to\modernize
+
+# Temporary PowerShell registration
+$env:PATH += ";C:\path\to\modernize"
+Linux / macOS (Bash & Zsh):
+# Persistent shell entry configuration
+echo 'export PATH="$PATH:/path/to/modernize"' >> ~/.bashrc
+source ~/.bashrc
+4. Step-by-Step Modernization Framework
+Execute the interface interactively to navigate the core stabilization steps:
+modernize
+Interactive Lifecycle Operations
+Phase 1: Assess
+Analyzes codebase metadata to evaluate deployment readiness. Follow screen inputs to define custom log outputs. Results are compiled locally to: .github/modernize/assessment/
+Phase 2: Plan
+Generates targeted optimization steps following natural language intentions (e.g., 'migrate from oracle to azure postgresqldb'). Structuring files export directly to:
+•	Plan Definition: .github/modernization/{plan-name}/plan.md
+•	Task Definitions Matrix: .github/modernization/{plan-name}/tasks.json
+[OPERATOR INSTRUCTION] Engineers can safely inject specific code boundaries or alternate rules directly by altering plan.md or adjusting the sequencing in tasks.json prior to deployment execution.
+5. Custom Migration Skills Configuration
+To implement proprietary patterns, custom API interfaces, or corporate code paradigms, you can feed internal parameters directly to the platform via Custom Skills.
+Creating a Custom Skill Specification File
+Construct an independent target directory mapping to .github/skills/your-skill-name/ inside the root codebase. Populate it with a SKILL.md file structured with the mandatory YAML metadata header layout:
+---
+name: migrate-from-rabbitmq-to-azure-service-bus
+description: Migrate from RabbitMQ with AMQP to Azure Service Bus for messaging.
+---
+
+## Overview
+(Describe your specific application migration scenarios)
+
+## Steps
+(Define specific sequential instruction strings for downstream execution)
+
+## Sample Code
+(Provide baseline examples utilizing corporate frameworks)
+[CRITICAL LOGIC NOTE] The orchestrator interprets the 'description' tag metadata using semantic patterns to implicitly select context-dependent skills against the developer's execution query.
+6. Enterprise Multi-Repo Execution Modes
+To handle multiple source trees concurrently, write a structured tracking file to the root workspace location at .github/modernize/repos.json:
+[
+  {
+    "name": "PhotoAlbum-Java",
+    "url": "https://github.com/Azure-Samples/PhotoAlbum-Java.git"
+  },
+  {
+    "name": "PhotoAlbum",
+    "url": "https://github.com/Azure-Samples/PhotoAlbum.git"
+  }
+]
+Launch the workspace tool via terminal. Navigate using platform bindings (Ctrl+A selects all repositories, Enter triggers execution options):
+1. Local Execution: Concurrently downloads all tracking entries and routes code evaluations using local device hardware assets.
+2. Cloud Delegation: Registers workflows over Copilot Cloud Agents (CCA), auto-generating explicit GitHub Pull Requests.
+7. Core Command Reference Syntax
+modernize assess
+# Standard evaluation run
+modernize assess
+
+# Route reports directly to active tracking issues
+modernize assess --issue-url https://github.com/org/repo/issues/123
+modernize plan create
+# Synthesize modernization architecture parameters
+modernize plan create "migrate from oracle to azure postgresql" --plan-name oracle-to-postgresql
+modernize plan execute
+# Automate background changes via non-interactive structures for CI workflows
+modernize plan execute "execute plan" --plan-name spring-boot-upgrade --no-tty
+
+
+
+Command Center 
+Command Center is a self-hosted web portal where app owners and architects track, govern, and coordinate the modernization of their applications.
+Command Center supports deployment and configuration for single and multi-user environments.
+Get Command Center running quickly using one of two deployment modes:
+•	Single-user mode: For local testing/individuals. Runs on localhost and reuses your CLI's GitHub token.
+•	Multi-user mode: For teams. Hosted behind a reverse proxy; uses GitHub OAuth for individual user sign-ins.
+Reference Links: Design Rationale (specs/command-center/) | Settings Keys (specs/settings/spec.md)
+1. Prerequisites
+1. modernize CLI installed and available on your PATH.
+2. GitHub CLI (gh) installed, verified, and authenticated.
+gh auth login
+3. A Dedicated Modernization Repo on GitHub (Command Center does not automatically create repositories; it must be provisioned beforehand).
+gh repo create <org>/<repo> --private
+4. Enable the 'command_center' feature flag in your configuration file (~/.modernize/config.json) to register the command tree.
+{
+  "feature_flags": {
+    "command_center": true
+  }
+}
+Alternatively, expose the flag via environment variables for one-off sessions (e.g., CI/CD pipelines):
+# Bash / Linux
+export MODERNIZE_FF_COMMAND_CENTER=true
+
+# PowerShell
+$env:MODERNIZE_FF_COMMAND_CENTER = "true"
+2. Single-User Deployment
+1. Register and initialize the Modernization Repo. This step seeds the repository and persists the configuration locally.
+modernize cc init --repo https://github.com/<org>/<repo>
+Note: If joining an existing deployment, append --no-repo-init to prevent accidental overwrites.
+2. Launch the local server. This binds to 127.0.0.1 on an ephemeral port and automatically opens your browser.
+modernize cc serve
+Optional: Use --port <n> to pin a specific port, or --no-open to suppress automatic browser launching.
+3. Verify installation by creating a project and registering an application in the UI. Ensure commits populate the remote repository default branch.
+To stop the application, use Ctrl+C (no background daemon is utilized).
+3. Multi-User Deployment (Operators)
+[DEPLOYMENT NOTE] For containerized environments (Docker Compose, Kubernetes, Azure Container Apps), consult the dedicated guides in docs/command-center/deployments/.
+[SECURITY WARNING] Multi-user mode broadens the application's attack surface. Review the operator security manual (specs/command-center/multi-user.md) prior to production rollouts.
+Additional Infrastructure Prerequisites
+•	A stable internal/public DNS URL (e.g., https://cc.company.internal).
+•	A Reverse Proxy with TLS Termination (e.g., Nginx, Envoy). The application speaks plain HTTP; the proxy must append X-Forwarded-Proto: https to secure session cookies.
+•	A configured GitHub OAuth Application.
+Creating the GitHub OAuth Application
+Command Center requires a classic GitHub OAuth App (GitHub Apps are not interchangeable).
+Registration Scope:
+•	Organization-owned (Recommended): Navigate to Org Settings → Developer settings → OAuth Apps → New OAuth App. Survives creator lifecycle changes and remains visible to owners.
+•	Personal (Evaluation Only): Navigate to github.com/settings/developers. App ties strictly to the creator's identity.
+Form Configuration Parameters:
+•	Application Name: Unique identifier visible to users on consent screens (e.g., Contoso Command Center).
+•	Homepage URL: https://<your-public-url>
+•	Authorization Callback URL: https://<your-public-url>/auth/callback (Must match precisely; avoid trailing slashes).
+Note: No scopes need manual checking; the system implicitly requests repo, user:email, and read:org at login.
+Post-Creation Verification Checklist:
+1. Generate a Client Secret and save it securely; it will not be displayed again.
+2. Record the unique Client ID.
+3. If Organization SAML SSO is enforced, explicitly authorize the OAuth app on your profile, or downstream API requests will fail.
+Step-by-Step Operator Setup
+1. Initialize the remote repository (one-time execution, requires active local 'gh auth login' access).
+modernize cc init --repo https://github.com/<org>/<repo>
+2. Construct the centralized configuration file inside the service account environment (~/.modernize/config.json).
+{
+  "feature_flags": {
+    "command_center": true
+  },
+  "command_center": {
+    "repo": {
+      "url": "https://github.com/<org>/<repo>"
+    },
+    "host": "0.0.0.0",
+    "port": 8080,
+    "multi_user": {
+      "public_url": "https://cc.company.internal",
+      "oauth": {
+        "client_id": "Ov23li...",
+        "client_secret": "YOUR_SECRET"
+      }
+    }
+  }
+}
+The inclusion of the multi_user block activates multi-user workflows. Host and Port fields are strictly required.
+3. Configure your reverse proxy infrastructure to point to http://<host>:<port> on your internal trusted network loop.
+4. Execute and start the server process. Note that --port and --repo flags are restricted in multi-user mode; settings must map from the JSON configuration.
+modernize cc serve
+5. Verify end-to-end access. End users navigate to the public URL, complete the OAuth handshake, and author a test commit. Confirm commits carry their explicit GitHub identity.
+Operations: Secret Rotation & Repository Migration
+To change environments or credentials, update ~/.modernize/config.json and execute a process restart. The multi_user schema is parsed solely at startup. Changing a repository URL flags the local checkout cache as stale, triggering an automatic clean re-clone.
+
+Quickstart: Assess, plan, execute and monitor modernization projects
+
+Assess at Scale with Modernize CLI
+1.	Download the latest version of modernize CLI. Add the folder to your system path. 
+2.	Create a blank repo in github, which will serve as the internal storage for command center.
+3.	Create config.json file in ~\.modernize folder, turn on these two feature flags and put central repo url inside
+{
+"feature_flags": {
+ "rulebook  ": true,
+"command_center": true
+  },
+  "command_center": {
+    "repo": {"url": "[https://github.com/myModernizationRepo] (replace with your repo url created in #2)"}
+  }
+}
+4.	Run “modernize cc init” to initialize 
+ 
+5.	Prepare a repos.json locally in the following format
+[
+  {
+    "name": "PhotoAlbum-Java",
+    "url": "https://github.com/Azure-Samples/PhotoAlbum-Java.git"
+  },
+  {
+    "name": "PhotoAlbum",
+    "url": "https://github.com/Azure-Samples/PhotoAlbum.git"
+  }
+]
+6.	Register apps, create project, associate apps with a project, run assessment
+Register all apps to command center via modernize cli:
+Register apps:
+-	modernize cc app register --name [appname] --app-repo “[repo github url, same as in repos.json]”. 
+modernize = "C:\codes\BUILD2026\modernize-cli\src\GitHub.Copilot.Modernization.Cli\bin\Debug\net10.0\modernize.exe"
+$repos = (Get-Content "C:\codes\BUILD2026\repos.json" | ConvertFrom-Json).repos
+
+foreach ($repo in $repos) {
+    Write-Host "Registering app: $($repo.name) -> $($repo.url)"
+    & $modernize cc app register --name $repo.name --app-repo $repo.url
+}
+
+Create project for command center via modernize cli:
+-	modernize cc project create --name "BUILD2026" --goal "modernize Zava app and deploy to Azure"
+ 
+Bind project with all apps:
+-	modernize cc project app add --project [projectname] –app [appname]
+you can use this script (save as .ps1 file) to batch add apps to this project:
+$modernize = "C:\codes\BUILD2026\modernize-cli\src\GitHub.Copilot.Modernization.Cli\bin\Debug\net10.0\modernize.exe"
+$repos = (Get-Content " C:\codes\BUILD2026\repos.json" | ConvertFrom-Json).repos
+
+foreach ($repo in $repos) {
+    Write-Host "Adding app to project: $($repo.name)"
+    & $modernize cc project app add --project "BUILD2026" --app $repo.name
+}
+ 
+Put  assessment-config.yaml into the same folder with modernize cli, to config assessment
+
+Do batch assessment:
+-	modernize cc assess --project [projectname] --delegate cloud --assess-config ./assessment-config.yaml
+ 	 
+
+Command Center web portal
+If you prefer an organic, visual orchestration flow over CLI automation script processing, you can serve a browser interface locally to perform end-to-end modifications.
+1. Boot and launch the local presentation dashboard web server from your configuration environment path:
+modernize cc serve
+2. Open the generated application loopback connection URL inside a browser.
+
+Assess at Scale with Command Center
+Alternatively, you can run assessment from the command center instead of the modernize CLI.
+1.	Create a project by adding all repos that make up your current app estate.
+2.	Select apps in the repo that are applicable.
+3.	Once the project has been created you can create an assessment from the assessment tab.
+ 
+Create a new rule book (optional)
+Rule book captures your organizational guidelines, best practices and guardrails. You can create a rulebook from command center. 
+Main menu-> rule book-> new and paste the rulebook content.
+ 
+Create a plan
+Plan your modernization project by defining modernization goals while incorporating the rule book and assessment reports. 
+ 
+Execute the Plan 
+Choose your target Plan configuration and select your desired agent execution boundary mode:
+•	Cloud Coding Agent: Delegates structural alterations to managed cloud processing sandboxes.
+•	Local Agent: Triggers execution in-process over your local machines using active Copilot CLI assets.
+•	Manual Mode: Automatically generates a branch and an issue ticket tracking layer for human software engineer handoffs
+
+ 
+Monitor the modernization progress 
+Monitor execution status from the activity log under each project 
+ 
+You can view modernization timeline, progress and things that needs attention in the dashboard page.
+ 
+
+

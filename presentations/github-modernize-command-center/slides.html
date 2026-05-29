@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GitHub Modernize and Command Center</title>
+  <link rel="stylesheet" href="../../assets/css/slides.css">
+  <style>
+    :root {
+      --slide-bg: #0b1020;
+      --slide-text: #f6f8ff;
+      --slide-accent: #58a6ff;
+      --slide-secondary: #111827;
+      --slide-highlight: #1f2a44;
+      --slide-muted: #a7b3c7;
+      --slide-success: #39d98a;
+      --slide-warning: #f2cc60;
+      --slide-danger: #ff6b6b;
+    }
+
+    .workflow-node {
+      fill: #111827;
+      stroke: #58a6ff;
+      stroke-width: 3;
+    }
+
+    .workflow-text {
+      fill: #f6f8ff;
+      font: 700 24px "Segoe UI", sans-serif;
+      text-anchor: middle;
+    }
+
+    .workflow-subtext {
+      fill: #a7b3c7;
+      font: 16px "Segoe UI", sans-serif;
+      text-anchor: middle;
+    }
+
+    .arrow {
+      stroke: #39d98a;
+      stroke-width: 5;
+      marker-end: url(#arrowhead);
+    }
+
+    .mini {
+      font-size: clamp(1rem, 1.25vw, 1.2rem);
+    }
+
+    .source-note {
+      position: absolute;
+      left: clamp(2rem, 5vw, 5rem);
+      bottom: 1.3rem;
+      color: var(--slide-muted);
+      font-size: 0.95rem;
+    }
+
+    .source-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 1rem;
+      padding: 0.4rem 0.7rem;
+      border: 1px solid rgba(88, 166, 255, 0.38);
+      border-radius: 999px;
+      color: var(--slide-muted);
+      background: rgba(88, 166, 255, 0.08);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .compact-list li {
+      font-size: clamp(1.05rem, 1.45vw, 1.4rem);
+    }
+
+    .code-small {
+      font-size: clamp(0.78rem, 1vw, 1rem);
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <main class="slides">
+    <section class="slide slide-title layout-center active" id="title">
+      <p class="eyebrow">Modernizing portfolios with GitHub</p>
+      <h1>GitHub Modernize &amp; Command Center</h1>
+      <p class="subtitle">A source-grounded Build demo narrative for modernization at scale</p>
+      <div class="pill-row">
+        <span class="pill">Java</span>
+        <span class="pill">.NET</span>
+        <span class="pill">Command Center</span>
+        <span class="pill">Governed workflows</span>
+      </div>
+      <div class="speaker-notes">Frame this as a practical presentation based on the local TXT source files, not a source of new public product announcements.</div>
+    </section>
+
+    <section class="slide layout-center" id="ground-rules">
+      <h2>Ground rules</h2>
+      <div class="grid grid-3">
+        <div class="grid-item fragment">
+          <h3>Authoritative TXT</h3>
+          <p>Command Center details come from the two local source files now available in this repository.</p>
+        </div>
+        <div class="grid-item fragment">
+          <h3>No invention</h3>
+          <p>When a detail is not in the docs, call it an assumption or leave it open.</p>
+        </div>
+        <div class="grid-item fragment">
+          <h3>Demo context</h3>
+          <p>BUILD 2026 is treated as demo narrative context, not a pricing or availability promise.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide-section layout-center" id="why-modernize">
+      <p class="eyebrow">The pressure</p>
+      <h2>Legacy modernization is now a portfolio problem</h2>
+      <p class="subtitle">Teams are not just upgrading one app; they are prioritizing apps, owners, risks, guardrails, and execution paths.</p>
+    </section>
+
+    <section class="slide layout-split" id="zava-bank">
+      <div>
+        <p class="eyebrow">Demo story</p>
+        <h2>Zava Bank has 30 years of software to move</h2>
+        <p>The source storyline describes a regional bank with COBOL, Java, ASP.NET Web Forms, WCF, and on-premises systems.</p>
+        <span class="source-badge">Source: demostorytelling.txt</span>
+      </div>
+      <div class="card animate-scale">
+        <div class="big-number">6</div>
+        <h3>Months of pressure</h3>
+        <p class="muted">The CEO mandate in the storyline: become cloud-native quickly enough to stay competitive.</p>
+      </div>
+    </section>
+
+    <section class="slide layout-center" id="zava-portfolio">
+      <h2>The demo portfolio is intentionally mixed</h2>
+      <div class="grid grid-2">
+        <div class="grid-item fragment">
+          <h3>.NET apps</h3>
+          <ul class="compact-list">
+            <li>ZavaLoan Portal — ASP.NET Web Forms</li>
+            <li>ZavaAccount Manager — .NET Framework</li>
+            <li>ZavaRisk Engine — WCF</li>
+            <li>ZavaNotify — legacy console app</li>
+          </ul>
+        </div>
+        <div class="grid-item fragment">
+          <h3>Java apps</h3>
+          <ul class="compact-list">
+            <li>ZavaPay Gateway — Struts 1.x, Java 8</li>
+            <li>ZavaLedger — converted mainframe core, Java 17</li>
+            <li>ZavaFraud Detector — Struts 2.x, Java 11</li>
+            <li>ZavaKYC Service — Java 8 servlets</li>
+          </ul>
+        </div>
+      </div>
+      <p class="fragment">The story scales from eight visible apps to a 200+ application estate.</p>
+    </section>
+
+    <section class="slide layout-center" id="portfolio-shift">
+      <h2>The shift</h2>
+      <div class="diagram" aria-label="Modernization shift from one application to many applications">
+        <svg viewBox="0 0 1000 390" role="img">
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L9,3 z" fill="#39d98a"></path>
+            </marker>
+          </defs>
+          <rect x="50" y="120" width="240" height="140" rx="24" class="workflow-node"></rect>
+          <text x="170" y="180" class="workflow-text">One app</text>
+          <text x="170" y="215" class="workflow-subtext">IDE assisted</text>
+          <line x1="320" y1="190" x2="650" y2="190" class="arrow"></line>
+          <rect x="700" y="55" width="250" height="80" rx="20" class="workflow-node"></rect>
+          <rect x="700" y="155" width="250" height="80" rx="20" class="workflow-node"></rect>
+          <rect x="700" y="255" width="250" height="80" rx="20" class="workflow-node"></rect>
+          <text x="825" y="105" class="workflow-text">Java</text>
+          <text x="825" y="205" class="workflow-text">.NET</text>
+          <text x="825" y="305" class="workflow-text">Mainframe</text>
+        </svg>
+      </div>
+      <p class="fragment">GitHub Modernize moves the experience from individual modernization tasks toward repeatable portfolio workflows.</p>
+    </section>
+
+    <section class="slide layout-center" id="modernize-definition">
+      <h2>What GitHub Modernize is for</h2>
+      <div class="callout info">
+        <p>GitHub Copilot Modernization is described as AI-driven utility frameworks for moving Java and .NET legacy codebases toward modern cloud structures.</p>
+      </div>
+      <div class="pill-row">
+        <span class="pill fragment">Profiling</span>
+        <span class="pill fragment">Gap analysis</span>
+        <span class="pill fragment">Planning</span>
+        <span class="pill fragment">Code execution</span>
+      </div>
+      <span class="source-badge">Source: Command center user guide.txt</span>
+    </section>
+
+    <section class="slide layout-center" id="modernize-prereqs">
+      <h2>Baseline prerequisites</h2>
+      <div class="grid grid-3">
+        <div class="grid-item fragment">
+          <h3>Tools</h3>
+          <p>Latest Copilot CLI, modernize CLI on PATH, Git, and authenticated GitHub CLI for Command Center.</p>
+        </div>
+        <div class="grid-item fragment">
+          <h3>Account</h3>
+          <p>The guide lists Copilot Free, Pro, Pro+, Business, or Enterprise plan eligibility.</p>
+        </div>
+        <div class="grid-item fragment">
+          <h3>Platform</h3>
+          <p>Windows, Linux, and macOS are listed; Linux requires glibc 2.27+.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide layout-center" id="cli-lifecycle">
+      <h2>The Modernize CLI lifecycle</h2>
+      <div class="diagram" aria-label="Assess plan execute lifecycle">
+        <svg viewBox="0 0 1100 340" role="img">
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L9,3 z" fill="#39d98a"></path>
+            </marker>
+          </defs>
+          <rect x="50" y="95" width="250" height="150" rx="28" class="workflow-node"></rect>
+          <text x="175" y="158" class="workflow-text">Assess</text>
+          <text x="175" y="195" class="workflow-subtext">readiness &amp; reports</text>
+          <line x1="325" y1="170" x2="420" y2="170" class="arrow"></line>
+          <rect x="450" y="95" width="250" height="150" rx="28" class="workflow-node"></rect>
+          <text x="575" y="158" class="workflow-text">Plan</text>
+          <text x="575" y="195" class="workflow-subtext">goals &amp; tasks</text>
+          <line x1="725" y1="170" x2="820" y2="170" class="arrow"></line>
+          <rect x="850" y="95" width="250" height="150" rx="28" class="workflow-node"></rect>
+          <text x="975" y="158" class="workflow-text">Execute</text>
+          <text x="975" y="195" class="workflow-subtext">agent or handoff</text>
+        </svg>
+      </div>
+      <p class="fragment">Command Center adds the project, governance, and monitoring layer around that lifecycle.</p>
+    </section>
+
+    <section class="slide layout-center" id="where-files-land">
+      <h2>The CLI leaves artifacts where teams work</h2>
+      <div class="grid grid-3">
+        <div class="grid-item fragment">
+          <h3>Assess</h3>
+          <p><code>.github/modernize/assessment/</code></p>
+        </div>
+        <div class="grid-item fragment">
+          <h3>Plan</h3>
+          <p><code>.github/modernization/{plan}/plan.md</code></p>
+        </div>
+        <div class="grid-item fragment">
+          <h3>Tasks</h3>
+          <p><code>.github/modernization/{plan}/tasks.json</code></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide-section layout-center" id="command-center-section">
+      <p class="eyebrow">Portfolio control plane</p>
+      <h2>Where Command Center fits</h2>
+      <p class="subtitle">The guide defines it as a self-hosted web portal for app owners and architects to track, govern, and coordinate modernization.</p>
+    </section>
+
+    <section class="slide layout-center" id="command-center-value">
+      <h2>Command Center answers portfolio questions</h2>
+      <div class="grid grid-2">
+        <div class="grid-item fragment">
+          <h3>Where are we?</h3>
+          <p>Projects, application lists, assessments, modernization timeline, progress, and activity logs.</p>
+        </div>
+        <div class="grid-item fragment">
+          <h3>What should happen next?</h3>
+          <p>Modernization goals, plans, assessment reports, rulebooks, and execution mode choices.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide layout-center" id="command-center-architecture">
+      <h2>Command Center architecture</h2>
+      <div class="diagram" aria-label="Command Center architecture with browser, CLI service, GitHub repository, and app repos">
+        <svg viewBox="0 0 1120 520" role="img">
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L9,3 z" fill="#39d98a"></path>
+            </marker>
+          </defs>
+          <rect x="70" y="185" width="230" height="120" rx="24" class="workflow-node"></rect>
+          <text x="185" y="235" class="workflow-text">Browser UI</text>
+          <text x="185" y="270" class="workflow-subtext">Command Center</text>
+          <line x1="315" y1="245" x2="430" y2="245" class="arrow"></line>
+          <rect x="450" y="165" width="250" height="160" rx="28" class="workflow-node"></rect>
+          <text x="575" y="225" class="workflow-text">modernize cc</text>
+          <text x="575" y="260" class="workflow-subtext">serve / init / commands</text>
+          <line x1="715" y1="245" x2="825" y2="165" class="arrow"></line>
+          <line x1="715" y1="245" x2="825" y2="325" class="arrow"></line>
+          <rect x="850" y="70" width="230" height="120" rx="24" class="workflow-node"></rect>
+          <text x="965" y="120" class="workflow-text">Modernization</text>
+          <text x="965" y="155" class="workflow-subtext">repo for state</text>
+          <rect x="850" y="300" width="230" height="120" rx="24" class="workflow-node"></rect>
+          <text x="965" y="350" class="workflow-text">App repos</text>
+          <text x="965" y="385" class="workflow-subtext">reports, issues, PRs</text>
+        </svg>
+      </div>
+      <p class="fragment">The docs say Command Center needs a pre-provisioned dedicated modernization repository; it does not automatically create it.</p>
+    </section>
+
+    <section class="slide layout-center" id="run-local">
+      <h2>Run Command Center locally</h2>
+      <pre class="code-small"><code>npm install -g @github/copilot
+gh auth login
+gh repo create &lt;org&gt;/&lt;repo&gt; --private
+
+# Enable Command Center
+# ~/.modernize/config.json
+{
+  "feature_flags": { "command_center": true }
+}
+
+modernize cc init --repo https://github.com/&lt;org&gt;/&lt;repo&gt;
+modernize cc serve</code></pre>
+      <p class="fragment mini">The dedicated modernization repo must already exist. Optional serve flags include <code>--port &lt;n&gt;</code> and <code>--no-open</code>.</p>
+    </section>
+
+    <section class="slide layout-center" id="multi-user">
+      <h2>Single-user or operator-hosted</h2>
+      <div class="grid grid-2">
+        <div class="grid-item fragment">
+          <h3>Single-user</h3>
+          <p>Localhost, reuses the CLI GitHub token, good for local testing and individual use.</p>
+        </div>
+        <div class="grid-item fragment">
+          <h3>Multi-user</h3>
+          <p>Hosted behind a reverse proxy with GitHub OAuth sign-ins and a central configuration.</p>
+        </div>
+      </div>
+      <p class="fragment muted">The guide says GitHub OAuth App is required for multi-user mode; GitHub Apps are not interchangeable.</p>
+    </section>
+
+    <section class="slide layout-center" id="oauth-setup">
+      <h2>Multi-user setup has explicit operator work</h2>
+      <div class="grid grid-2">
+        <div class="grid-item fragment">
+          <h3>Infrastructure</h3>
+          <p>Stable URL, TLS-terminating reverse proxy, <code>X-Forwarded-Proto: https</code>, host and port in config.</p>
+        </div>
+        <div class="grid-item fragment">
+          <h3>OAuth app</h3>
+          <p>Classic GitHub OAuth App with callback <code>/auth/callback</code>; record client ID and secret securely.</p>
+        </div>
+      </div>
+      <p class="fragment mini">The multi-user block activates multi-user workflows; config is parsed at startup and changes require restart.</p>
+    </section>
+
+    <section class="slide layout-center" id="register-apps">
+      <h2>Register applications</h2>
+      <pre class="code-small"><code># Repos manifest shape from the guide
+[
+  { "name": "PhotoAlbum-Java", "url": "https://github.com/Azure-Samples/PhotoAlbum-Java.git" },
+  { "name": "PhotoAlbum", "url": "https://github.com/Azure-Samples/PhotoAlbum.git" }
+]
+
+modernize cc app register --name &lt;appname&gt; --app-repo &lt;repo-url&gt;</code></pre>
+      <p class="fragment">The Zava demo scales this pattern across the Java and .NET app portfolio.</p>
+    </section>
+
+    <section class="slide layout-center" id="project-flow">
+      <h2>Create a project, add apps, then assess</h2>
+      <pre class="code-small"><code>modernize cc project create \
+  --name "BUILD2026" \
+  --goal "modernize Zava app and deploy to Azure"
+
+modernize cc project app add --project BUILD2026 --app &lt;appname&gt;
+modernize cc assess --project BUILD2026 \
+  --delegate cloud \
+  --assess-config ./assessment-config.yaml</code></pre>
+      <div class="callout info fragment">
+        <p>The guide also says assessment can be run visually from Command Center after creating a project and selecting apps.</p>
+      </div>
+    </section>
+
+    <section class="slide layout-center" id="assessment-outcomes">
+      <h2>Assessment output goes to the places teams use</h2>
+      <div class="grid grid-2">
+        <div class="grid-item fragment">
+          <h3>Per application</h3>
+          <p>The demo story shows individual reports committed into each repository as pull requests.</p>
+        </div>
+        <div class="grid-item fragment">
+          <h3>Portfolio view</h3>
+          <p>Command Center brings reports together for technology, risk, readiness, and prioritization views.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide layout-center" id="rulebooks">
+      <h2>Rulebooks make governance executable</h2>
+      <div class="grid grid-3">
+        <div class="grid-item fragment">
+          <h3>Standards</h3>
+          <p>Organizational guidelines and architectural patterns.</p>
+        </div>
+        <div class="grid-item fragment">
+          <h3>Guardrails</h3>
+          <p>Security, telemetry, cloud platform, and runtime expectations.</p>
+        </div>
+        <div class="grid-item fragment">
+          <h3>Reuse</h3>
+          <p>Created in Command Center and incorporated when defining modernization goals and plans.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide layout-center" id="skill-file">
+      <h2>Custom skills are files the agent can select</h2>
+      <pre class="code-small"><code>.github/skills/your-skill-name/SKILL.md
+---
+name: migrate-from-rabbitmq-to-azure-service-bus
+description: Migrate from RabbitMQ with AMQP to Azure Service Bus for messaging.
+---
+
+## Overview
+## Steps
+## Sample Code</code></pre>
+      <p class="fragment mini">The guide says the orchestrator uses the description metadata semantically to select relevant skills.</p>
+    </section>
+
+    <section class="slide layout-center" id="rulebook-examples">
+      <h2>Rulebook examples from the demo doc</h2>
+      <ul>
+        <li class="fragment">Target cloud platform: Azure with approved SKUs.</li>
+        <li class="fragment">Use managed identity; avoid connection string secrets.</li>
+        <li class="fragment">Use structured telemetry such as OpenTelemetry and Application Insights.</li>
+        <li class="fragment">Use parameterized database access and add health checks.</li>
+      </ul>
+    </section>
+
+    <section class="slide layout-center" id="custom-skills">
+      <h2>Custom skills capture local knowledge</h2>
+      <div class="grid grid-3">
+        <div class="grid-item fragment">
+          <h3>PII handling</h3>
+          <p>Detect unsafe logging of sensitive customer values during migration.</p>
+        </div>
+        <div class="grid-item fragment">
+          <h3>Error codes</h3>
+          <p>Map legacy behavior to Zava Bank's standardized response format.</p>
+        </div>
+        <div class="grid-item fragment">
+          <h3>Messaging</h3>
+          <p>Teach the agent how the internal queue wrapper should migrate.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide layout-center" id="execution-modes">
+      <h2>Choose the execution boundary</h2>
+      <div class="grid grid-3">
+        <div class="grid-item fragment">
+          <h3>Cloud Coding Agent</h3>
+          <p>Delegates structural alterations to managed cloud processing sandboxes.</p>
+        </div>
+        <div class="grid-item fragment">
+          <h3>Local Agent</h3>
+          <p>Runs in-process on local machines using active Copilot CLI assets.</p>
+        </div>
+        <div class="grid-item fragment">
+          <h3>Manual Mode</h3>
+          <p>Generates branch and issue tracking for human engineer handoffs.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide layout-center" id="demo-story-flow">
+      <h2>A practical demo flow</h2>
+      <div class="diagram" aria-label="Demo flow from portfolio assessment to running Azure applications">
+        <svg viewBox="0 0 1160 500" role="img">
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L9,3 z" fill="#39d98a"></path>
+            </marker>
+          </defs>
+          <rect x="40" y="185" width="185" height="110" rx="22" class="workflow-node"></rect>
+          <text x="132" y="230" class="workflow-text">Portfolio</text>
+          <text x="132" y="262" class="workflow-subtext">Java + .NET</text>
+          <line x1="245" y1="240" x2="315" y2="240" class="arrow"></line>
+          <rect x="335" y="185" width="185" height="110" rx="22" class="workflow-node"></rect>
+          <text x="427" y="230" class="workflow-text">Assess</text>
+          <text x="427" y="262" class="workflow-subtext">at scale</text>
+          <line x1="540" y1="240" x2="610" y2="240" class="arrow"></line>
+          <rect x="630" y="185" width="185" height="110" rx="22" class="workflow-node"></rect>
+          <text x="722" y="230" class="workflow-text">Plan</text>
+          <text x="722" y="262" class="workflow-subtext">rulebook</text>
+          <line x1="835" y1="240" x2="905" y2="240" class="arrow"></line>
+          <rect x="925" y="185" width="185" height="110" rx="22" class="workflow-node"></rect>
+          <text x="1017" y="230" class="workflow-text">Execute</text>
+          <text x="1017" y="262" class="workflow-subtext">track progress</text>
+        </svg>
+      </div>
+      <p class="fragment">Use Command Center as the connective tissue: portfolio view, plan creation, issue/PR handoff, and project activity.</p>
+    </section>
+
+    <section class="slide layout-split" id="java-path">
+      <div>
+        <p class="eyebrow">Workstream 1</p>
+        <h2>Java path: Struts to Spring Boot</h2>
+        <p>The demo storyline uses ZavaPay Gateway to rewrite a Struts application toward Java 21 and Spring Boot in another directory.</p>
+      </div>
+      <ul>
+        <li class="fragment">Introduce non-compliant logging and messaging for the custom-skill demo.</li>
+        <li class="fragment">Execute from Command Center so status ties back to the project.</li>
+        <li class="fragment">Follow the generated GitHub issue in VS Code.</li>
+        <li class="fragment">Close the issue when rewrite is complete.</li>
+      </ul>
+    </section>
+
+    <section class="slide layout-split" id="dotnet-path">
+      <div>
+        <p class="eyebrow">Workstream 2</p>
+        <h2>.NET path: Web Forms to Blazor + Aspire</h2>
+        <p>The storyline uses ZavaLoan Portal to show Web Forms migration, Blazor conversion, and Aspire enablement.</p>
+      </div>
+      <ul>
+        <li class="fragment">Open the folder in VS Code or the solution in Visual Studio.</li>
+        <li class="fragment">Use the GitHub Copilot modernization for .NET experience.</li>
+        <li class="fragment">Prompt for a .NET 10 upgrade and Web Forms to Blazor migration.</li>
+        <li class="fragment">Prompt <code>Add Aspire</code> after the Blazor migration.</li>
+      </ul>
+    </section>
+
+    <section class="slide layout-center" id="monitoring">
+      <h2>Return to Command Center to monitor</h2>
+      <div class="grid grid-2">
+        <div class="grid-item fragment">
+          <h3>Progress</h3>
+          <p>Modernization timeline, execution status, activity log, and items that need attention.</p>
+        </div>
+        <div class="grid-item fragment">
+          <h3>Governance</h3>
+          <p>Plans remain tied to goals, rulebooks, assessments, and project context.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide layout-center" id="running-story">
+      <h2>The source narrative ends with a working flow</h2>
+      <div class="diagram" aria-label="Customer loan flow through modernized Zava apps">
+        <svg viewBox="0 0 1120 420" role="img">
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L9,3 z" fill="#39d98a"></path>
+            </marker>
+          </defs>
+          <rect x="60" y="150" width="220" height="120" rx="24" class="workflow-node"></rect>
+          <text x="170" y="198" class="workflow-text">Customer</text>
+          <text x="170" y="232" class="workflow-subtext">loan application</text>
+          <line x1="300" y1="210" x2="405" y2="210" class="arrow"></line>
+          <rect x="425" y="150" width="260" height="120" rx="24" class="workflow-node"></rect>
+          <text x="555" y="198" class="workflow-text">ZavaLoan</text>
+          <text x="555" y="232" class="workflow-subtext">Blazor + Aspire</text>
+          <line x1="705" y1="210" x2="810" y2="210" class="arrow"></line>
+          <rect x="830" y="150" width="230" height="120" rx="24" class="workflow-node"></rect>
+          <text x="945" y="198" class="workflow-text">ZavaLedger</text>
+          <text x="945" y="232" class="workflow-subtext">core banking logic</text>
+        </svg>
+      </div>
+      <p class="fragment">The punchline: same loan workflow, now governed, observable, and cloud-oriented in the demo story.</p>
+    </section>
+
+    <section class="slide layout-center" id="benefits">
+      <h2>Why teams use this pattern</h2>
+      <div class="grid grid-3">
+        <div class="grid-item fragment">
+          <h3>Scale</h3>
+          <p>Assess many repositories without requiring every app to be open in an IDE.</p>
+        </div>
+        <div class="grid-item fragment">
+          <h3>Consistency</h3>
+          <p>Apply shared rulebooks and skills across Java and .NET workstreams.</p>
+        </div>
+        <div class="grid-item fragment">
+          <h3>Traceability</h3>
+          <p>Use repositories, issues, PRs, plans, and dashboards to keep work visible.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide layout-center" id="requirements">
+      <h2>Guardrails and requirements</h2>
+      <ul>
+        <li class="fragment">Latest Copilot CLI installed globally: <code>npm install -g @github/copilot</code>.</li>
+        <li class="fragment">Git installed and available on PATH.</li>
+        <li class="fragment">Eligible GitHub Copilot plan: Free, Pro, Pro+, Business, or Enterprise, per guide.</li>
+        <li class="fragment">GitHub CLI installed, verified, and authenticated for Command Center setup.</li>
+        <li class="fragment">Dedicated modernization repository created before <code>modernize cc init</code>.</li>
+      </ul>
+    </section>
+
+    <section class="slide layout-center" id="watchouts">
+      <h2>Things not to gloss over</h2>
+      <div class="callout warning">
+        <p>Command Center does not automatically create the dedicated modernization repository. Multi-user mode needs a GitHub OAuth App and careful secret handling.</p>
+      </div>
+      <div class="pill-row">
+        <span class="pill fragment">Feature flags</span>
+        <span class="pill fragment">Repo permissions</span>
+        <span class="pill fragment">OAuth callback URLs</span>
+        <span class="pill fragment">Rulebook ownership</span>
+      </div>
+    </section>
+
+    <section class="slide layout-center" id="next-steps">
+      <h2>Suggested next steps</h2>
+      <ol>
+        <li class="fragment">Pick a small portfolio and create the dedicated modernization repo.</li>
+        <li class="fragment">Enable Command Center and register apps from a manifest.</li>
+        <li class="fragment">Run assessments before choosing an execution mode.</li>
+        <li class="fragment">Write one rulebook and one custom skill that reflect real team standards.</li>
+        <li class="fragment">Use Command Center to monitor progress and attention items.</li>
+      </ol>
+    </section>
+
+    <section class="slide layout-center" id="missing-information">
+      <h2>Open information</h2>
+      <div class="grid grid-2">
+        <div class="grid-item">
+          <h3>Not in the docs</h3>
+          <p>Pricing, service-level commitments, official public URLs, and any current status beyond what the local TXT files say.</p>
+        </div>
+        <div class="grid-item">
+          <h3>Qualified language</h3>
+          <p>The demo doc includes phrases like “Now GA” and “Private Preview”; this deck treats them as source-script language, not independent public confirmation.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide-section layout-center" id="close">
+      <p class="eyebrow">Takeaway</p>
+      <h2>Modernization becomes repeatable when it is governed, visible, and executable.</h2>
+      <p class="subtitle">GitHub Modernize provides the lifecycle; Command Center provides the portfolio operating model.</p>
+    </section>
+  </main>
+
+  <script src="../../assets/js/slides.js"></script>
+</body>
+</html>

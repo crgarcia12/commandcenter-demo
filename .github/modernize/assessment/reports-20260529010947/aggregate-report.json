@@ -1,0 +1,74 @@
+﻿{
+  "version": null,
+  "producer": "GitHub Copilot Modernization CLI",
+  "metadata": {
+    "analysisStartTime": "2026-05-29T01:09:47.1022081Z",
+    "analysisCoverage": "full",
+    "assessmentVersion": "manual-best-effort",
+    "analysisEndTime": "2026-05-29T01:09:47.1022081Z",
+    "capabilities": [],
+    "os": [],
+    "domains": [],
+    "targetIds": [],
+    "targetDisplayNames": [],
+    "mode": "issue-only",
+    "repos": [
+      {
+        "identity": "ZavaFileIngestion",
+        "name": "ZavaFileIngestion",
+        "path": "C:\\gitrepos\\github\\crgarcia12\\commandcenter-demo\\repos\\ZavaFileIngestion",
+        "sourceRepo": "ZavaFileIngestion",
+        "appIdentifiers": [
+          "ZavaFileIngestion"
+        ]
+      }
+    ]
+  },
+  "summary": {
+    "totalProjects": 0,
+    "totalIssues": 0,
+    "totalIncidents": 0,
+    "totalEffort": 0,
+    "charts": {
+      "severity": {
+        "mandatory": 0,
+        "optional": 0,
+        "potential": 0,
+        "information": 0
+      },
+      "category": {}
+    }
+  },
+  "projects": [
+    {
+      "properties": {
+        "repo": "ZavaFileIngestion",
+        "appName": "ZavaFileIngestion",
+        "languages": [
+          "Java"
+        ],
+        "frameworks": [
+          "Java SE"
+        ],
+        "tools": [
+          "Gradle"
+        ],
+        "securityMandatory": 0,
+        "securityPotential": 1,
+        "securityOptional": 2,
+        "rearchitectCount": 0
+      },
+      "incidents": [],
+      "ruleInstances": []
+    }
+  ],
+  "rules": {},
+  "apps": [
+    {
+      "identifier": "ZavaFileIngestion",
+      "repos": [
+        "ZavaFileIngestion"
+      ]
+    }
+  ]
+}
