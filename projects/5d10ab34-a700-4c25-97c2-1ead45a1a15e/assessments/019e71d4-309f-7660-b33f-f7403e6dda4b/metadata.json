@@ -56,7 +56,10 @@
       "job_id": "27244028-1252788161-dca9d0db-cabd-48bf-916c-df2f31499b5c"
     },
     "8f0c68c8-0a98-4631-a8f7-0c210a4bb44b": {
-      "status": "running"
+      "status": "running",
+      "pull_request": "https://github.com/crgarcia12/mnm-ZavaBatchScheduler/pull/4",
+      "session_url": "https://github.com/crgarcia12/mnm-ZavaBatchScheduler/pull/4/agent-sessions/ae09e44d-1d2c-43a2-bb80-f3f8823c837f",
+      "job_id": "27244028-1252788158-6dcb24c8-cfea-49c8-8719-04589eed558e"
     },
     "9b3bb3e2-6193-4fd3-948a-225065c2c34a": {
       "status": "running"
