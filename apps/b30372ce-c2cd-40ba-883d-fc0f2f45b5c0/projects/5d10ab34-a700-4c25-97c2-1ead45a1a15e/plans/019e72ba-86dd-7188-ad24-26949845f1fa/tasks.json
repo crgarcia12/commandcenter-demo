@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade-java-framework",
+      "description": "Upgrade the application to the latest supported Java framework/runtime baseline.",
+      "reason": "The application currently targets Java 8 and legacy Java EE servlet APIs that should be modernized before cloud-native migration.",
+      "requirements": "Modernize the Java runtime/framework to the latest supported baseline for this application and ensure compatibility with existing interest calculation endpoints.",
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-cloud-native-services",
+      "description": "Modernize core services to Azure cloud-native managed services.",
+      "reason": "The per-plan execution goal explicitly requires cloud-native services as part of modernization.",
+      "requirements": "Migrate SQL connectivity and secret handling from current local/plaintext patterns to Azure cloud-native services using managed identity patterns where applicable.",
+      "dependencies": [
+        "001-upgrade-java-framework"
+      ],
+      "skills": [
+        {
+          "name": "migration-mi-azure-sql",
+          "location": "builtin"
+        },
+        {
+          "name": "migration-plaintext-credential-to-azure-keyvault",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "003-security-cve-remediation",
+      "description": "Scan dependencies for CVEs and remediate vulnerabilities before deployment.",
+      "reason": "Security remediation is required for every modernization plan and reduces deployment risk.",
+      "requirements": "Scan all dependencies for CVEs, upgrade vulnerable packages to patched versions, and document any major-version remediation impact.",
+      "dependencies": [
+        "002-transform-cloud-native-services"
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "004-deployment-azure-container-apps",
+      "description": "Deploy the modernized application to Azure.",
+      "reason": "The project modernization goal explicitly requires Azure deployment.",
+      "requirements": "Containerize as needed and deploy the modernized application to Azure Container Apps.",
+      "dependencies": [
+        "003-security-cve-remediation"
+      ],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "to be created",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaInterestCalculator",
+    "language": "java",
+    "createdAt": "2026-05-29T08:20:20Z",
+    "version": "1.0"
+  }
+}
