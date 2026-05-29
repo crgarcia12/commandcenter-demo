@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade-dotnet",
+      "description": "Upgrade the ZavaAccountManager application from .NET Framework 4.8 (ASP.NET Web Forms) to .NET 10 (ASP.NET Core), converting the legacy non-SDK-style project to a modern SDK-style project.",
+      "reason": "The application currently targets .NET Framework 4.8 and runs on Mono 6.12 in containers, which is end-of-life and unsupported in Azure. Upgrading to .NET 10 enables modern Azure SDK usage (Azure.* packages), proper containerization without Mono, and compatibility with all subsequent migration tasks.",
+      "requirements": "Upgrade from .NET Framework 4.8 ASP.NET Web Forms to .NET 10. Convert the non-SDK-style .csproj to an SDK-style project. Migrate from System.Web and ASP.NET Web Forms to ASP.NET Core (Razor Pages or MVC). Replace System.Data.SqlClient with Microsoft.Data.SqlClient. Ensure the application builds and all existing functionality is preserved after the upgrade.",
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-sql-azure-managed-identity",
+      "description": "Migrate the SQL Server database connection from username/password credentials to Azure SQL Database using Managed Identity authentication.",
+      "reason": "The application currently stores SQL Server credentials (username and password) in web.config, which is a security risk. Azure SQL Database with Managed Identity eliminates hardcoded credentials and follows Azure security best practices.",
+      "requirements": "Replace the existing SQL Server connection string (using User Id/Password) with a Managed Identity-based connection to Azure SQL Database. Remove hardcoded credentials from configuration files. Ensure all ADO.NET database calls (customers, accounts, account types, transactions) continue to function with the new passwordless authentication approach.",
+      "dependencies": ["001-upgrade-dotnet"],
+      "skills": [
+        {
+          "name": "migration-azure-sql-database",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "003-transform-auth-entra-id",
+      "description": "Migrate the application authentication from legacy ASP.NET Forms Authentication with the external ZavaAuthGateway to Microsoft Entra ID (formerly Azure AD).",
+      "reason": "The application currently uses ASP.NET Forms Authentication redirecting to an external ZavaAuthGateway for login/logout. This is a legacy pattern with a hardcoded machineKey in web.config (a known security vulnerability). Migrating to Microsoft Entra ID provides modern, secure, standards-based authentication (OAuth2/OIDC) without hardcoded secrets.",
+      "requirements": "Replace ASP.NET Forms Authentication and ZavaAuthGateway with Microsoft Entra ID authentication. Remove the hardcoded machineKey from configuration. Migrate AuthGatewayLoginUrl and AuthGatewayLogoutUrl appSettings to Entra ID endpoints. Ensure Login.aspx, Logout.aspx, and the authenticated Default.aspx page all work correctly with the new identity provider. Apply proper authorization so unauthenticated users are redirected to login.",
+      "dependencies": ["001-upgrade-dotnet"],
+      "skills": [
+        {
+          "name": "migration-microsoft-entra-id",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "004-transform-console-logging",
+      "description": "Configure console logging for cloud-native log aggregation in Azure Container Apps.",
+      "reason": "The application currently has no structured logging configured. Azure Container Apps collects logs from stdout/stderr, so proper console logging must be configured to ensure observability in the cloud environment.",
+      "requirements": "Configure console logging so that all application log output is directed to stdout/stderr in a format suitable for Azure Container Apps log aggregation. Ensure the logging configuration is appropriate for a containerized cloud environment.",
+      "dependencies": ["001-upgrade-dotnet"],
+      "skills": [
+        {
+          "name": "migration-console-logging",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "005-security-cve-remediation",
+      "description": "Scan all project dependencies for known CVEs and remediate any identified vulnerabilities before deployment.",
+      "reason": "Security scanning ensures the modernized application is free from known vulnerabilities before it is deployed to Azure production environments.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, the current version, the upgraded major version, and the breaking change risk. Verify that the project builds and all tests pass after remediation. Also verify the removal of the hardcoded machineKey from web.config as a security hardening step.",
+      "dependencies": [
+        "001-upgrade-dotnet",
+        "002-transform-sql-azure-managed-identity",
+        "003-transform-auth-entra-id",
+        "004-transform-console-logging"
+      ],
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "006-deployment-azure-container-apps",
+      "description": "Containerize the upgraded .NET 10 application and deploy it to Azure Container Apps.",
+      "reason": "The user has requested deployment to Azure. Azure Container Apps (default) is the recommended modern deployment target for containerized web applications, replacing the legacy Mono-based Dockerfile.",
+      "requirements": "Generate a new production-ready Dockerfile for the .NET 10 ASP.NET Core application, replacing the existing Mono-based Dockerfile. Build and push the container image. Provision and deploy the application to Azure Container Apps, configuring Managed Identity, environment variables, and connection to Azure SQL Database. Ensure the deployment is healthy and the application is accessible.",
+      "dependencies": [
+        "001-upgrade-dotnet",
+        "002-transform-sql-azure-managed-identity",
+        "003-transform-auth-entra-id",
+        "004-transform-console-logging",
+        "005-security-cve-remediation"
+      ],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "Create new resources",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaAccountManager",
+    "language": "dotnet",
+    "createdAt": "2026-05-29T09:50:15.685+02:00",
+    "version": "1.0"
+  }
+}

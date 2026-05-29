@@ -1,0 +1,14 @@
+{
+  "name": "ZavaAccountManager plan",
+  "execution_mode": "local",
+  "status": "completed",
+  "use_rulebook": false,
+  "base_commit": "85a894c45aff4b5cced91bfdb09c4f1ea3c5a9ed",
+  "source_commit": "a73ab7600902d6428622de445857cbf8a97fd835",
+  "created_at": "2026-05-29T07:49:58.5038984\u002B00:00",
+  "completed_at": "2026-05-29T07:52:52.5179059\u002B00:00",
+  "content_hash": {
+    "plan.md": "0294e1dfc7eb6854d525ddd1326d0731d73156173facbfabfe8c047abe28e0af",
+    "tasks.json": "8f910992a604c8e4e5a8f089a5d413930478b9f697c7bf7da91cf00cb629024c"
+  }
+}
