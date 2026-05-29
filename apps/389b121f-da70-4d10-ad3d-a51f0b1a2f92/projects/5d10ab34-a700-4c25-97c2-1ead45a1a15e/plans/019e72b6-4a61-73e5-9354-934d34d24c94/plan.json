@@ -1,0 +1,14 @@
+{
+  "name": "ZavaAuthGateway plan",
+  "execution_mode": "local",
+  "status": "completed",
+  "use_rulebook": false,
+  "base_commit": "719ea769a0abd6dae25e16e63b8188bf7d9b9817",
+  "source_commit": "20f9e54329df84db4e4fa46f921a09ff35d38bef",
+  "created_at": "2026-05-29T07:50:09.8283276\u002B00:00",
+  "completed_at": "2026-05-29T07:53:55.3948474\u002B00:00",
+  "content_hash": {
+    "plan.md": "2dde1789d7964fda0db10c396776fc806c99cc0d89e83720c86c8f4d5d563eab",
+    "tasks.json": "5cac6c7f25e5368e793b2b1592a0262850543d3113189d059da7e0ca64d27106"
+  }
+}

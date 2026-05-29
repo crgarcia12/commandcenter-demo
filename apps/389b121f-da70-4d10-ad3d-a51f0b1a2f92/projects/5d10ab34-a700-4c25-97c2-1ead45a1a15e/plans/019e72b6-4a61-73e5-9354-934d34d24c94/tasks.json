@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade-dotnet",
+      "description": "Upgrade the project from .NET Framework 4.8 to .NET 10 (net10.0) and convert from legacy non-SDK project format to SDK-style. Migrate ASP.NET WebForms pages and HTTP Handlers to ASP.NET Core equivalents, and replace packages.config with PackageReference.",
+      "reason": "ASP.NET WebForms does not run on Linux containers without Mono, and Mono is not a production-supported runtime for Azure Container Apps. Upgrading to .NET 10 enables proper Linux containerization, modern Azure SDK support, and official Microsoft runtime support.",
+      "requirements": "Upgrade from .NET Framework 4.8 to .NET 10 (net10.0). Convert the non-SDK-style .csproj to SDK-style format. Migrate WebForms (.aspx pages) and HTTP Handlers (.ashx) to ASP.NET Core Minimal API or MVC equivalents preserving all endpoints: Login, Logout, Default, WhoAmI, ApiAuthValidate (/api/auth/validate), and Health (/health). Replace packages.config with PackageReference. Migrate Forms Authentication and web.config settings to ASP.NET Core middleware and appsettings.json.",
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-sql-azure-managed-identity",
+      "description": "Migrate SQL Server connectivity from username/password credentials to Azure SQL Database using Managed Identity (passwordless authentication).",
+      "reason": "The application currently uses hardcoded SQL Server credentials in web.config and DbConfig.cs. Managed Identity eliminates credential management risks and aligns with Azure security best practices.",
+      "requirements": "Replace the SQL Server connection string that uses User Id and Password with an Azure SQL Database connection string using Managed Identity (DefaultAzureCredential). Update DbConfig.cs to use Managed Identity authentication. Remove hardcoded DB credentials from configuration files. The AuthRepository.cs database operations (GetUserByUsername, GetUserRoles, CreateSessionToken, DeactivateSessionToken, ValidateSessionToken, UpdateLastLogin) must continue to function correctly against Azure SQL Database.",
+      "skills": [
+        {
+          "name": "migration-azure-sql-database",
+          "location": "builtin"
+        }
+      ],
+      "dependencies": ["001-upgrade-dotnet"],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "003-transform-console-logging",
+      "description": "Configure structured console logging suitable for Azure Container Apps log aggregation.",
+      "reason": "The application currently lacks structured logging, which prevents effective log aggregation and monitoring on Azure. Cloud-native logging is essential for observability in Azure Container Apps.",
+      "requirements": "Configure the ASP.NET Core application to emit structured console logs using the built-in logging framework. Ensure all application events (authentication attempts, session operations, errors) are captured through the logging pipeline rather than ad-hoc output. Output must be compatible with Azure Container Apps log aggregation.",
+      "skills": [
+        {
+          "name": "migration-console-logging",
+          "location": "builtin"
+        }
+      ],
+      "dependencies": ["001-upgrade-dotnet"],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "004-security-cve-remediation",
+      "description": "Scan all project dependencies for known CVEs and remediate identified vulnerabilities before deployment.",
+      "reason": "Security scanning ensures the modernized application is free of known vulnerabilities before deploying to production on Azure.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, the current version, the upgraded major version, and the breaking change risk. Verify that the project builds and all tests pass after remediation.",
+      "dependencies": ["001-upgrade-dotnet", "002-transform-sql-azure-managed-identity", "003-transform-console-logging"],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "005-deployment-azure-container-apps",
+      "description": "Containerize the modernized .NET 10 application and deploy it to Azure Container Apps, replacing the legacy Mono-based container.",
+      "reason": "The user explicitly requested deployment to Azure. Azure Container Apps provides a managed, scalable container hosting platform ideal for this authentication gateway service.",
+      "requirements": "Generate a production-grade Dockerfile using the official .NET 10 runtime image to replace the legacy Mono-based Dockerfile. Deploy the containerized application to Azure Container Apps. Configure environment variables for Azure SQL Database connection (server endpoint). Enable Managed Identity on the Container App for Azure SQL Database access.",
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "Create new service",
+      "deploymentTool": "bicep",
+      "dependencies": ["004-security-cve-remediation"],
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaAuthGateway",
+    "language": "dotnet",
+    "createdAt": "2026-05-29T09:50:43.310+02:00",
+    "version": "1.0"
+  }
+}
