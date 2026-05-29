@@ -140,7 +140,10 @@
       "job_id": "27244028-1252788229-8c31beab-efab-4af6-9906-cf8b731f0a34"
     },
     "f77d1482-8f52-440e-9d61-250f2b539d9b": {
-      "status": "running"
+      "status": "running",
+      "pull_request": "https://github.com/crgarcia12/mnm-ZavaCurrencyService/pull/4",
+      "session_url": "https://github.com/crgarcia12/mnm-ZavaCurrencyService/pull/4/agent-sessions/59a4dbec-8c41-43db-8e6c-ef54037c8fae",
+      "job_id": "27244028-1252788167-02763dcc-dafe-4dc8-b6f3-4fe659d738ec"
     }
   }
 }
