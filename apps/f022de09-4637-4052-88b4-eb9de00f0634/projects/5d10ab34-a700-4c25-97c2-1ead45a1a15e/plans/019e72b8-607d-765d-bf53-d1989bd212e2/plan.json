@@ -1,0 +1,8 @@
+{
+  "name": "ZavaLoanOriginationAPI plan",
+  "execution_mode": "local",
+  "status": "running",
+  "use_rulebook": false,
+  "base_commit": "c7f01667fa45967da64d5ce89992751bb7eda64c",
+  "created_at": "2026-05-29T07:52:26.7931011\u002B00:00"
+}
