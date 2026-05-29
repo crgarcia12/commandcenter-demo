@@ -1,0 +1,8 @@
+{
+  "name": "ZavaAlertService plan",
+  "execution_mode": "local",
+  "status": "running",
+  "use_rulebook": false,
+  "base_commit": "4d64c1094a7397b0b238e8d69ed0e5e539451424",
+  "created_at": "2026-05-29T07:51:54.9365048\u002B00:00"
+}
