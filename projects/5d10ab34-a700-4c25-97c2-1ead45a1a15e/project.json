@@ -2,5 +2,7 @@
   "name": "Zava2026",
   "modernization_goal": "modernize Zava app and deploy to Azure",
   "created_at": "2026-05-29T03:01:25.9605217\u002B00:00",
-  "apps": []
+  "apps": [
+    "1667b9a4-0d72-47bd-ac20-0c3d5138ab3e"
+  ]
 }
