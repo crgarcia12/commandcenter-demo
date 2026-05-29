@@ -1,8 +1,0 @@
-{
-  "name": "ZavaComplianceReporter plan",
-  "execution_mode": "local",
-  "status": "running",
-  "use_rulebook": false,
-  "base_commit": "3a923540580c5696e5c375368cde916bc960b0c8",
-  "created_at": "2026-05-29T07:50:30.0459213\u002B00:00"
-}
