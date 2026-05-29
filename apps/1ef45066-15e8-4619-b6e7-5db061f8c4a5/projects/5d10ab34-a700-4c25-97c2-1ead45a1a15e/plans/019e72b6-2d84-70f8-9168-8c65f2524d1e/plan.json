@@ -1,8 +1,0 @@
-{
-  "name": "ZavaFileIngestion plan",
-  "execution_mode": "local",
-  "status": "running",
-  "use_rulebook": false,
-  "base_commit": "79e380728e19cfbe6a9f629b085a09f9b5babd98",
-  "created_at": "2026-05-29T07:50:02.4447634\u002B00:00"
-}
