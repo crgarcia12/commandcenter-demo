@@ -1,0 +1,14 @@
+{
+  "name": "ZavaBatchScheduler plan",
+  "execution_mode": "local",
+  "status": "completed",
+  "use_rulebook": false,
+  "base_commit": "5eaf217594ef4961a5c0a7b7867bff6e1d5315f5",
+  "source_commit": "b062939310dcdb7b9d80c1f578db4339d993b421",
+  "created_at": "2026-05-29T07:50:34.8356043\u002B00:00",
+  "completed_at": "2026-05-29T07:53:58.6630153\u002B00:00",
+  "content_hash": {
+    "plan.md": "d4e0f61c0fb697904700b8a229bce614f78a21199a416e09aa487a8d3b94bef2",
+    "tasks.json": "283fec76fa81bc57566e9e96b6d9efd20cd17a20a2a36786e935cd6c24dc54d0"
+  }
+}

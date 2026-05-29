@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "transform",
+      "id": "001-transform-amqp-rabbitmq-to-servicebus",
+      "description": "Migrate RabbitMQ AMQP messaging to Azure Service Bus",
+      "reason": "The project includes the RabbitMQ AMQP client dependency (com.rabbitmq:amqp-client). Replacing it with Azure Service Bus provides a fully managed, cloud-native messaging service on Azure with Managed Identity support, eliminating the need to manage a RabbitMQ broker.",
+      "requirements": "Migrate the RabbitMQ AMQP client dependency and any related messaging code to Azure Service Bus. Replace AMQP connection configuration with Azure Service Bus connection settings. Use Managed Identity for authentication to Azure Service Bus. Update build.gradle to replace the RabbitMQ AMQP dependency with the appropriate Azure Service Bus client library.",
+      "skills": [
+        {
+          "name": "migration-amqp-rabbitmq-servicebus",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-sql-server-to-azure-sql-mi",
+      "description": "Migrate SQL Server password-based authentication to Azure SQL Database with Managed Identity",
+      "reason": "The application connects to SQL Server using username/password credentials (db.username, db.password, SQLSERVER_PASSWORD env var). Migrating to Azure Managed Identity eliminates hardcoded or environment-injected passwords, improving security and simplifying credential management on Azure.",
+      "requirements": "Migrate the SQL Server JDBC datasource from password-based authentication to Azure Managed Identity authentication for Azure SQL Database. Remove reliance on db.username and db.password configuration properties and the SQLSERVER_PASSWORD environment variable. Update build.gradle to include Azure-compatible JDBC authentication support. Ensure the BatchRunLog insert functionality continues to work correctly after migration.",
+      "skills": [
+        {
+          "name": "migration-mi-azure-sql",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "003-security-cve-remediation",
+      "description": "Scan all project dependencies for known CVEs and remediate identified vulnerabilities",
+      "reason": "The project uses Java 8 and older library versions (RabbitMQ AMQP client 5.21.0, mssql-jdbc 12.6.1.jre8) that may contain known security vulnerabilities. Remediating CVEs before deployment ensures the modernized application meets security standards.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, the current version, the upgraded major version, and the breaking change risk. Verify that the project builds and all tests pass after remediation.",
+      "dependencies": [
+        "001-transform-amqp-rabbitmq-to-servicebus",
+        "002-transform-sql-server-to-azure-sql-mi"
+      ],
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "004-deployment-azure-container-apps",
+      "description": "Containerize and deploy ZavaBatchScheduler to Azure Container Apps",
+      "reason": "The user explicitly requested deployment to Azure. Azure Container Apps provides a fully managed, serverless container runtime ideal for batch and scheduled workloads, with built-in support for Managed Identity and auto-scaling.",
+      "requirements": "Update the existing Dockerfile to use a modern JDK base image compatible with the migrated application. Provision an Azure Container Apps environment and deploy the application. Configure Managed Identity for the container app to enable passwordless access to Azure SQL Database and Azure Service Bus. Configure environment variables for service URLs and endpoints.",
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "Create new Azure Container Apps environment and container app",
+      "deploymentTool": "bicep",
+      "dependencies": [
+        "003-security-cve-remediation"
+      ],
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaBatchScheduler",
+    "language": "java",
+    "createdAt": "2026-05-29T09:50:49.032+02:00",
+    "version": "1.0"
+  }
+}
