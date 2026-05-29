@@ -1,5 +1,6 @@
 {
   "name": "ZavaCurrencyService",
+  "language": "dotnet",
   "created_at": "2026-05-29T02:37:35.9466042\u002B00:00",
   "source": {
     "provider": "github",
