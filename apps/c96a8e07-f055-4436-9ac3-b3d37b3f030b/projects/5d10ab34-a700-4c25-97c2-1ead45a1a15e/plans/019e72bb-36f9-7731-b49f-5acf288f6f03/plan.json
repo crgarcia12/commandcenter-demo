@@ -6,5 +6,9 @@
   "assessment_id": "019e71d4-309f-7660-b33f-f7403e6dda4b",
   "use_rulebook": false,
   "base_commit": "b82d18f7cd67036ee8855012d05c20aef094be90",
-  "created_at": "2026-05-29T07:55:32.5591267\u002B00:00"
+  "source_commit": "bca3f23b70bce27d22a9c1b52594d2fe0596942c",
+  "created_at": "2026-05-29T07:55:32.5591267\u002B00:00",
+  "pull_request": "https://github.com/crgarcia12/mnm-ZavaQueueBridge/pull/5",
+  "session_url": "https://github.com/crgarcia12/mnm-ZavaQueueBridge/pull/5/agent-sessions/cd4848e4-ed12-40c7-80cd-5f3e999f24e4",
+  "job_id": "27244028-1252788273-6cfc0418-1bf0-4fac-be68-081b842bf055"
 }
