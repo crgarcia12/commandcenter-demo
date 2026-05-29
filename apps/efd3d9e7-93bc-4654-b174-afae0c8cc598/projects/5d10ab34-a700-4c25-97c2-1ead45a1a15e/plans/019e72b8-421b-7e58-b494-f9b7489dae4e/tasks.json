@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaACHProcessor",
+    "language": "java",
+    "createdAt": "2026-05-29T09:52:39.112+02:00",
+    "version": "1.0"
+  },
+  "tasks": [
+    {
+      "type": "transform",
+      "id": "001-transform-rabbitmq-amqp-to-servicebus",
+      "description": "Migrate RabbitMQ AMQP messaging to Azure Service Bus for publishing ACH processed and failed events.",
+      "reason": "The application currently uses the RabbitMQ AMQP client library to publish domain events (ach.processed, ach.failed) to exchanges on a self-hosted RabbitMQ broker. Migrating to Azure Service Bus provides a fully managed, cloud-native messaging service with built-in reliability, dead-letter queuing, and passwordless authentication via Managed Identity.",
+      "requirements": "Replace the `com.rabbitmq:amqp-client` dependency and all RabbitMQ connection/channel/publish code in Main.java with Azure Service Bus SDK. Map the existing exchanges and routing keys to Azure Service Bus topics and subscriptions. Use Managed Identity (passwordless) authentication. Remove all RabbitMQ host, port, username, password, and vhost configuration properties.",
+      "skills": [
+        {
+          "name": "migration-amqp-rabbitmq-servicebus",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-local-files-to-azure-storage",
+      "description": "Migrate local file system paths for ACH file intake, processed, and error directories to mounted Azure Storage paths.",
+      "reason": "The application polls a local directory (`/shared/ach-incoming`) and moves files to subdirectories (`processed`, `error`). In a containerized cloud environment, local file paths are ephemeral and not shared across replicas. Mounting Azure Storage provides durable, cloud-accessible file storage.",
+      "requirements": "Update all file system path references (`ach.incoming.path`, `ach.processed.path`, `ach.error.path`) to use the Azure-mounted storage path convention starting with `${AZURE_MOUNT_PATH:/mnt/azure}`. Ensure the application reads, moves, and manages ACH files via the mounted Azure Storage path. No change to the polling logic or file parsing logic is required beyond the path configuration.",
+      "dependencies": [],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "003-transform-plaintext-credentials-to-keyvault",
+      "description": "Migrate plaintext RabbitMQ credentials and any other hardcoded secrets to Azure Key Vault.",
+      "reason": "The application loads sensitive configuration (RabbitMQ username, password) from a properties file or environment variables as plaintext. Storing and retrieving secrets via Azure Key Vault eliminates hardcoded credentials and follows cloud security best practices.",
+      "requirements": "Identify all plaintext credentials and secrets in source code and configuration files (e.g., rabbitmq.username, rabbitmq.password). Migrate them to Azure Key Vault. Update the application to retrieve secrets from Key Vault at runtime using the Azure Key Vault SecretClient with Managed Identity authentication. Remove all plaintext credential values from configuration.",
+      "dependencies": [
+        "001-transform-rabbitmq-amqp-to-servicebus"
+      ],
+      "skills": [
+        {
+          "name": "migration-plaintext-credential-to-azure-keyvault",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "004-security-cve-remediation",
+      "description": "Scan all project dependencies for known CVEs and remediate any identified vulnerabilities.",
+      "reason": "Before deploying to Azure, all project dependencies should be free of known security vulnerabilities. The project currently uses several older library versions (Java 8, Gradle 7.6, amqp-client 5.21.0, mssql-jdbc 12.6.1) that may carry CVEs.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, the current version, the upgraded major version, and the breaking change risk. Verify that the project builds and all tests pass after remediation.",
+      "dependencies": [
+        "001-transform-rabbitmq-amqp-to-servicebus",
+        "002-transform-local-files-to-azure-storage",
+        "003-transform-plaintext-credentials-to-keyvault"
+      ],
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "005-deployment-azure-container-apps",
+      "description": "Containerize and deploy ZavaACHProcessor to Azure Container Apps.",
+      "reason": "The application needs to run as a managed container workload in Azure. Azure Container Apps provides serverless container hosting with built-in scaling, Managed Identity support, and Azure Storage volume mount capabilities needed by the migrated application.",
+      "requirements": "Update the existing Dockerfile as needed to produce a production-ready container image for the modernized application. Provision a new Azure Container Apps environment and deploy the application. Configure Azure Storage volume mounts for the ACH file paths. Enable Managed Identity on the container app for passwordless access to Azure Service Bus and Azure Key Vault. Generate Bicep IaC files to provision required Azure resources (Container Apps environment, Azure Service Bus namespace and topics, Azure Key Vault, Azure Storage account and file share).",
+      "dependencies": [
+        "004-security-cve-remediation"
+      ],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "new",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ]
+}
