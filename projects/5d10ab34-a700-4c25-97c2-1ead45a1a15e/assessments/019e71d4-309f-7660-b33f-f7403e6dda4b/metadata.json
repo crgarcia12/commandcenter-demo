@@ -26,7 +26,10 @@
       "job_id": "27244028-1252788179-2832068e-1e89-4445-93c2-e9b288bdf729"
     },
     "1fe26e17-cc72-4ae2-a176-223d3dd435c3": {
-      "status": "running"
+      "status": "running",
+      "pull_request": "https://github.com/crgarcia12/mnm-ZavaWireTransferService/pull/4",
+      "session_url": "https://github.com/crgarcia12/mnm-ZavaWireTransferService/pull/4/agent-sessions/db61544b-87a0-4c9f-a5ed-b87d7a9b5cc7",
+      "job_id": "27244028-1252788292-c4913e9f-d3cb-461b-ad05-850d0dbceefe"
     },
     "389b121f-da70-4d10-ad3d-a51f0b1a2f92": {
       "status": "running"
