@@ -1,146 +1,147 @@
 {
   "name": "Assessment-2026-05-29",
   "execution_mode": "cca",
-  "status": "running",
+  "status": "completed",
   "target": "openjdk25",
   "domain": "upgrade,cloud-readiness,security",
   "created_at": "2026-05-29T03:43:13.0172533\u002B00:00",
+  "completed_at": "2026-05-29T04:49:58.1455211\u002B00:00",
   "base_commit": "b7a28ad443a416a63bf967a52b2a47b068a3b45d",
   "apps": {
     "11fe0e17-bd1f-42e5-8866-0ef2799fc678": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaRiskEngine/pull/4",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaRiskEngine/pull/4/agent-sessions/1a7b8033-5344-4b39-a499-5d9553be6b3f",
       "job_id": "27244028-1252788281-9183bf23-100c-443f-a53b-5c4da3ef5f05"
     },
     "1667b9a4-0d72-47bd-ac20-0c3d5138ab3e": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaAccountManager/pull/4",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaAccountManager/pull/4/agent-sessions/f9c891a3-accb-41c4-9d17-d1d2ef02e767",
       "job_id": "27244028-1252760694-7ec8ab49-8f9d-4746-bff5-98f247d7bac2"
     },
     "1ef45066-15e8-4619-b6e7-5db061f8c4a5": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaFileIngestion/pull/5",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaFileIngestion/pull/5/agent-sessions/db775a23-2f39-4e6b-83c6-0006677a888f",
       "job_id": "27244028-1252788179-2832068e-1e89-4445-93c2-e9b288bdf729"
     },
     "1fe26e17-cc72-4ae2-a176-223d3dd435c3": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaWireTransferService/pull/4",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaWireTransferService/pull/4/agent-sessions/db61544b-87a0-4c9f-a5ed-b87d7a9b5cc7",
       "job_id": "27244028-1252788292-c4913e9f-d3cb-461b-ad05-850d0dbceefe"
     },
     "389b121f-da70-4d10-ad3d-a51f0b1a2f92": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaAuthGateway/pull/4",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaAuthGateway/pull/4/agent-sessions/393d1491-6f89-42af-957b-9d3290d6479f",
       "job_id": "27244028-1252788155-3879ee69-091c-4874-8a91-9cd086190fbe"
     },
     "661db426-980d-406c-8063-e638875dd492": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaReportDashboard/pull/4",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaReportDashboard/pull/4/agent-sessions/4255eb03-6e0f-40ef-9359-f8c2ccb2a2be",
       "job_id": "27244028-1252788279-2242705a-2123-4a87-9f65-92cef1dcadd8"
     },
     "7a005bcc-a091-4513-85d9-18de5a55e889": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaStatementService/pull/4",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaStatementService/pull/4/agent-sessions/6b594fa9-cab2-4d85-86ef-d0044c4bf424",
       "job_id": "27244028-1252788288-ee2c6934-3911-4b6d-863c-a660247100ac"
     },
     "7b7f733e-a768-4d3e-9583-dd2269c5d433": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaComplianceReporter/pull/4",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaComplianceReporter/pull/4/agent-sessions/5b0ef416-25de-4ebb-90a5-9fad0fea05f9",
       "job_id": "27244028-1252788161-dca9d0db-cabd-48bf-916c-df2f31499b5c"
     },
     "8f0c68c8-0a98-4631-a8f7-0c210a4bb44b": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaBatchScheduler/pull/4",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaBatchScheduler/pull/4/agent-sessions/ae09e44d-1d2c-43a2-bb80-f3f8823c837f",
       "job_id": "27244028-1252788158-6dcb24c8-cfea-49c8-8719-04589eed558e"
     },
     "9b3bb3e2-6193-4fd3-948a-225065c2c34a": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaKYCService/pull/4",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaKYCService/pull/4/agent-sessions/5852f5d3-027f-4b46-9d90-f8a6adcef2ec",
       "job_id": "27244028-1252788208-2ce4a57c-7b3c-407c-bc01-8b164df13b43"
     },
     "a921573e-0dfb-4517-80e9-aee465449647": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaPayGateway/pull/4",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaPayGateway/pull/4/agent-sessions/17e28a0b-5eec-43a4-8212-f7f272127fdf",
       "job_id": "27244028-1252788258-b806035f-a156-486a-af19-c526f285b6ce"
     },
     "b30372ce-c2cd-40ba-883d-fc0f2f45b5c0": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaInterestCalculator/pull/4",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaInterestCalculator/pull/4/agent-sessions/6d799f35-7236-4e71-ad12-342af65673c7",
       "job_id": "27244028-1252788199-016a8ec5-f211-46d8-beeb-eae64dccc1fe"
     },
     "c0e33be9-a44e-4f2a-800c-f3ec7f7f2012": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaFraudDetector/pull/4",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaFraudDetector/pull/4/agent-sessions/cc229193-90ce-43f6-b95b-9bf0eb3054e4",
       "job_id": "27244028-1252788186-7e6cfea6-e346-44b0-ac76-5bb16e980c93"
     },
     "c96a8e07-f055-4436-9ac3-b3d37b3f030b": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaQueueBridge/pull/4",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaQueueBridge/pull/4/agent-sessions/eedaa97c-ebaf-406c-933c-d9f251f079c3",
       "job_id": "27244028-1252788273-13c60000-67f3-446a-83d3-e093b5adb93f"
     },
     "d0a36446-b441-4ccf-afb3-23ab9c9c245c": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaLoanPortal/pull/4",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaLoanPortal/pull/4/agent-sessions/b497e75a-23d4-46ae-a9f4-4ac134d92355",
       "job_id": "27244028-1252788242-ce4cedb1-f8b9-4328-9921-f0e42743916d"
     },
     "d50cf309-1e85-49ef-b7df-9e7e21bbfeef": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaAlertService/pull/4",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaAlertService/pull/4/agent-sessions/6e6afdf9-2c79-475b-807c-5619ce5f609a",
       "job_id": "27244028-1252788145-77a6a789-4029-4f73-9b90-a803d504d24d"
     },
     "d524fc47-df1b-45f3-af60-c14a555453d9": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaNotifyWorker/pull/4",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaNotifyWorker/pull/4/agent-sessions/c1597936-0894-4a89-8fa3-13cb365ead42",
       "job_id": "27244028-1252788247-c92c5e4e-d204-4df5-8ba1-039a4a17a17e"
     },
     "d6378622-24fe-4071-91b5-90ce84250e6b": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaLedger/pull/4",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaLedger/pull/4/agent-sessions/f8b06e02-16ff-4930-989a-7184505df5d7",
       "job_id": "27244028-1252788215-5568026e-d1ca-43e8-93c0-491655ad1ddb"
     },
     "d9c4b0ef-9a1b-4430-9ef6-1cb6bb95ff14": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaAuditWorker/pull/4",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaAuditWorker/pull/4/agent-sessions/a95a52de-29c9-4320-b7fa-a91067dca9eb",
       "job_id": "27244028-1252788149-105ac756-2be1-433a-9993-33c0dc3d5bee"
     },
     "e4654446-044a-4f82-9824-8efc61414c7c": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaDocVault/pull/4",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaDocVault/pull/4/agent-sessions/e54924c6-4d93-4b6d-a0d0-dd6a39685e90",
       "job_id": "27244028-1252788174-42d6a357-1f52-48e8-a2c1-19303f3f9bea"
     },
     "efd3d9e7-93bc-4654-b174-afae0c8cc598": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaACHProcessor/pull/4",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaACHProcessor/pull/4/agent-sessions/864d7bc0-cd0d-43ee-a381-14291f2cc3ba",
       "job_id": "27244028-1252788138-f56cbced-1cc3-4363-a921-cb9396ab229b"
     },
     "f022de09-4637-4052-88b4-eb9de00f0634": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaLoanOriginationAPI/pull/4",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaLoanOriginationAPI/pull/4/agent-sessions/b76b4b26-2cf7-4399-b092-1f0f54055d8e",
       "job_id": "27244028-1252788229-8c31beab-efab-4af6-9906-cf8b731f0a34"
     },
     "f77d1482-8f52-440e-9d61-250f2b539d9b": {
-      "status": "running",
+      "status": "completed",
       "pull_request": "https://github.com/crgarcia12/mnm-ZavaCurrencyService/pull/4",
       "session_url": "https://github.com/crgarcia12/mnm-ZavaCurrencyService/pull/4/agent-sessions/59a4dbec-8c41-43db-8e6c-ef54037c8fae",
       "job_id": "27244028-1252788167-02763dcc-dafe-4dc8-b6f3-4fe659d738ec"
