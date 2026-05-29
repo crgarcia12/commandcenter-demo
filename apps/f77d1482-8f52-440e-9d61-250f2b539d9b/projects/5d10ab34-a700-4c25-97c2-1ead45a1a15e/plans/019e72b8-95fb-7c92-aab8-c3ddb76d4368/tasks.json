@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade",
+      "description": "Upgrade ZavaCurrencyService from .NET Framework 4.8 to .NET 10 LTS",
+      "reason": "The project targets .NET Framework 4.8 using legacy non-SDK project format, WCF (System.ServiceModel), and System.Web — all of which are Windows-only and incompatible with Linux containers required for Azure Container Apps deployment. Upgrading to .NET 10 enables the modern SDK-style project format, Linux container support, and compatibility with modern Azure SDK packages.",
+      "requirements": "Upgrade the project from .NET Framework 4.8 (TargetFrameworkVersion v4.8) to .NET 10 (net10.0). Convert the legacy non-SDK .csproj format to modern SDK-style format. Remove packages.config and migrate any package references to PackageReference elements in the .csproj. Ensure the build succeeds after the upgrade.",
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-wcf-to-restapi",
+      "description": "Migrate the WCF SOAP service to an ASP.NET Core REST API",
+      "reason": "WCF server-side hosting (System.ServiceModel) is not supported on .NET 5+. The service must be converted to ASP.NET Core REST API to run on .NET 10 and deploy as a Linux container to Azure Container Apps.",
+      "requirements": "Convert the ICurrencyService WCF service contract and CurrencyService implementation to an ASP.NET Core REST API. Preserve the three existing operations as REST endpoints: GetRate (GET /rates/{fromCurrency}/{toCurrency}), GetSupportedCurrencies (GET /currencies), and ConvertAmount (GET or POST /convert). Maintain the existing business logic in CurrencyService without changes to computation. Convert the HealthHandler (IHttpHandler) to an ASP.NET Core health endpoint at /health. Replace System.ServiceModel.FaultException with appropriate HTTP status codes and problem detail responses. Remove web.config system.serviceModel configuration.",
+      "dependencies": ["001-upgrade"],
+      "skills": [],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "003-transform-sql-managed-identity",
+      "description": "Migrate SQL Server connection to Azure SQL Database with Managed Identity",
+      "reason": "The application currently uses username/password authentication for SQL Server via environment variables (DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD) and web.config connection strings. These must be replaced with Azure Managed Identity (DefaultAzureCredential) for passwordless, secure access to Azure SQL Database.",
+      "requirements": "Migrate the SQL Server connection in DbConfig.cs and CurrencyService.cs from username/password credential-based authentication to Azure SQL Database using Managed Identity (DefaultAzureCredential). Replace System.Data.SqlClient with Microsoft.Data.SqlClient. Remove username/password connection string handling from DbConfig.cs and configuration files. Update the connection string to an Azure SQL Database format without embedded credentials. Ensure the application uses DefaultAzureCredential for authentication.",
+      "dependencies": ["001-upgrade"],
+      "skills": [
+        {
+          "name": "migration-azure-sql-database",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "004-transform-console-logging",
+      "description": "Configure structured console logging for cloud-native container environments",
+      "reason": "The application has no structured logging configured. Azure Container Apps and Azure Monitor require proper console log output for container log aggregation and cloud observability.",
+      "requirements": "Add and configure structured console logging suitable for cloud container environments. Ensure log output is properly formatted for Azure Monitor and container platform log aggregation. Configure appropriate log levels for production and development environments. Integrate logging into the ASP.NET Core request pipeline.",
+      "dependencies": ["002-transform-wcf-to-restapi"],
+      "skills": [
+        {
+          "name": "migration-console-logging",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "005-security",
+      "description": "Scan all project dependencies for known CVEs and remediate identified vulnerabilities",
+      "reason": "Security scanning ensures the modernized application is free of known vulnerabilities before deployment to Azure.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, the current version, the upgraded major version, and the breaking change risk. Verify that the project builds and all tests pass after remediation. Runtime environment and build tool established by previous upgrade and transform tasks.",
+      "dependencies": ["001-upgrade", "002-transform-wcf-to-restapi", "003-transform-sql-managed-identity", "004-transform-console-logging"],
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "006-deployment",
+      "description": "Containerize and deploy ZavaCurrencyService to Azure Container Apps",
+      "reason": "The modernized ASP.NET Core REST API must be containerized and deployed to Azure Container Apps for cloud-native hosting as requested by the user.",
+      "requirements": "Containerize the ASP.NET Core REST API as a Docker container. Replace the existing Mono-based Dockerfile with a modern .NET 10 multi-stage Dockerfile. Deploy to Azure Container Apps. Configure Managed Identity for the container app to authenticate with Azure SQL Database. Expose the REST API on the appropriate port.",
+      "dependencies": ["005-security"],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "Create new",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaCurrencyService",
+    "language": "dotnet",
+    "createdAt": "2026-05-29T09:53:13+02:00",
+    "version": "1.0"
+  }
+}

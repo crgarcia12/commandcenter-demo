@@ -1,8 +1,14 @@
 {
   "name": "ZavaCurrencyService plan",
   "execution_mode": "local",
-  "status": "running",
+  "status": "completed",
   "use_rulebook": false,
   "base_commit": "8b08b1933c3651ec62b5b5482c95d5d39da39f52",
-  "created_at": "2026-05-29T07:52:41.7197466\u002B00:00"
+  "source_commit": "d2a8fdb7f247e719a8e6861d25568c47b1609174",
+  "created_at": "2026-05-29T07:52:41.7197466\u002B00:00",
+  "completed_at": "2026-05-29T07:57:10.3899956\u002B00:00",
+  "content_hash": {
+    "plan.md": "847c56dc74d1905ad1fe8a443b5d9c49aad399161da2a97ca72443ef89fb4bda",
+    "tasks.json": "cf1e5347bac94da87368e2163f8aafb7836c8835bb82eb9db6fdb1360a622bd2"
+  }
 }
