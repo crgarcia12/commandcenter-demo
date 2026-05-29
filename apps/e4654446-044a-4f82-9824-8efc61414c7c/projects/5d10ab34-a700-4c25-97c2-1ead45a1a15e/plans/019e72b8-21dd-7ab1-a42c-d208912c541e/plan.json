@@ -1,8 +1,14 @@
 {
   "name": "ZavaDocVault plan",
   "execution_mode": "local",
-  "status": "running",
+  "status": "completed",
   "use_rulebook": false,
   "base_commit": "50ad8d6aa2e3b79307d3c5b31e62ae90725af98e",
-  "created_at": "2026-05-29T07:52:10.5543739\u002B00:00"
+  "source_commit": "2d5d34e0e0b0d64243cdc67000a01dcfe5499d7b",
+  "created_at": "2026-05-29T07:52:10.5543739\u002B00:00",
+  "completed_at": "2026-05-29T07:56:23.3825056\u002B00:00",
+  "content_hash": {
+    "plan.md": "14a356cdaf9e098ca44be6506f15abf97696a99b776bdd7011c9096d85bc1750",
+    "tasks.json": "3363969b55dc83ffd19ec98e7bdd8c4ce8a5b7a0cb07d9011fd4e18c963bb035"
+  }
 }

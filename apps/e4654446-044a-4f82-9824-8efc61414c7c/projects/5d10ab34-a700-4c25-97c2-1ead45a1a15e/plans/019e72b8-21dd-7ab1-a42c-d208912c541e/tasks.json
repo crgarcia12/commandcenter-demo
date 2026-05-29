@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "transform",
+      "id": "001-transform-plaintext-credential-to-azure-keyvault",
+      "description": "Migrate hardcoded database credentials from the Dockerfile and configuration files to Azure Key Vault for secure secrets management",
+      "reason": "The application has hardcoded database credentials (DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME) in the Dockerfile as environment variables and in doc-vault.properties. Storing credentials in source code and container images is a security risk that must be remediated for Azure deployment.",
+      "requirements": "Identify all hardcoded plaintext credentials in the Dockerfile and doc-vault.properties (DB_USER, DB_PASSWORD, and any other secrets). Migrate those credentials to Azure Key Vault. Update the application to retrieve secrets from Azure Key Vault at runtime using managed identity, removing all hardcoded credential values from source code and configuration files.",
+      "skills": [
+        {
+          "name": "migration-plaintext-credential-to-azure-keyvault",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-mi-azure-sql",
+      "description": "Migrate SQL Server database authentication from password-based to Azure Managed Identity",
+      "reason": "The application currently uses username/password authentication (via DocVaultConnectionFactory and DocVaultConfig) to connect to SQL Server. Managed Identity eliminates stored credentials and reduces the attack surface for database access.",
+      "requirements": "Update the JDBC connection configuration to use Azure Managed Identity instead of username/password authentication for Azure SQL Database. Remove password-based authentication from the connection factory and configuration. Ensure the application can authenticate to Azure SQL Database using managed identity token-based authentication.",
+      "dependencies": [
+        "001-transform-plaintext-credential-to-azure-keyvault"
+      ],
+      "skills": [
+        {
+          "name": "migration-mi-azure-sql",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "003-security-cve-remediation",
+      "description": "Scan all project dependencies for known CVEs and remediate identified vulnerabilities before deployment",
+      "reason": "The project uses org.json:json:20140107 (released in 2014), which has well-known critical CVEs. Other dependencies may also have vulnerabilities. All must be resolved before deploying to Azure.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, the current version, the upgraded major version, and the breaking change risk. Verify that the project builds and all tests pass after remediation.",
+      "dependencies": [
+        "001-transform-plaintext-credential-to-azure-keyvault",
+        "002-transform-mi-azure-sql"
+      ],
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "004-deployment-azure-container-apps",
+      "description": "Containerize the ZavaDocVault application and deploy it to Azure Container Apps",
+      "reason": "The user requested deployment to Azure. Azure Container Apps provides scalable, managed container hosting with native managed identity support, aligning with the authentication modernization done in earlier tasks.",
+      "requirements": "Containerize the Java WAR application (updating the existing Dockerfile as needed) and deploy to Azure Container Apps. Configure the container app to use managed identity for Azure SQL Database access. Provision new Azure Container Apps resources using Bicep. Ensure environment variables are sourced from Azure Key Vault references rather than hardcoded values.",
+      "dependencies": [
+        "003-security-cve-remediation"
+      ],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "create new service",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaDocVault",
+    "language": "java",
+    "createdAt": "2026-05-29T09:52:27.565+02:00",
+    "version": "1.0"
+  }
+}
