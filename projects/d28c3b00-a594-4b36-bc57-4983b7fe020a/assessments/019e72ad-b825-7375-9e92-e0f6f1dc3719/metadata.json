@@ -8,16 +8,19 @@
   "base_commit": "339511daacbd590edd01979ae5850c50b885ffb0",
   "apps": {
     "1667b9a4-0d72-47bd-ac20-0c3d5138ab3e": {
-      "status": "pending"
+      "status": "running",
+      "pull_request": "https://github.com/crgarcia12/mnm-ZavaAccountManager/pull/5",
+      "session_url": "https://github.com/crgarcia12/mnm-ZavaAccountManager/pull/5/agent-sessions/d3e027a6-20ae-45f9-b643-8d385b933285",
+      "job_id": "27244028-1252760694-2e21b3e2-79e1-4375-90b6-ca40851920ab"
     },
     "1ef45066-15e8-4619-b6e7-5db061f8c4a5": {
-      "status": "pending"
+      "status": "running"
     },
     "8f0c68c8-0a98-4631-a8f7-0c210a4bb44b": {
-      "status": "pending"
+      "status": "running"
     },
     "c0e33be9-a44e-4f2a-800c-f3ec7f7f2012": {
-      "status": "pending"
+      "status": "running"
     }
   }
 }
