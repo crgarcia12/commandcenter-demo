@@ -1,5 +1,6 @@
 {
   "name": "ZavaWireTransferService",
+  "language": "java",
   "created_at": "2026-05-29T02:40:04.0405773\u002B00:00",
   "source": {
     "provider": "github",
