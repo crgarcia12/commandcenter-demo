@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "transform",
+      "id": "001-transform-migrate-plaintext-credentials-to-keyvault",
+      "description": "Migrate hardcoded plaintext credentials from compliance.properties to Azure Key Vault for secure secret storage and retrieval.",
+      "reason": "The application stores the SQL Server password (db.password=Zava123!), database username, and other sensitive configuration values as plaintext in compliance.properties. These must be secured in Azure Key Vault before deployment to Azure.",
+      "requirements": "Identify all plaintext credentials in compliance.properties and ComplianceConfig.java (database password, database username, connection details, SSO cookie name, auth gateway URL). Migrate secrets to Azure Key Vault. Update the application to retrieve secrets from Azure Key Vault at runtime using Managed Identity. Ensure no credentials remain in source files after migration.",
+      "skills": [
+        {
+          "name": "migration-plaintext-credential-to-azure-keyvault",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-migrate-sql-auth-to-managed-identity",
+      "description": "Migrate the SQL Server database connection from password-based JDBC authentication to Azure Managed Identity for Azure SQL Database.",
+      "reason": "ComplianceConnectionFactory uses DriverManager.getConnection with username and password to connect to SQL Server. When deployed to Azure, the connection must use Azure Managed Identity (passwordless authentication) instead of SQL credentials to follow security best practices.",
+      "requirements": "Update the JDBC connection in ComplianceConnectionFactory to use Azure Active Directory Managed Identity authentication for Azure SQL Database instead of username/password. Remove password-based authentication from the connection logic. Ensure the application can connect to Azure SQL Database using the Managed Identity assigned to the Azure Container App. Update build.gradle dependencies as needed to support Azure AD authentication for SQL Server JDBC.",
+      "dependencies": [
+        "001-transform-migrate-plaintext-credentials-to-keyvault"
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "003-security-cve-remediation",
+      "description": "Scan all project dependencies for known CVEs and remediate identified vulnerabilities before deployment.",
+      "reason": "The application uses older dependency versions (javax.servlet-api 3.1.0, jstl 1.2) that may have known vulnerabilities. A security scan is required to ensure the modernized application is free of known security vulnerabilities before going to production on Azure.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, the current version, the upgraded major version, and the breaking change risk. Verify that the project builds and all tests pass after remediation.",
+      "dependencies": [
+        "001-transform-migrate-plaintext-credentials-to-keyvault",
+        "002-transform-migrate-sql-auth-to-managed-identity"
+      ],
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "004-deployment-azure-container-apps",
+      "description": "Containerize and deploy the ZavaComplianceReporter application to Azure Container Apps.",
+      "reason": "The application needs to be deployed to Azure as a containerized workload. The existing Dockerfile (Tomcat 9 + JDK 8 WAR) will be reused. Azure Container Apps provides a fully managed serverless container platform.",
+      "requirements": "Build the Docker image using the existing Dockerfile. Deploy the application to Azure Container Apps. Assign a system-assigned Managed Identity to the container app so it can authenticate to Azure SQL Database and Azure Key Vault. Configure necessary environment variables and application settings. Ensure the /health endpoint is accessible for health checks.",
+      "dependencies": [
+        "003-security-cve-remediation"
+      ],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "Create new",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaComplianceReporter",
+    "language": "java",
+    "createdAt": "2026-05-29T09:50:43.427+02:00",
+    "version": "1.0"
+  }
+}
