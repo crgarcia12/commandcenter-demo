@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaKYCService",
+    "language": "java",
+    "createdAt": "2026-05-29T09:50:54.000Z",
+    "version": "1.0"
+  },
+  "tasks": [
+    {
+      "type": "transform",
+      "id": "001-transform-migrate-credentials-to-keyvault",
+      "description": "Migrate hardcoded database credentials from kyc.properties and source code to Azure Key Vault for secure secret management.",
+      "reason": "The application stores the SQL Server password (YourStrong!Passw0rd) as plaintext in src/main/resources/kyc.properties, which is committed to source control. Removing hardcoded credentials and delegating secret retrieval to Azure Key Vault is required before deploying to Azure.",
+      "requirements": "Identify all hardcoded credentials in the project (db.password in kyc.properties, and any other secrets in source files). Migrate those secrets to Azure Key Vault. Update KycConfig.java to retrieve the database password (and any other secrets) from Azure Key Vault at runtime using Managed Identity instead of reading from the properties file or environment variables.",
+      "skills": [
+        {
+          "name": "migration-plaintext-credential-to-azure-keyvault",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-migrate-logging-to-console",
+      "description": "Migrate the application to use console-only logging to conform to cloud-native Azure Container logging standards.",
+      "reason": "The application currently has no logging framework configured and produces no structured log output. For Azure Container Apps, all log output must go to stdout/stderr so Azure Monitor and Log Analytics can capture it.",
+      "requirements": "Add a logging framework (e.g., SLF4J with Logback) to the project. Configure it to output all logs exclusively to the console (stdout). Remove or disable any file-based appenders. Instrument the existing servlets (KycVerifyServlet, KycStatusServlet, KycBootstrapServlet) with appropriate log statements for key operations and errors.",
+      "dependencies": ["001-transform-migrate-credentials-to-keyvault"],
+      "skills": [
+        {
+          "name": "migration-log-to-console",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "003-security-cve-remediation",
+      "description": "Scan all project dependencies for known CVEs and remediate identified vulnerabilities before deployment.",
+      "reason": "The project uses org.json:json:20140107 (a library from 2014) and other dependencies that may contain known CVEs. Resolving these before deployment ensures the application meets security compliance requirements.",
+      "requirements": "Scan all dependencies declared in build.gradle for known CVEs. Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, current version, upgraded version, and breaking change risk. Verify the project builds and all tests pass after remediation.",
+      "dependencies": ["002-transform-migrate-logging-to-console"],
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "004-deployment-azure-container-apps",
+      "description": "Deploy ZavaKYCService to Azure Container Apps using the existing Dockerfile and Azure CLI tooling.",
+      "reason": "The application is already containerized via a multi-stage Dockerfile (Gradle build + Tomcat 9). Deploying to Azure Container Apps provides managed scaling, built-in HTTPS, and Managed Identity support.",
+      "requirements": "Use the existing Dockerfile to build and push the container image. Provision or use existing Azure Container Apps environment and deploy the application. Configure the container app with appropriate resource limits and environment variables (Azure Key Vault endpoint, etc.). Ensure the /health endpoint is configured as the liveness probe.",
+      "dependencies": ["003-security-cve-remediation"],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "Create new Azure Container Apps resource",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ]
+}
