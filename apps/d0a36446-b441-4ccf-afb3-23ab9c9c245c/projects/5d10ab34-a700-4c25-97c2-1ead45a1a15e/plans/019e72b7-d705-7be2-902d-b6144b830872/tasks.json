@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaLoanPortal",
+    "language": "dotnet",
+    "createdAt": "2026-05-29T09:52:01.088+02:00",
+    "version": "1.0"
+  },
+  "tasks": [
+    {
+      "type": "transform",
+      "id": "001-transform-sql-server-to-azure-sql",
+      "description": "Migrate the SQL Server database connection from password-based authentication to Azure SQL Database with Managed Identity.",
+      "reason": "The application uses hardcoded SQL Server credentials (username/password) in web.config. These must be replaced with Azure SQL Database and passwordless Managed Identity authentication to eliminate secrets from configuration.",
+      "requirements": "Replace the existing SqlConnection usage backed by the 'ZavaBankDb' connection string (currently pointing to a local SQL Server with hardcoded User Id and Password) with Azure SQL Database using Managed Identity (DefaultAzureCredential). Remove the plaintext password from web.config. All ADO.NET queries (LoanApplications INSERT, LoanProducts SELECT, and loan history SELECT) must continue to function correctly after migration.",
+      "skills": [
+        {
+          "name": "migration-azure-sql-database",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-auth-to-entra-id",
+      "description": "Migrate ASP.NET Forms Authentication and the external Auth Gateway to Microsoft Entra ID.",
+      "reason": "The application uses Forms Authentication with a custom external Auth Gateway (AuthGatewayLoginUrl / AuthGatewayLogoutUrl) and a hardcoded machineKey in web.config. This must be replaced with Microsoft Entra ID (formerly Azure AD) for enterprise-grade identity, removing the hardcoded machineKey and Auth Gateway dependency.",
+      "requirements": "Replace Forms Authentication (configured in web.config with a hardcoded machineKey) and the external Auth Gateway redirect pattern (Login.aspx / Logout.aspx) with Microsoft Entra ID authentication. Remove hardcoded machineKey validationKey and decryptionKey from web.config. The AuthGatewayLoginUrl and AuthGatewayLogoutUrl appSettings should no longer be required after migration. Ensure that protected pages (Default.aspx) still require authentication and that unauthenticated users are redirected to the Entra ID login flow.",
+      "dependencies": ["001-transform-sql-server-to-azure-sql"],
+      "skills": [
+        {
+          "name": "migration-microsoft-entra-id",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "003-transform-appsettings-to-azure-app-config",
+      "description": "Externalize non-secret application settings from web.config to Azure App Configuration.",
+      "reason": "Runtime configuration values such as LoanOriginationApiUrl are currently hardcoded in web.config appSettings. These should be externalized to Azure App Configuration so they can be managed independently per environment without redeployment.",
+      "requirements": "Move non-secret application settings (specifically LoanOriginationApiUrl and any remaining configuration values after the Entra ID migration) from web.config appSettings to Azure App Configuration. Ensure the application continues to resolve these values through IConfiguration / ConfigurationManager at runtime. Emit a .azure/configuration-migration.json seed file for use by the deployment agent. The application-side change must ensure that environment-variable configuration sources are registered so injected values remain accessible.",
+      "dependencies": ["002-transform-auth-to-entra-id"],
+      "skills": [
+        {
+          "name": "migration-local-appsettings-azure-app-configuration-via-deployment",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "004-transform-console-logging",
+      "description": "Configure console logging to ensure structured log output for Azure Monitor log aggregation.",
+      "reason": "The application has no structured logging. In a cloud environment, logs must be written to stdout/stderr (console) so that Azure App Service log streaming and Azure Monitor can aggregate them properly.",
+      "requirements": "Configure the application to emit structured logs to the console (stdout). Ensure that application events (loan submissions, authentication events, database errors) are captured and written in a format compatible with Azure Monitor / Application Insights log aggregation.",
+      "dependencies": ["001-transform-sql-server-to-azure-sql"],
+      "skills": [
+        {
+          "name": "migration-console-logging",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "005-security-cve-remediation",
+      "description": "Scan all project dependencies for known CVEs and remediate identified vulnerabilities.",
+      "reason": "Before deploying to Azure, the application must be free of known security vulnerabilities. The project uses .NET Framework 4.8 and several system assemblies that may have CVEs.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, the current version, the upgraded major version, and the breaking change risk. Verify that the project builds and all tests pass after remediation.",
+      "dependencies": [
+        "001-transform-sql-server-to-azure-sql",
+        "002-transform-auth-to-entra-id",
+        "003-transform-appsettings-to-azure-app-config",
+        "004-transform-console-logging"
+      ],
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "006-deployment-azure-app-service",
+      "description": "Deploy the ZavaLoanPortal application to Azure App Service (Windows).",
+      "reason": "Azure App Service (Windows) is the native deployment target for ASP.NET Web Forms on .NET Framework 4.8. It provides first-class support without requiring containerization and integrates natively with Managed Identity.",
+      "requirements": "Deploy the application to Azure App Service (Windows) using the Azure CLI. Configure Managed Identity on the App Service instance so that Azure SQL Database and Azure App Configuration connections can authenticate without secrets. Inject the .azure/configuration-migration.json values as App Service application settings. Ensure the deployment uses bicep for IaC.",
+      "dependencies": ["005-security-cve-remediation"],
+      "targetAzureService": "Azure App Service",
+      "resourceStatus": "Create new",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-appservice-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ]
+}
