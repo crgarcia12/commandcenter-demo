@@ -92,7 +92,10 @@
       "job_id": "27244028-1252788273-13c60000-67f3-446a-83d3-e093b5adb93f"
     },
     "d0a36446-b441-4ccf-afb3-23ab9c9c245c": {
-      "status": "running"
+      "status": "running",
+      "pull_request": "https://github.com/crgarcia12/mnm-ZavaLoanPortal/pull/4",
+      "session_url": "https://github.com/crgarcia12/mnm-ZavaLoanPortal/pull/4/agent-sessions/b497e75a-23d4-46ae-a9f4-4ac134d92355",
+      "job_id": "27244028-1252788242-ce4cedb1-f8b9-4328-9921-f0e42743916d"
     },
     "d50cf309-1e85-49ef-b7df-9e7e21bbfeef": {
       "status": "running"
