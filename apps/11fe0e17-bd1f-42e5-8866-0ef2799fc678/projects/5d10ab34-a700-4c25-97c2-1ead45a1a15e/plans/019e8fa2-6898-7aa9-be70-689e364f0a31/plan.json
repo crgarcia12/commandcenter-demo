@@ -1,8 +1,14 @@
 {
   "name": "ZavaRiskEngine plan",
   "execution_mode": "local",
-  "status": "running",
+  "status": "completed",
   "use_rulebook": false,
   "base_commit": "d36cbed8b6143b0a1734e304bf03358bb66d8b16",
-  "created_at": "2026-06-03T22:37:27.1612067\u002B00:00"
+  "source_commit": "98a0c9ea05f4816a7776606ec4044c5467751a16",
+  "created_at": "2026-06-03T22:37:27.1612067\u002B00:00",
+  "completed_at": "2026-06-03T22:41:33.2240103\u002B00:00",
+  "content_hash": {
+    "plan.md": "25634b15e2427da5b1e41e01c360806c52516868d79160f6a6fb65ad67dc5ec8",
+    "tasks.json": "df7120d363bce7ff9f1841ffd73d2bc751c6599c3b4acb34ff658dd8ac4d0107"
+  }
 }

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "transform",
+      "id": "001-transform-sql-azure-sql-managed-identity",
+      "description": "Migrate the SQL Server database connection from username/password credentials to Azure SQL Database with Managed Identity authentication.",
+      "reason": "The application currently connects to SQL Server using hardcoded credentials (User Id/Password) in web.config and environment variables. Deploying to Azure requires secure, passwordless authentication using Managed Identity against Azure SQL Database.",
+      "requirements": "Migrate all SQL Server connections in ZavaRiskEngineService.cs and DbConfig.cs from username/password authentication to Azure SQL Database using Managed Identity (DefaultAzureCredential). Replace or update the connection string configuration to remove hardcoded credentials and support Managed Identity token-based authentication. Ensure all ADO.NET operations (queries, inserts, transactions) continue to work correctly after the migration.",
+      "dependencies": [],
+      "skills": [
+        {
+          "name": "migration-azure-sql-database",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "002-security-cve-remediation",
+      "description": "Scan all project dependencies for known CVEs and remediate any identified vulnerabilities.",
+      "reason": "Before deploying to Azure, all known security vulnerabilities in project dependencies must be identified and resolved to ensure the application is secure.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, the current version, the upgraded major version, and the breaking change risk. Verify that the project builds and all tests pass after remediation.",
+      "dependencies": [
+        "001-transform-sql-azure-sql-managed-identity"
+      ],
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "003-deployment-azure-container-apps",
+      "description": "Containerize and deploy the ZavaRiskEngine service to Azure Container Apps.",
+      "reason": "The user requested deployment to Azure. Azure Container Apps provides a managed, serverless container hosting environment suitable for the WCF service workload.",
+      "requirements": "Package the ZavaRiskEngine application into a container image using the existing Dockerfile (update as needed for the modernized runtime). Deploy the containerized service to Azure Container Apps. Configure the container app to use Managed Identity for Azure SQL Database access. Ensure health endpoint (/health) is accessible and the WCF service endpoint is reachable.",
+      "dependencies": [
+        "002-security-cve-remediation"
+      ],
+      "targetAzureService": "Azure Container Apps",
+      "resourceStatus": "Create new Azure Container Apps resource",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "planName": "plan",
+    "projectName": "ZavaRiskEngine",
+    "language": "dotnet",
+    "createdAt": "2026-06-04T00:37:51.886Z",
+    "version": "1.0"
+  }
+}
