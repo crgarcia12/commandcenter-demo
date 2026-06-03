@@ -4,16 +4,10 @@ Enforceable standards and hard boundaries for modernization. Every policy here i
 
 ## Guardrails (Hard Boundaries)
 
-### Prohibited Technologies
-
-| Technology | Reason | Approved Alternative |
-|-----------|--------|---------------------|
-| Any database service not in the approved list | Only Azure SQL, Azure Database for PostgreSQL, and Azure Cosmos DB are supported | Azure SQL, Azure Database for PostgreSQL, Azure Cosmos DB |
-
 ### Required Elements
 
 Every modernized application must include:
 
-#### Data Services
+#### Integration
 
-- Database tier must use one of the approved services: **Azure SQL**, **Azure Database for PostgreSQL**, or **Azure Cosmos DB**.
+- All asynchronous functions must communicate via RabbitMQ.

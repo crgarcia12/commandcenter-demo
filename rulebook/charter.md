@@ -1,6 +1,15 @@
 # Charter
 
-## Principles
+## Metadata
 
-- Prefer the latest stable version of all packages and dependencies.
-- Prefer cloud native services when possible.
+| Field | Value |
+|-------|-------|
+| Rulebook Name | |
+| Version | |
+| Changelog | |
+
+## Scope
+
+### Constraints
+
+Asynchronous functions must use RabbitMQ for messaging.
