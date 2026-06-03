@@ -1,7 +1,12 @@
 {
   "name": "ZavaRiskEngine plan execution",
   "execution_mode": "manual",
-  "status": "pending",
+  "status": "awaiting_issue",
   "base_commit": "69c8cdc7b7145f6c8a53f957bd12a8e92ec47941",
+  "source_commit": "98a0c9ea05f4816a7776606ec4044c5467751a16",
+  "branch": "modernize/019e8fa5-d2c1-7f3d-8673-f200a7bec32f",
+  "issue_url": "https://github.com/crgarcia12/mnm-ZavaRiskEngine/issues/6",
+  "issue_number": 6,
+  "stale_at": "2026-07-03T22:41:22.0473069\u002B00:00",
   "started_at": "2026-06-03T22:41:09.9384958\u002B00:00"
 }
